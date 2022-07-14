@@ -25,9 +25,9 @@ const ObjectiveDetailScreen = ({ navigation }: any) => {
         </View>
       </View>
       <View style={styles.cardList}>
-        <ProgressCard />
-        <ProgressCard />
-        <ProgressCard />
+        <ProgressCard navigation={navigation} />
+        <ProgressCard navigation={navigation} />
+        <ProgressCard navigation={navigation} />
       </View>
     </ScrollView>
   );

@@ -1,9 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 
-const ProgressCard = () => {
+const ProgressCard = ({ navigation }: any) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("KeyResultDetail")}
+      style={styles.container}
+    >
       <View style={styles.titleContainer}>
         <Text style={styles.title}>디자인 서적 4권 읽기</Text>
       </View>
@@ -24,7 +28,7 @@ const ProgressCard = () => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
