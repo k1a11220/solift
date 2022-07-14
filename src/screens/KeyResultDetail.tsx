@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Title from "../components/Title";
 import * as Icon from "../../assets/icons";
+import InitiativeCard from "../components/InitiativeCard";
 
 const KeyResultDetailScreen = () => {
   return (
@@ -17,6 +18,12 @@ const KeyResultDetailScreen = () => {
         <View style={styles.progressContainer}>
           <View style={styles.progressBar} />
         </View>
+      </View>
+      <View style={styles.cardList}>
+        <InitiativeCard />
+        <InitiativeCard />
+        <InitiativeCard />
+        <InitiativeCard />
       </View>
     </ScrollView>
   );
@@ -72,6 +79,10 @@ const styles = StyleSheet.create({
 
   date: {
     color: "#8B919E",
+  },
+
+  cardList: {
+    marginTop: 22,
   },
 });
 
