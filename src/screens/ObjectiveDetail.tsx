@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    paddingTop: 32,
+    paddingTop: 22,
     paddingBottom: 12,
     paddingLeft: 22,
     paddingRight: 22,
