@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import HomeIconOutline from "./assets/icons/HomeIconOutline";
+import * as Icon from "./assets/icons";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <HomeIconOutline size={24} color="red" />
+      <Icon.ArrowUp />
     </View>
   );
 }
