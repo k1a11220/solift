@@ -1,8 +1,8 @@
 import Svg, { Path } from "react-native-svg";
 
-export function Chevron() {
+export function Chevron({ fillColor }: any) {
   return (
-    <Svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <Svg fill="none" stroke={fillColor} viewBox="0 0 24 24">
       <Path
         strokeLinecap="round"
         strokeLinejoin="round"

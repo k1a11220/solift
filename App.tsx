@@ -1,13 +1,24 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import * as Icon from "./assets/icons";
+import { StyleSheet } from "react-native";
+import HomeScreen from "./src/screens/Home";
+import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <StatusBar style="auto" />
-      <Icon.ArrowUp />
-    </View>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="ObjectiveDetail"
+          component={ObjectiveDetailScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
