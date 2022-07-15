@@ -17,17 +17,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#4191FD",
     justifyContent: "center",
     alignItems: "center",
-    width: 53,
-    height: 53,
-    borderRadius: 53 / 2,
+    width: 56,
+    height: 56,
+    borderRadius: 56 / 2,
     position: "absolute",
     bottom: 44,
     right: 22,
   },
 
   iconContainer: {
-    width: 24,
-    height: 24,
+    width: 26,
+    height: 26,
   },
 });
 
