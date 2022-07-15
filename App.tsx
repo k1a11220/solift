@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import HomeScreen from "./src/screens/Home";
-import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
+
 import * as Icon from "./assets/icons";
+import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
+import HomeScreen from "./src/screens/Home";
 import KeyResultDetailScreen from "./src/screens/KeyResultDetail";
 import FloatingBtn from "./src/components/FloatingBtn";
 
