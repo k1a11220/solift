@@ -1,15 +1,25 @@
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 
 const InitiativeCard = () => {
+  const [hasDone, setHasDone] = useState(false);
   return (
-    <TouchableOpacity style={styles.container}>
-      <View>
-        <Text style={styles.deadline}>10/7까지</Text>
-        <Text style={styles.title}>사용자를 사로잡는 UX/UI 실전 가이드</Text>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={1}
+      onPress={() => setHasDone(!hasDone)}
+    >
+      <View style={styles.contentContainer}>
+        <Text style={[styles.deadline, hasDone ? styles.done : null]}>
+          10/7까지
+        </Text>
+        <Text style={[styles.title, hasDone ? styles.done : null]}>
+          사용자를 사로잡는 UX/UI 실전 가이드
+        </Text>
       </View>
       <View style={styles.iconContainer}>
-        <Icon.CheckCircleOutline fillColor={"#C3C9D3"} />
+        <Icon.CheckCircleOutline fillColor={hasDone ? "#4191FD" : "#C3C9D3"} />
       </View>
     </TouchableOpacity>
   );
@@ -31,6 +41,9 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
+  contentContainer: {
+    maxWidth: "87%",
+  },
   deadline: {
     fontSize: 13,
     fontWeight: "500",
@@ -41,6 +54,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333D4B",
     fontWeight: "600",
+  },
+  done: {
+    textDecorationLine: "line-through",
   },
 });
 

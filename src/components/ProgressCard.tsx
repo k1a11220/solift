@@ -6,6 +6,7 @@ const ProgressCard = ({ navigation }: any) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("KeyResultDetail")}
+      activeOpacity={1}
       style={styles.container}
     >
       <View style={styles.titleContainer}>
