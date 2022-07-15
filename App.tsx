@@ -1,17 +1,25 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import HomeScreen from "./src/screens/Home";
 import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
 import * as Icon from "./assets/icons";
 import KeyResultDetailScreen from "./src/screens/KeyResultDetail";
+import FloatingBtn from "./src/components/FloatingBtn";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
+      <SafeAreaView />
       <StatusBar style="auto" />
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -52,6 +60,7 @@ export default function App() {
           })}
         />
       </Stack.Navigator>
+      <FloatingBtn />
     </NavigationContainer>
   );
 }
