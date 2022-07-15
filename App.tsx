@@ -15,54 +15,63 @@ import HomeScreen from "./src/screens/Home";
 import KeyResultDetailScreen from "./src/screens/KeyResultDetail";
 import FloatingBtn from "./src/components/FloatingBtn";
 
+import { Provider as StoreProvider } from "react-redux";
+import store from "./src/redux/store";
+import ExampleView from "./src/components/ExampleView";
+import ExampleInput from "./src/components/ExampleInput";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <SafeAreaView />
-      <StatusBar style="auto" />
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen
-          name="ObjectiveDetail"
-          component={ObjectiveDetailScreen}
-          options={({ navigation, route }) => ({
-            headerBackTitleVisible: false,
-            headerTitle: "",
-            headerShadowVisible: false, // applied here
-            headerTintColor: "#333D4B",
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ width: 26, height: 26 }}
-              >
-                <Icon.Chevron fillColor="#333D4B" />
-              </TouchableOpacity>
-            ),
-          })}
-        />
-        <Stack.Screen
-          name="KeyResultDetail"
-          component={KeyResultDetailScreen}
-          options={({ navigation, route }) => ({
-            headerBackTitleVisible: false,
-            headerTitle: "",
-            headerShadowVisible: false, // applied here
-            headerTintColor: "#333D4B",
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ width: 26, height: 26 }}
-              >
-                <Icon.Chevron fillColor="#333D4B" />
-              </TouchableOpacity>
-            ),
-          })}
-        />
-      </Stack.Navigator>
-      <FloatingBtn />
-    </NavigationContainer>
+    <StoreProvider store={store}>
+      <ExampleView />
+      <ExampleInput />
+      {/* <NavigationContainer>
+        <SafeAreaView />
+        <StatusBar style="auto" />
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="ObjectiveDetail"
+            component={ObjectiveDetailScreen}
+            options={({ navigation, route }) => ({
+              headerBackTitleVisible: false,
+              headerTitle: "",
+              headerShadowVisible: false, // applied here
+              headerTintColor: "#333D4B",
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ width: 26, height: 26 }}
+                >
+                  <Icon.Chevron fillColor="#333D4B" />
+                </TouchableOpacity>
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="KeyResultDetail"
+            component={KeyResultDetailScreen}
+            options={({ navigation, route }) => ({
+              headerBackTitleVisible: false,
+              headerTitle: "",
+              headerShadowVisible: false, // applied here
+              headerTintColor: "#333D4B",
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ width: 26, height: 26 }}
+                >
+                  <Icon.Chevron fillColor="#333D4B" />
+                </TouchableOpacity>
+              ),
+            })}
+          />
+        </Stack.Navigator>
+        <FloatingBtn />
+      </NavigationContainer> */}
+    </StoreProvider>
   );
 }
 
