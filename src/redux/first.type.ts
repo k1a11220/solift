@@ -1,5 +1,19 @@
-export interface FirstState {
-  exampleStringState: string | null;
+export interface InitiativeState {
+  name: string;
+  deadline: string;
+  hasDone: boolean;
+}
+
+export interface KeyResultState {
+  name: string;
+  deadline: string;
+  initiatives: InitiativeState[];
+}
+
+export interface ObjectiveState {
+  name: string;
+  deadline: string;
+  keyResults: KeyResultState[];
 }
 
 export const SET_EXAMPLE_STRING = "SET_EXAMPLE_STRING";

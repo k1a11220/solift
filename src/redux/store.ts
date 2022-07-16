@@ -8,3 +8,22 @@ const rootReducer = combineReducers({
 const store: Store = createStore(rootReducer);
 
 export default store;
+
+// {
+//   objective: {
+//     name: ""
+//     deadline: ""
+//     keyResults: [
+//       {
+//         name: "",
+//         deadline: "",
+//         initiatives: [
+//           initiative: {
+//             name: "",
+//             deadline: "",
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// }

@@ -1,11 +1,13 @@
 import {
-  FirstState,
+  ObjectiveState,
   SetExampleStringAction,
   SET_EXAMPLE_STRING,
 } from "./first.type";
 
-export const firstState: FirstState = {
-  exampleStringState: null,
+export const objectiveState: ObjectiveState = {
+  name: "",
+  deadline: "",
+  keyResults: [],
 };
 
 export const setExampleString = (text: string): SetExampleStringAction => {
@@ -15,7 +17,10 @@ export const setExampleString = (text: string): SetExampleStringAction => {
   };
 };
 
-export const firstReducer = (state = firstState, action): FirstState => {
+export const firstReducer = (
+  state = objectiveState,
+  action
+): ObjectiveState => {
   switch (action.type) {
     case SET_EXAMPLE_STRING:
       return { ...state, exampleStringState: action.exampleStringState };
