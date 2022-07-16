@@ -19,58 +19,50 @@ import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
 import ExampleView from "./src/components/ExampleView";
 import ExampleInput from "./src/components/ExampleInput";
+import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <StoreProvider store={store}>
-      <ExampleView />
-      <ExampleInput />
-      {/* <NavigationContainer>
+      {/* <ExampleView />
+      <ExampleInput /> */}
+      <NavigationContainer>
         <SafeAreaView />
         <StatusBar style="auto" />
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={({ navigation, route }) => ({
+            headerBackTitleVisible: false,
+            headerTitle: "",
+            headerShadowVisible: false, // applied here
+            headerTintColor: "#333D4B",
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={{ width: 26, height: 26 }}
+              >
+                <Icon.Chevron fillColor="#333D4B" />
+              </TouchableOpacity>
+            ),
+          })}
+        >
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen
             name="ObjectiveDetail"
             component={ObjectiveDetailScreen}
-            options={({ navigation, route }) => ({
-              headerBackTitleVisible: false,
-              headerTitle: "",
-              headerShadowVisible: false, // applied here
-              headerTintColor: "#333D4B",
-              headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.goBack()}
-                  style={{ width: 26, height: 26 }}
-                >
-                  <Icon.Chevron fillColor="#333D4B" />
-                </TouchableOpacity>
-              ),
-            })}
           />
           <Stack.Screen
             name="KeyResultDetail"
             component={KeyResultDetailScreen}
-            options={({ navigation, route }) => ({
-              headerBackTitleVisible: false,
-              headerTitle: "",
-              headerShadowVisible: false, // applied here
-              headerTintColor: "#333D4B",
-              headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.goBack()}
-                  style={{ width: 26, height: 26 }}
-                >
-                  <Icon.Chevron fillColor="#333D4B" />
-                </TouchableOpacity>
-              ),
-            })}
+          />
+          <Stack.Screen
+            name="CreateInitiative"
+            component={CreateInitiativeScreen}
           />
         </Stack.Navigator>
-        <FloatingBtn />
-      </NavigationContainer> */}
+        <FloatingBtn to={"CreateInitiative"} />
+      </NavigationContainer>
     </StoreProvider>
   );
 }

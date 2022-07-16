@@ -1,9 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import * as Icon from "../../assets/icons";
 
-const FloatingBtn = () => {
+const FloatingBtn = ({ to }: any) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(to)}
+      style={styles.container}
+    >
       <View style={styles.iconContainer}>
         <Icon.Create fillColor={"#ffffff"} />
       </View>
