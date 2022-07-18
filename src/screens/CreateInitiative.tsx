@@ -1,16 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import InitiativeCard from "../components/InitiativeCard";
+import Input from "../components/Input";
 import Title from "../components/Title";
 
 const CreateInitiativeScreen = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView overScrollMode="never" style={styles.container}>
       <Title
         title="목표를 알려주세요"
         detail="어떤 목표든 괜찮아요"
         type="detail"
       />
-    </View>
+      <View style={styles.contentContainer}>
+        <Input placeholder="목표를 입력하세요" />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -20,6 +24,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingLeft: 22,
     paddingRight: 22,
+  },
+
+  contentContainer: {
+    paddingTop: 22,
+    flex: 1,
   },
 });
 
