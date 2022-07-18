@@ -1,4 +1,6 @@
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import CTA from "../components/Cta";
+import Gap from "../components/Gap";
 import InitiativeCard from "../components/InitiativeCard";
 import Input from "../components/Input";
 import Title from "../components/Title";
@@ -13,6 +15,8 @@ const CreateInitiativeScreen = () => {
       />
       <View style={styles.contentContainer}>
         <Input placeholder="목표를 입력하세요" />
+        <Gap />
+        <CTA label="다음으로" type="primary" onPress={() => console.log("a")} />
       </View>
     </ScrollView>
   );
