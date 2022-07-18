@@ -5,7 +5,11 @@ import Title from "../components/Title";
 const CreateInitiativeScreen = () => {
   return (
     <View style={styles.container}>
-      <Title title="ds" type="detail" />
+      <Title
+        title="목표를 알려주세요"
+        detail="어떤 목표든 괜찮아요"
+        type="detail"
+      />
     </View>
   );
 };

@@ -6,7 +6,13 @@ import Title from "../components/Title";
 const KeyResultDetailScreen = () => {
   return (
     <ScrollView style={styles.container}>
-      <Title title="디자인 도서 4권 읽기" type="progress" />
+      <Title
+        title="디자인 도서 4권 읽기"
+        subtitle="디자인 방법론 공부하기"
+        progress={34}
+        date="2023/02/11"
+        type="progress"
+      />
       <View style={styles.cardList}>
         <InitiativeCard />
         <InitiativeCard />

@@ -21,22 +21,20 @@ const Title = ({
   return (
     <View style={styles.container}>
       {type === "default" ? null : type === "progress" ? (
-        <Text style={styles.objectiveName}>디자인 방법론 공부하기</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
       ) : null}
-      <Text style={styles.keyResultName}>디자인 도서 4권 읽기</Text>
-      {type === "detail" ? (
-        <Text style={styles.detailName}>어떤 목표든 괜찮아요</Text>
-      ) : null}
+      <Text style={styles.title}>{title}</Text>
+      {type === "detail" ? <Text style={styles.detail}>{detail}</Text> : null}
       {type === "progress" ? (
         <>
           <View style={styles.dateContainer}>
             <View style={styles.iconContainer}>
               <Icon.CalendarOutline fillColor={"#8B919E"} />
             </View>
-            <Text style={styles.date}>2023/02/20</Text>
+            <Text style={styles.date}>{date}</Text>
           </View>
           <View style={styles.progressContainer}>
-            <View style={styles.progressBar} />
+            <View style={[styles.progressBar, { maxWidth: `${progress}%` }]} />
           </View>
         </>
       ) : null}
@@ -65,25 +63,25 @@ const styles = StyleSheet.create({
 
   progressBar: {
     backgroundColor: "#4191FD",
-    width: "50%",
     height: "100%",
     borderRadius: 6,
+    width: "100%",
   },
 
-  objectiveName: {
+  subtitle: {
     fontSize: 14,
     fontWeight: "500",
     color: "#8B919E",
     marginBottom: 6,
   },
 
-  keyResultName: {
+  title: {
     fontSize: 22,
     color: "#333D4B",
     fontWeight: "bold",
   },
 
-  detailName: {
+  detail: {
     fontSize: 16,
     marginTop: 6,
     color: "#8B919E",

@@ -8,11 +8,12 @@ import {
 } from "react-native";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
+import Title from "../components/Title";
 
 const ObjectiveDetailScreen = ({ navigation }: any) => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>디자인 방법론 공부하기</Text>
+      <Title title="디자인 방법론 공부하기" type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
@@ -37,22 +38,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 22,
-    paddingTop: 22,
-    paddingBottom: 12,
     paddingLeft: 22,
     paddingRight: 22,
-    fontWeight: "700",
-    color: "#333D4B",
   },
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingTop: 12,
-    paddingLeft: 22,
-    paddingRight: 22,
+    paddingTop: 24,
     width: "100%",
   },
   infoCard: {
@@ -78,8 +70,6 @@ const styles = StyleSheet.create({
   cardList: {
     justifyContent: "space-between",
     paddingTop: 16,
-    paddingLeft: 22,
-    paddingRight: 22,
   },
 });
 
