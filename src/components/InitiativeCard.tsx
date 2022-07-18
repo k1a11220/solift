@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
+import * as Haptics from "expo-haptics";
 
 const InitiativeCard = () => {
   const [hasDone, setHasDone] = useState(false);
@@ -8,7 +9,10 @@ const InitiativeCard = () => {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={1}
-      onPress={() => setHasDone(!hasDone)}
+      onPress={() => {
+        setHasDone(!hasDone);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }}
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>
