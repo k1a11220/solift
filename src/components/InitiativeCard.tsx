@@ -6,7 +6,8 @@ import * as Haptics from "expo-haptics";
 interface InitiativeCardProps {
   name: string;
   deadline: Date;
-  hasDone: boolean;
+  hasDone?: boolean;
+  onPress: () => void;
 }
 
 const InitiativeCard = ({ name, deadline }: InitiativeCardProps) => {

@@ -1,5 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import * as Icon from "../../assets/icons";
+import { ScrollView, StyleSheet, View } from "react-native";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
@@ -19,7 +18,6 @@ const KeyResultDetailScreen = ({ ...props }) => {
           <InitiativeCard
             key={index}
             name={initiative.name}
-            progress={initiative.progress}
             deadline={initiative.deadline}
             onPress={() => {
               props.navigation.navigate("KeyResultDetail", {

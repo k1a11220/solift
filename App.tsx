@@ -1,13 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 
 import * as Icon from "./assets/icons";
 import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
@@ -17,8 +11,6 @@ import FloatingBtn from "./src/components/FloatingBtn";
 
 import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
-import ExampleView from "./src/components/ExampleView";
-import ExampleInput from "./src/components/ExampleInput";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
 
