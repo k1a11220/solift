@@ -20,10 +20,26 @@ import store from "./src/redux/store";
 import ExampleView from "./src/components/ExampleView";
 import ExampleInput from "./src/components/ExampleInput";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
+import { useState } from "react";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [initiative, setInitiative] = useState({
+    name: "",
+    date: "",
+    hasDone: false,
+  });
+  const [initiatives, setInitiatives] = useState([]);
+
+  const handleInitiative = () => {
+    let newInitiative = initiative;
+    let newInitiatives = [newInitiative, ...initiatives];
+    setInitiatives(newInitiatives);
+    setInitiative("");
+    console.log(initiatives);
+  };
+
   return (
     <StoreProvider store={store}>
       {/* <ExampleView />
@@ -52,14 +68,21 @@ export default function App() {
             name="ObjectiveDetail"
             component={ObjectiveDetailScreen}
           />
-          <Stack.Screen
-            name="KeyResultDetail"
-            component={KeyResultDetailScreen}
-          />
-          <Stack.Screen
-            name="CreateInitiative"
-            component={CreateInitiativeScreen}
-          />
+          <Stack.Screen name="KeyResultDetail">
+            {(props) => (
+              <KeyResultDetailScreen {...props} initiatives={initiatives} />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="CreateInitiative">
+            {(props) => (
+              <CreateInitiativeScreen
+                {...props}
+                initiative={initiative}
+                handleInitiative={handleInitiative}
+                setInitiative={setInitiative}
+              />
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
         <FloatingBtn to={"CreateInitiative"} />
       </NavigationContainer>
