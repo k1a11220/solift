@@ -3,7 +3,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
 
-const InitiativeCard = () => {
+interface InitiativeCardProps {
+  name: string;
+  deadline: Date;
+  hasDone: boolean;
+}
+
+const InitiativeCard = ({ name, deadline }: InitiativeCardProps) => {
   const [hasDone, setHasDone] = useState(false);
   return (
     <TouchableOpacity
@@ -16,11 +22,9 @@ const InitiativeCard = () => {
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>
-          10/7까지
+          {deadline.toLocaleDateString()}
         </Text>
-        <Text style={[styles.title, hasDone ? styles.done : null]}>
-          사용자를 사로잡는 UX/UI 실전 가이드
-        </Text>
+        <Text style={[styles.title, hasDone ? styles.done : null]}>{name}</Text>
       </View>
       <View style={styles.iconContainer}>
         <Icon.CheckCircleOutline fillColor={hasDone ? "#4191FD" : "#C3C9D3"} />

@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [initiative, setInitiative] = useState({
     name: "",
-    date: "",
+    deadline: new Date(),
     hasDone: false,
   });
   const [initiatives, setInitiatives] = useState([]);

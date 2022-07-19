@@ -3,7 +3,8 @@ import * as Icon from "../../assets/icons";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
-const KeyResultDetailScreen = () => {
+const KeyResultDetailScreen = ({ ...props }) => {
+  console.log(props.initiatives);
   return (
     <ScrollView style={styles.container}>
       <Title
@@ -14,10 +15,19 @@ const KeyResultDetailScreen = () => {
         type="progress"
       />
       <View style={styles.cardList}>
-        <InitiativeCard />
-        <InitiativeCard />
-        <InitiativeCard />
-        <InitiativeCard />
+        {props.initiatives.map((initiative, index) => (
+          <InitiativeCard
+            key={index}
+            name={initiative.name}
+            progress={initiative.progress}
+            deadline={initiative.deadline}
+            onPress={() => {
+              props.navigation.navigate("KeyResultDetail", {
+                initiative: initiative,
+              });
+            }}
+          />
+        ))}
       </View>
     </ScrollView>
   );
