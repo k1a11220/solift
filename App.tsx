@@ -13,6 +13,7 @@ import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
+import { Objective } from "./src/libs/types";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,28 @@ export default function App() {
     setInitiatives(newInitiatives);
     setInitiative("");
     console.log(initiatives);
+  };
+
+  const [objective, setObjective] = useState<Objective>({
+    id: null,
+    name: null,
+    deadline: null,
+    keyResults: [],
+  });
+
+  const [objectives, setObjectives] = useState<Objective[]>([]);
+
+  const handleObjective = () => {
+    let newObjective = objective;
+    let newObjectives = [newObjective, ...objectives];
+    setObjectives(newObjectives);
+    setObjective({
+      id: null,
+      name: null,
+      deadline: null,
+      keyResults: [],
+    });
+    console.log(objectives);
   };
 
   return (
@@ -55,7 +78,9 @@ export default function App() {
             ),
           })}
         >
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Home">
+            {(props) => <HomeScreen {...props} objectives={objectives} />}
+          </Stack.Screen>
           <Stack.Screen
             name="ObjectiveDetail"
             component={ObjectiveDetailScreen}
