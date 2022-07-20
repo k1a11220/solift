@@ -1,13 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { Button, StyleSheet, Text, View } from "react-native";
-import { Objective } from "../libs/types";
+import ProgressCard from "../components/ProgressCard";
+import { Objective, ROUTES } from "../libs/types";
 
-const HomeScreen = ({ objectives }: Objective[]) => {
-  const navigation = useNavigation();
+const HomeScreen = ({ ...props }) => {
+  console.log(props.objectives);
+  const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>
       <Text>홈 화면</Text>
-      {objectives.map((objective: Objective) => (
+      {props.objectives.map((objective: Objective) => (
         <Button
           key={objective?.id}
           title={

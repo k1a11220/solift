@@ -1,12 +1,25 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Icon from "../../assets/icons";
+import { useEffect } from "react";
+import { ROUTES } from "../libs/types";
 
-const FloatingBtn = ({ to }: any) => {
-  const navigation = useNavigation();
+const FloatingBtn = () => {
+  const navigation = useNavigation<ROUTES>();
+  const currentScreen = navigation?.getCurrentRoute()?.name;
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(to)}
+      onPress={() =>
+        navigation.navigate(
+          currentScreen === "Home"
+            ? "CreateObjective"
+            : currentScreen === "ObjectiveDetail"
+            ? "CreateKeyResult"
+            : currentScreen === "KeyResultDetail"
+            ? "CreateInitiative"
+            : "CreateObjective"
+        )
+      }
       style={styles.container}
     >
       <View style={styles.iconContainer}>

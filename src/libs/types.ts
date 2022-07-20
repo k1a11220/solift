@@ -1,3 +1,12 @@
+export interface ROUTES {
+  navigate: any;
+  getCurrentRoute: any;
+  Home: "Home";
+  CreateObjective: "CreateObjective";
+  CreateKeyResult: "CreateKeyResult";
+  CreateInitiative: "CreateInitiative";
+}
+
 export interface Initiative {
   id: number;
   name: string;

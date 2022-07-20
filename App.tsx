@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
@@ -14,10 +14,12 @@ import store from "./src/redux/store";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
 import { Objective } from "./src/libs/types";
+import CreateObjectiveScreen from "./src/screens/CreateObjective";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [latesetObjectiveId, setLatesetObjectiveId] = useState(0);
   const [initiative, setInitiative] = useState({
     name: "",
     deadline: new Date(),
@@ -90,18 +92,30 @@ export default function App() {
               <KeyResultDetailScreen {...props} initiatives={initiatives} />
             )}
           </Stack.Screen>
+          <Stack.Screen name="CreateObjective">
+            {(props) => (
+              <CreateObjectiveScreen
+                {...props}
+                objective={objective}
+                setObjective={setObjective}
+                handleObjective={handleObjective}
+                latesetObjectiveId={latesetObjectiveId}
+                setLatesetObjectiveId={setLatesetObjectiveId}
+              />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="CreateInitiative">
             {(props) => (
               <CreateInitiativeScreen
                 {...props}
-                initiative={initiative}
-                handleInitiative={handleInitiative}
-                setInitiative={setInitiative}
+                objective={objective}
+                setObjective={setObjective}
+                handleObjective={handleObjective}
               />
             )}
           </Stack.Screen>
         </Stack.Navigator>
-        <FloatingBtn to={"CreateInitiative"} />
+        <FloatingBtn />
       </NavigationContainer>
     </StoreProvider>
   );
