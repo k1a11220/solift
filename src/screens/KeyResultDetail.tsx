@@ -1,6 +1,7 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
@@ -29,16 +30,23 @@ const KeyResultDetailScreen = ({ ...props }) => {
         type="progress"
       />
       <View style={styles.cardList}>
-        {filteredInitiatives.map((initiative) => (
-          <InitiativeCard
-            key={initiative.id}
-            initiative={initiative}
-            id={initiative.id}
-            name={initiative.name}
-            deadline={initiative.deadline}
-            setInitiative={props.setInitiative}
+        {filteredInitiatives.length === 0 ? (
+          <EmptyView
+            title={`아직 세부과제를 만들지 않으셨군요! \n 이제 세부과제를 만들어봐요`}
+            icon="satellite"
           />
-        ))}
+        ) : (
+          filteredInitiatives.map((initiative) => (
+            <InitiativeCard
+              key={initiative.id}
+              initiative={initiative}
+              id={initiative.id}
+              name={initiative.name}
+              deadline={initiative.deadline}
+              setInitiative={props.setInitiative}
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );
@@ -53,6 +61,7 @@ const styles = StyleSheet.create({
   },
 
   cardList: {
+    flex: 1,
     marginTop: 22,
   },
 });

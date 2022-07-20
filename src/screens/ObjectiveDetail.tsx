@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from "react-native";
+import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
@@ -45,17 +46,24 @@ const ObjectiveDetailScreen = ({
         </View>
       </View>
       <View style={styles.cardList}>
-        {filteredKeyResults.map((keyResult: any) => (
-          <ProgressCard
-            key={keyResult.id}
-            title={keyResult.name}
-            date={keyResult.deadline}
-            navigation={navigation}
-            onPress={() =>
-              navigation?.navigate("KeyResultDetail", { id: keyResult.id })
-            }
+        {filteredKeyResults.length === 0 ? (
+          <EmptyView
+            title={`목표를 다 만드셨군요!\n이젠 세부과제를 만들어봐요`}
+            icon="antenna"
           />
-        ))}
+        ) : (
+          filteredKeyResults.map((keyResult: any) => (
+            <ProgressCard
+              key={keyResult.id}
+              title={keyResult.name}
+              date={keyResult.deadline}
+              navigation={navigation}
+              onPress={() =>
+                navigation?.navigate("KeyResultDetail", { id: keyResult.id })
+              }
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );
@@ -95,7 +103,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   cardList: {
-    justifyContent: "space-between",
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     paddingTop: 16,
   },
 });

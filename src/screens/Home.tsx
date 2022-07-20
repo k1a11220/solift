@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from "react-native";
+import EmptyView from "../components/EmptyView";
 import ProgressCard from "../components/ProgressCard";
 import { Objective, ROUTES } from "../libs/types";
 
@@ -26,15 +27,7 @@ const HomeScreen = ({ ...props }) => {
         />
       </View>
       {props.objectives.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <View style={styles.emptyWrapper}>
-            <Image
-              style={{ height: 68, width: 68 }}
-              source={require("../../assets/scope.png")}
-            />
-            <Text style={styles.emptyText}>새로운 목표를 만들어봐요</Text>
-          </View>
-        </View>
+        <EmptyView title="새로운 목표를 만들어봐요" icon="scope" />
       ) : (
         <ScrollView style={styles.cardList}>
           {props.objectives.map((objective: Objective) => (
@@ -65,23 +58,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 48,
     marginBottom: 12,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  emptyWrapper: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 40,
-  },
-  emptyText: {
-    fontSize: 18,
-    color: "#333D4B",
-    fontWeight: "600",
-    marginTop: 24,
   },
   cardList: {},
 });
