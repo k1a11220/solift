@@ -2,22 +2,22 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 
-const ProgressCard = ({ navigation }: any) => {
+const ProgressCard = ({ title, date, progress, id, navigation }: any) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("KeyResultDetail")}
+      onPress={() => navigation?.navigate("KeyResultDetail", { id })}
       activeOpacity={1}
       style={styles.container}
     >
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>디자인 서적 4권 읽기</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.detailContainer}>
         <View style={styles.detailWrapper}>
           <View style={styles.iconContainer}>
             <Icon.CalendarOutline fillColor={"#8B919E"} />
           </View>
-          <Text style={styles.detailValue}>2022/06/20</Text>
+          <Text style={styles.detailValue}>{date}</Text>
         </View>
         <View style={styles.detailWrapper}>
           <View style={styles.iconContainer}>

@@ -16,11 +16,16 @@ const ObjectiveDetailScreen = ({
   route,
   setCurrentRoute,
   setCurrentObjectiveId,
+  keyResults,
 }: any) => {
   useEffect(() => {
     setCurrentRoute("ObjectiveDetail");
     setCurrentObjectiveId(route.params.objective.id);
   });
+  const filteredKeyResults = keyResults.filter(
+    (keyResult: any) => keyResult.objectiveId === route.params.objective.id
+  );
+  console.log(filteredKeyResults);
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />
@@ -38,9 +43,15 @@ const ObjectiveDetailScreen = ({
         </View>
       </View>
       <View style={styles.cardList}>
-        <ProgressCard navigation={navigation} />
-        <ProgressCard navigation={navigation} />
-        <ProgressCard navigation={navigation} />
+        {filteredKeyResults.map((keyResult: any) => (
+          <ProgressCard
+            key={keyResult.id}
+            title={keyResult.name}
+            date={keyResult.deadline}
+            id={keyResult.id}
+            navigation={navigation}
+          />
+        ))}
       </View>
     </ScrollView>
   );

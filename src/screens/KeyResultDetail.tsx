@@ -3,7 +3,7 @@ import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
 const KeyResultDetailScreen = ({ ...props }) => {
-  console.log(props.initiatives);
+  console.log(props);
   return (
     <ScrollView style={styles.container}>
       <Title
