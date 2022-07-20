@@ -156,6 +156,7 @@ export default function App() {
                 handleObjective={handleObjective}
                 latestObjectiveId={latestObjectiveId}
                 setLatestObjectiveId={setLatestObjectiveId}
+                setCurrentRoute={setCurrentRoute}
               />
             )}
           </Stack.Screen>
@@ -169,6 +170,7 @@ export default function App() {
                 latestKeyResultId={latestKeyResultId}
                 setLatestKeyResultId={setLatestKeyResultId}
                 currentObjectiveId={currentObjectiveId}
+                setCurrentRoute={setCurrentRoute}
               />
             )}
           </Stack.Screen>
@@ -180,11 +182,18 @@ export default function App() {
                 setInitiative={setInitiative}
                 handleInitiative={handleInitiative}
                 currentKeyResultId={currentKeyResultId}
+                setCurrentRoute={setCurrentRoute}
               />
             )}
           </Stack.Screen>
         </Stack.Navigator>
-        <FloatingBtn currentRoute={currentRoute} />
+        {currentRoute === "Home" ? (
+          <FloatingBtn currentRoute={currentRoute} />
+        ) : currentRoute === "ObjectiveDetail" ? (
+          <FloatingBtn currentRoute={currentRoute} />
+        ) : currentRoute === "KeyResultDetail" ? (
+          <FloatingBtn currentRoute={currentRoute} />
+        ) : null}
       </NavigationContainer>
     </StoreProvider>
   );

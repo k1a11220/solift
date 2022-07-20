@@ -1,5 +1,5 @@
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CTA from "../components/Cta";
@@ -9,6 +9,9 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 
 const CreateInitiativeScreen = ({ ...props }) => {
+  useEffect(() => {
+    props.setCurrentRoute("CreateInitiative");
+  });
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 

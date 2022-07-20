@@ -1,5 +1,5 @@
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CTA from "../components/Cta";
@@ -9,6 +9,10 @@ import Title from "../components/Title";
 import { useDate } from "../utils/useDate";
 
 const CreateObjectiveScreen = ({ ...props }) => {
+  useEffect(() => {
+    props.setCurrentRoute("CreateObjective");
+  });
+
   const [date, setDate] = useState(new Date());
 
   const onChange = (event, selectedDate) => {
