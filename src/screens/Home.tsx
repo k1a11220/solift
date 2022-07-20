@@ -1,6 +1,13 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import ProgressCard from "../components/ProgressCard";
 import { Objective, ROUTES } from "../libs/types";
 
@@ -29,26 +36,19 @@ const HomeScreen = ({ ...props }) => {
           </View>
         </View>
       ) : (
-        props.objectives.map((objective: Objective) => (
-          <ProgressCard
-            key={objective.id}
-            title={objective.name}
-            date={objective.deadline}
-            onPress={() =>
-              navigation.navigate("ObjectiveDetail", { objective })
-            }
-            navigation={navigation}
-          />
-          // <Button
-          //   key={objective?.id}
-          //   title={
-          //     objective?.name === null ? "오브젝트 이름 없음" : objective?.name
-          //   }
-          //   onPress={() =>
-          //     navigation.navigate("ObjectiveDetail", { objective })
-          //   }
-          // />
-        ))
+        <ScrollView style={styles.cardList}>
+          {props.objectives.map((objective: Objective) => (
+            <ProgressCard
+              key={objective.id}
+              title={objective.name}
+              date={objective.deadline}
+              onPress={() =>
+                navigation.navigate("ObjectiveDetail", { objective })
+              }
+              navigation={navigation}
+            />
+          ))}
+        </ScrollView>
       )}
     </View>
   );
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     justifyContent: "center",
-    height: 52,
+    height: 48,
+    marginBottom: 12,
   },
   emptyContainer: {
     flex: 1,
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginTop: 24,
   },
+  cardList: {},
 });
 
 export default HomeScreen;
