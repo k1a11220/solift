@@ -8,7 +8,7 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import { useDate } from "../utils/useDate";
 
-const CreateObjectiveScreen = ({ ...props }) => {
+const CreateKeyResultScreen = ({ ...props }) => {
   const [date, setDate] = useState(new Date());
 
   const onChange = (event, selectedDate) => {
@@ -30,7 +30,7 @@ const CreateObjectiveScreen = ({ ...props }) => {
   return (
     <ScrollView overScrollMode="never" style={styles.container}>
       <Title
-        title="Objective and deadline"
+        title="KetResult and deadline"
         detail="어떤 목표든 괜찮아요"
         type="detail"
       />
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateObjectiveScreen;
+export default CreateKeyResultScreen;

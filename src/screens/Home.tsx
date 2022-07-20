@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import ProgressCard from "../components/ProgressCard";
 import { Objective, ROUTES } from "../libs/types";
 
 const HomeScreen = ({ ...props }) => {
-  console.log(props.objectives);
+  useEffect(() => props.setCurrentRoute("Home"), []);
   const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>

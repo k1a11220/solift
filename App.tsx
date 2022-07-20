@@ -1,4 +1,4 @@
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
@@ -15,10 +15,12 @@ import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
 import { Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
+import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [currentRoute, setCurrentRoute] = useState("");
   const [latesetObjectiveId, setLatesetObjectiveId] = useState(0);
   const [initiative, setInitiative] = useState({
     name: "",
@@ -81,15 +83,26 @@ export default function App() {
           })}
         >
           <Stack.Screen name="Home">
-            {(props) => <HomeScreen {...props} objectives={objectives} />}
+            {(props) => (
+              <HomeScreen
+                {...props}
+                objectives={objectives}
+                setCurrentRoute={setCurrentRoute}
+              />
+            )}
           </Stack.Screen>
           <Stack.Screen
             name="ObjectiveDetail"
             component={ObjectiveDetailScreen}
+            setCurrentRoute={setCurrentRoute}
           />
           <Stack.Screen name="KeyResultDetail">
             {(props) => (
-              <KeyResultDetailScreen {...props} initiatives={initiatives} />
+              <KeyResultDetailScreen
+                {...props}
+                initiatives={initiatives}
+                setCurrentRoute={setCurrentRoute}
+              />
             )}
           </Stack.Screen>
           <Stack.Screen name="CreateObjective">
@@ -104,6 +117,16 @@ export default function App() {
               />
             )}
           </Stack.Screen>
+          <Stack.Screen name="CreateKeyResult">
+            {(props) => (
+              <CreateKeyResultScreen
+                {...props}
+                objective={objective}
+                setObjective={setObjective}
+                handleObjective={handleObjective}
+              />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="CreateInitiative">
             {(props) => (
               <CreateInitiativeScreen
@@ -115,7 +138,7 @@ export default function App() {
             )}
           </Stack.Screen>
         </Stack.Navigator>
-        <FloatingBtn />
+        <FloatingBtn currentRoute={currentRoute} />
       </NavigationContainer>
     </StoreProvider>
   );
