@@ -142,6 +142,7 @@ export default function App() {
                 objectives={objectives}
                 keyResults={keyResults}
                 initiatives={initiatives}
+                setInitiative={setInitiative}
                 setCurrentRoute={setCurrentRoute}
                 setCurrentKeyResultId={setCurrentKeyResultId}
               />
@@ -183,6 +184,8 @@ export default function App() {
                 handleInitiative={handleInitiative}
                 currentKeyResultId={currentKeyResultId}
                 setCurrentRoute={setCurrentRoute}
+                latestInitiativeId={latestInitiativeId}
+                setLatestInitiativeId={setLatestInitiativeId}
               />
             )}
           </Stack.Screen>

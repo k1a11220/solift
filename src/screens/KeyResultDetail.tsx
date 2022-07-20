@@ -27,16 +27,14 @@ const KeyResultDetailScreen = ({ ...props }) => {
         type="progress"
       />
       <View style={styles.cardList}>
-        {filteredInitiatives.map((initiative, index) => (
+        {filteredInitiatives.map((initiative) => (
           <InitiativeCard
-            key={index}
+            key={initiative.id}
+            initiative={initiative}
+            id={initiative.id}
             name={initiative.name}
             deadline={initiative.deadline}
-            onPress={() => {
-              props.navigation.navigate("KeyResultDetail", {
-                initiative: initiative,
-              });
-            }}
+            setInitiative={props.setInitiative}
           />
         ))}
       </View>

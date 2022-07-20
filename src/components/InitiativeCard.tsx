@@ -4,22 +4,33 @@ import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
 
 interface InitiativeCardProps {
+  id: number;
   name: string;
   deadline: Date;
   hasDone?: boolean;
-  onPress: () => void;
+  initiative?: any;
+  setInitiative: (initiative: Initiative) => void;
+  // onPress: () => void;
 }
 
-const InitiativeCard = ({ name, deadline }: InitiativeCardProps) => {
-  const [hasDone, setHasDone] = useState(false);
+const InitiativeCard = ({
+  name,
+  deadline,
+  setInitiative,
+  id,
+  initiative,
+}: InitiativeCardProps) => {
+  const [hasDone, setHasDone] = useState(initiative.hasDone);
+  const onClick = () => {
+    initiative.hasDone = !initiative.hasDone;
+    setHasDone(initiative.hasDone);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={1}
-      onPress={() => {
-        setHasDone(!hasDone);
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      }}
+      onPress={onClick}
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>

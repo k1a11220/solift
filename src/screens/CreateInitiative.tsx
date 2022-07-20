@@ -23,6 +23,7 @@ const CreateInitiativeScreen = ({ ...props }) => {
     props.setInitiative({
       ...props.initiative,
       deadline: currentDate,
+      id: props.latestInitiativeId,
       keyResultId: props.currentKeyResultId,
     });
     setDate(currentDate);
@@ -30,6 +31,7 @@ const CreateInitiativeScreen = ({ ...props }) => {
 
   const onSubmit = () => {
     props.handleInitiative();
+    props?.setLatestInitiativeId(props?.latestInitiativeId + 1);
     props.navigation.goBack();
   };
 
