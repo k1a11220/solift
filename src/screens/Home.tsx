@@ -30,15 +30,24 @@ const HomeScreen = ({ ...props }) => {
         </View>
       ) : (
         props.objectives.map((objective: Objective) => (
-          <Button
-            key={objective?.id}
-            title={
-              objective?.name === null ? "오브젝트 이름 없음" : objective?.name
-            }
+          <ProgressCard
+            key={objective.id}
+            title={objective.name}
+            date={objective.deadline}
             onPress={() =>
               navigation.navigate("ObjectiveDetail", { objective })
             }
+            navigation={navigation}
           />
+          // <Button
+          //   key={objective?.id}
+          //   title={
+          //     objective?.name === null ? "오브젝트 이름 없음" : objective?.name
+          //   }
+          //   onPress={() =>
+          //     navigation.navigate("ObjectiveDetail", { objective })
+          //   }
+          // />
         ))
       )}
     </View>

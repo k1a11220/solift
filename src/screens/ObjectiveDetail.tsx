@@ -47,8 +47,10 @@ const ObjectiveDetailScreen = ({
             key={keyResult.id}
             title={keyResult.name}
             date={keyResult.deadline}
-            id={keyResult.id}
             navigation={navigation}
+            onPress={() =>
+              navigation?.navigate("KeyResultDetail", { id: keyResult.id })
+            }
           />
         ))}
       </View>

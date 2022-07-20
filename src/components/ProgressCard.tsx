@@ -2,10 +2,10 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 
-const ProgressCard = ({ title, date, progress, id, navigation }: any) => {
+const ProgressCard = ({ title, date, progress, onPress }: any) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation?.navigate("KeyResultDetail", { id })}
+      onPress={onPress}
       activeOpacity={1}
       style={styles.container}
     >
