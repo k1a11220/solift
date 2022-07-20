@@ -2,12 +2,13 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Icon from "../../assets/icons";
 import { ROUTES } from "../libs/types";
+import * as Haptics from "expo-haptics";
 
 const FloatingBtn = ({ currentRoute }: string) => {
   const navigation = useNavigation<ROUTES>();
   return (
     <TouchableOpacity
-      onPress={() =>
+      onPress={() => {
         navigation.navigate(
           currentRoute === "Home"
             ? "CreateObjective"
@@ -16,8 +17,9 @@ const FloatingBtn = ({ currentRoute }: string) => {
             : currentRoute === "KeyResultDetail"
             ? "CreateInitiative"
             : "CreateObjective"
-        )
-      }
+        );
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      }}
       style={styles.container}
     >
       <View style={styles.iconContainer}>

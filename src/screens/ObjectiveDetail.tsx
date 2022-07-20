@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
 import {
   Button,
@@ -18,10 +19,11 @@ const ObjectiveDetailScreen = ({
   setCurrentObjectiveId,
   keyResults,
 }: any) => {
+  const isFocused = useIsFocused();
   useEffect(() => {
     setCurrentRoute("ObjectiveDetail");
     setCurrentObjectiveId(route.params.objective.id);
-  });
+  }, [isFocused]);
   const filteredKeyResults = keyResults.filter(
     (keyResult: any) => keyResult.objectiveId === route.params.objective.id
   );

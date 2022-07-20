@@ -1,13 +1,15 @@
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
 const KeyResultDetailScreen = ({ ...props }) => {
+  const isFocused = useIsFocused();
   useEffect(() => {
     props.setCurrentRoute("KeyResultDetail");
     props.setCurrentKeyResultId(props.route.params.id);
-  });
+  }, [props, isFocused]);
   const currentKeyResult = props?.keyResults?.find(
     (keyResult) => keyResult?.id === props?.route?.params?.id
   );

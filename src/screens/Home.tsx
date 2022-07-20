@@ -21,7 +21,7 @@ const HomeScreen = ({ ...props }) => {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          style={{ height: 32, width: 63 }}
+          style={{ height: 36, width: 69 }}
           source={require("../../assets/logo.png")}
         />
       </View>
