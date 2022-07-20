@@ -23,7 +23,6 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState("");
 
   const [currentObjectiveId, setCurrentObjectiveId] = useState();
-  console.log(currentRoute, currentObjectiveId);
   const [latestObjectiveId, setLatestObjectiveId] = useState(0);
   const [objective, setObjective] = useState<Objective>({
     id: null,
@@ -44,7 +43,6 @@ export default function App() {
       deadline: null,
       keyResults: [],
     });
-    console.log(objectives);
   };
 
   const [currentKeyResultId, setCurrentKeyResultId] = useState();
@@ -70,7 +68,6 @@ export default function App() {
       initiatives: [],
       objectiveId: null,
     });
-    console.log(keyResults);
   };
 
   const [latestInitiativeId, setLatestInitiativeId] = useState(0);
@@ -94,7 +91,6 @@ export default function App() {
       keyResultId: null,
       hasDone: false,
     });
-    console.log(initiatives);
   };
 
   return (
@@ -120,7 +116,7 @@ export default function App() {
             ),
           })}
         >
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" options={{ headerShown: false }}>
             {(props) => (
               <HomeScreen
                 {...props}

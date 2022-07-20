@@ -25,7 +25,6 @@ const ObjectiveDetailScreen = ({
   const filteredKeyResults = keyResults.filter(
     (keyResult: any) => keyResult.objectiveId === route.params.objective.id
   );
-  console.log(filteredKeyResults);
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />
