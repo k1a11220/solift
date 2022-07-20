@@ -10,36 +10,36 @@ import { useDate } from "../utils/useDate";
 
 const CreateKeyResultScreen = ({ ...props }) => {
   const [date, setDate] = useState(new Date());
-
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    props.setObjective({
-      ...props.objective,
+    props.setKeyResult({
+      ...props.keyResult,
       deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
-      id: props.latesetObjectiveId,
+      id: props.latestKeyResultId,
+      objectiveId: props.currentObjectiveId,
     });
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    props.handleObjective();
-    props.setLatesetObjectiveId(props.latesetObjectiveId + 1);
-    props.navigation.goBack();
+    props?.handleKeyResult();
+    props?.setLatestKeyResultId(props?.latestKeyResultId + 1);
+    props?.navigation.goBack();
   };
 
   return (
     <ScrollView overScrollMode="never" style={styles.container}>
       <Title
-        title="KetResult and deadline"
+        title="KeyResult and deadline"
         detail="어떤 목표든 괜찮아요"
         type="detail"
       />
       <View style={styles.contentContainer}>
         <Input
           placeholder="목표를 입력하세요"
-          value={props.objective.name}
+          value={props.keyResult.name}
           onChangeText={(text: any) =>
-            props.setObjective({ ...props.objective, name: text })
+            props.setKeyResult({ ...props.keyResult, name: text })
           }
         />
         <Gap />

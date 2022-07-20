@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Button,
   Dimensions,
@@ -10,8 +11,16 @@ import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
 
-const ObjectiveDetailScreen = ({ navigation, route }: any) => {
-  console.log(route.params.objective);
+const ObjectiveDetailScreen = ({
+  navigation,
+  route,
+  setCurrentRoute,
+  setCurrentObjectiveId,
+}: any) => {
+  useEffect(() => {
+    setCurrentRoute("ObjectiveDetail");
+    setCurrentObjectiveId(route.params.objective.id);
+  });
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />

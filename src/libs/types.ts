@@ -16,10 +16,10 @@ export interface Initiative {
 }
 
 export interface KeyResult {
-  id: number;
-  name: string;
-  deadline: Date;
-  objectiveId: number;
+  id: number | null;
+  name: string | null;
+  deadline: string | null;
+  objectiveId: number | null;
   initiatives: Initiative[];
 }
 

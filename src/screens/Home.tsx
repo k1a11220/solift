@@ -5,7 +5,7 @@ import ProgressCard from "../components/ProgressCard";
 import { Objective, ROUTES } from "../libs/types";
 
 const HomeScreen = ({ ...props }) => {
-  useEffect(() => props.setCurrentRoute("Home"), []);
+  useEffect(() => props.setCurrentRoute("Home"));
   const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>

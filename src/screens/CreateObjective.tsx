@@ -16,14 +16,14 @@ const CreateObjectiveScreen = ({ ...props }) => {
     props.setObjective({
       ...props.objective,
       deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
-      id: props.latesetObjectiveId,
+      id: props.latestObjectiveId,
     });
     setDate(currentDate);
   };
 
   const onSubmit = () => {
     props.handleObjective();
-    props.setLatesetObjectiveId(props.latesetObjectiveId + 1);
+    props.setLatestObjectiveId(props.latestObjectiveId + 1);
     props.navigation.goBack();
   };
 

@@ -13,7 +13,7 @@ import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
-import { Objective } from "./src/libs/types";
+import { KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 
@@ -21,22 +21,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState("");
-  const [latesetObjectiveId, setLatesetObjectiveId] = useState(0);
-  const [initiative, setInitiative] = useState({
-    name: "",
-    deadline: new Date(),
-    hasDone: false,
-  });
-  const [initiatives, setInitiatives] = useState([]);
 
-  const handleInitiative = () => {
-    let newInitiative = initiative;
-    let newInitiatives = [newInitiative, ...initiatives];
-    setInitiatives(newInitiatives);
-    setInitiative("");
-    console.log(initiatives);
-  };
-
+  const [currentObjectiveId, setCurrentObjectiveId] = useState();
+  console.log(currentRoute, currentObjectiveId);
+  const [latestObjectiveId, setLatestObjectiveId] = useState(0);
   const [objective, setObjective] = useState<Objective>({
     id: null,
     name: null,
@@ -57,6 +45,46 @@ export default function App() {
       keyResults: [],
     });
     console.log(objectives);
+  };
+
+  const [latestKeyResultId, setLatestKeyResultId] = useState(0);
+  const [keyResult, setKeyResult] = useState<KeyResult>({
+    id: null,
+    name: null,
+    deadline: null,
+    initiatives: [],
+    objectiveId: null,
+  });
+
+  const [keyResults, setKeyResults] = useState<Objective[]>([]);
+
+  const handleKeyResult = () => {
+    let newKeyResult = keyResult;
+    let newKeyResults = [newKeyResult, ...keyResults];
+    setKeyResults(newKeyResults);
+    setKeyResult({
+      id: null,
+      name: null,
+      deadline: null,
+      initiatives: [],
+      objectiveId: null,
+    });
+    console.log(keyResults);
+  };
+
+  const [initiative, setInitiative] = useState({
+    name: "",
+    deadline: new Date(),
+    hasDone: false,
+  });
+  const [initiatives, setInitiatives] = useState([]);
+
+  const handleInitiative = () => {
+    let newInitiative = initiative;
+    let newInitiatives = [newInitiative, ...initiatives];
+    setInitiatives(newInitiatives);
+    setInitiative("");
+    console.log(initiatives);
   };
 
   return (
@@ -91,11 +119,16 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen
-            name="ObjectiveDetail"
-            component={ObjectiveDetailScreen}
-            setCurrentRoute={setCurrentRoute}
-          />
+          <Stack.Screen name="ObjectiveDetail">
+            {(props) => (
+              <ObjectiveDetailScreen
+                {...props}
+                setCurrentRoute={setCurrentRoute}
+                keyResults={keyResults}
+                setCurrentObjectiveId={setCurrentObjectiveId}
+              />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="KeyResultDetail">
             {(props) => (
               <KeyResultDetailScreen
@@ -112,8 +145,8 @@ export default function App() {
                 objective={objective}
                 setObjective={setObjective}
                 handleObjective={handleObjective}
-                latesetObjectiveId={latesetObjectiveId}
-                setLatesetObjectiveId={setLatesetObjectiveId}
+                latestObjectiveId={latestObjectiveId}
+                setLatestObjectiveId={setLatestObjectiveId}
               />
             )}
           </Stack.Screen>
@@ -121,9 +154,12 @@ export default function App() {
             {(props) => (
               <CreateKeyResultScreen
                 {...props}
-                objective={objective}
-                setObjective={setObjective}
-                handleObjective={handleObjective}
+                keyResult={keyResult}
+                setKeyResult={setKeyResult}
+                handleKeyResult={handleKeyResult}
+                latestKeyResultId={latestKeyResultId}
+                setLatestKeyResultId={setLatestKeyResultId}
+                currentObjectiveId={currentObjectiveId}
               />
             )}
           </Stack.Screen>
