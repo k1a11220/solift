@@ -3,14 +3,19 @@ import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
 const KeyResultDetailScreen = ({ ...props }) => {
-  console.log(props);
+  const currentKeyResult = props?.keyResults?.find(
+    (keyResult) => keyResult?.id === props?.route?.params?.id
+  );
+  const currentObjective = props?.objectives?.find(
+    (objective) => objective?.id === currentKeyResult?.objectiveId
+  );
   return (
     <ScrollView style={styles.container}>
       <Title
-        title="디자인 도서 4권 읽기"
-        subtitle="디자인 방법론 공부하기"
+        title={currentKeyResult?.name}
+        subtitle={currentObjective?.name}
         progress={34}
-        date="2023/02/11"
+        date={currentKeyResult?.deadline}
         type="progress"
       />
       <View style={styles.cardList}>

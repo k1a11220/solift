@@ -8,11 +8,11 @@ export interface ROUTES {
 }
 
 export interface Initiative {
-  id: number;
-  name: string;
-  deadline: Date;
+  id: number | null;
+  name: string | null;
+  deadline: string | null;
   hasDone: boolean;
-  keyResultId: number;
+  keyResultId: number | null;
 }
 
 export interface KeyResult {

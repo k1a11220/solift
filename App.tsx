@@ -13,7 +13,7 @@ import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
 import { useState } from "react";
-import { KeyResult, Objective } from "./src/libs/types";
+import { Initiative, KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 
@@ -72,9 +72,12 @@ export default function App() {
     console.log(keyResults);
   };
 
-  const [initiative, setInitiative] = useState({
-    name: "",
-    deadline: new Date(),
+  const [latestInitiativeId, setLatestInitiativeId] = useState(0);
+  const [initiative, setInitiative] = useState<Initiative>({
+    id: null,
+    name: null,
+    deadline: null,
+    keyResultId: null,
     hasDone: false,
   });
   const [initiatives, setInitiatives] = useState([]);
@@ -83,7 +86,13 @@ export default function App() {
     let newInitiative = initiative;
     let newInitiatives = [newInitiative, ...initiatives];
     setInitiatives(newInitiatives);
-    setInitiative("");
+    setInitiative({
+      id: null,
+      name: null,
+      deadline: null,
+      keyResultId: null,
+      hasDone: false,
+    });
     console.log(initiatives);
   };
 
@@ -133,6 +142,8 @@ export default function App() {
             {(props) => (
               <KeyResultDetailScreen
                 {...props}
+                objectives={objectives}
+                keyResults={keyResults}
                 initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
               />
