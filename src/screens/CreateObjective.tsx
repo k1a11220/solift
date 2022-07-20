@@ -1,14 +1,22 @@
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import CTA from "../components/Cta";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import { useDate } from "../utils/useDate";
+import Modal from "react-native-modal";
 
 const CreateObjectiveScreen = ({ ...props }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     props.setCurrentRoute("CreateObjective");
   });
@@ -32,30 +40,51 @@ const CreateObjectiveScreen = ({ ...props }) => {
   };
 
   return (
-    <ScrollView overScrollMode="never" style={styles.container}>
-      <Title
-        title="Objective and deadline"
-        detail="어떤 목표든 괜찮아요"
-        type="detail"
-      />
-      <View style={styles.contentContainer}>
-        <Input
-          placeholder="목표를 입력하세요"
-          value={props.objective.name}
-          onChangeText={(text: any) =>
-            props.setObjective({ ...props.objective, name: text })
-          }
+    <>
+      <ScrollView overScrollMode="never" style={styles.container}>
+        <Title
+          title="Objective and deadline"
+          detail="어떤 목표든 괜찮아요"
+          type="detail"
         />
-        <Gap />
-        <RNDateTimePicker
-          value={date}
-          onChange={onChange}
-          mode="date"
-          locale="ko-KR"
-        />
-        <CTA label="다음으로" type="primary" onPress={onSubmit} />
-      </View>
-    </ScrollView>
+        <View style={styles.contentContainer}>
+          <Input
+            placeholder="목표를 입력하세요"
+            value={props.objective.name}
+            onChangeText={(text: any) =>
+              props.setObjective({ ...props.objective, name: text })
+            }
+          />
+          <Gap />
+
+          <TouchableOpacity
+            style={styles.datePickerContainer}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.datePickerText}>{useDate(date)}</Text>
+          </TouchableOpacity>
+          <CTA label="다음으로" type="primary" onPress={onSubmit} />
+        </View>
+      </ScrollView>
+
+      <Modal isVisible={modalVisible} style={{ margin: 0 }}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          onPress={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <RNDateTimePicker
+              value={date}
+              onChange={onChange}
+              mode="date"
+              locale="ko-KR"
+              display={"inline"}
+              textColor="black"
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </>
   );
 };
 
@@ -70,6 +99,35 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 22,
     flex: 1,
+    padding: 0,
+  },
+
+  modalContainer: {
+    flex: 1,
+    flexDirection: "column-reverse",
+    padding: 0,
+  },
+
+  modalContent: {
+    width: "100%",
+    backgroundColor: "#ffffff",
+    padding: 22,
+    borderTopRightRadius: 24,
+    borderTopLeftRadius: 24,
+  },
+
+  datePickerContainer: {
+    padding: 15,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#C3C9D3",
+    marginBottom: 16,
+  },
+
+  datePickerText: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#333D4B",
   },
 });
 
