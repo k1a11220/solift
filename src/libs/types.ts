@@ -26,6 +26,6 @@ export interface KeyResult {
 export interface Objective {
   id: number | null;
   name: string | null;
-  deadline: Date | null;
+  deadline: string | null;
   keyResults: KeyResult[];
 }

@@ -10,10 +10,11 @@ import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
 
-const ObjectiveDetailScreen = ({ navigation }: any) => {
+const ObjectiveDetailScreen = ({ navigation, route }: any) => {
+  console.log(route.params.objective);
   return (
     <ScrollView style={styles.container}>
-      <Title title="디자인 방법론 공부하기" type="default" />
+      <Title title={route.params.objective.name} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
@@ -22,7 +23,9 @@ const ObjectiveDetailScreen = ({ navigation }: any) => {
         <Gap />
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>마감일</Text>
-          <Text style={styles.infoCardValue}>2023/02/11</Text>
+          <Text style={styles.infoCardValue}>
+            {route.params.objective.deadline}
+          </Text>
         </View>
       </View>
       <View style={styles.cardList}>

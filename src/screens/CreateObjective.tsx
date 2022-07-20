@@ -6,6 +6,7 @@ import CTA from "../components/Cta";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
+import { useDate } from "../utils/useDate";
 
 const CreateObjectiveScreen = ({ ...props }) => {
   const [date, setDate] = useState(new Date());
@@ -16,7 +17,7 @@ const CreateObjectiveScreen = ({ ...props }) => {
     setShow(false);
     props.setObjective({
       ...props.objective,
-      deadline: currentDate,
+      deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
       id: props.latesetObjectiveId,
     });
     setDate(currentDate);
