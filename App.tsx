@@ -47,6 +47,7 @@ export default function App() {
     console.log(objectives);
   };
 
+  const [currentKeyResultId, setCurrentKeyResultId] = useState();
   const [latestKeyResultId, setLatestKeyResultId] = useState(0);
   const [keyResult, setKeyResult] = useState<KeyResult>({
     id: null,
@@ -146,6 +147,7 @@ export default function App() {
                 keyResults={keyResults}
                 initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
+                setCurrentKeyResultId={setCurrentKeyResultId}
               />
             )}
           </Stack.Screen>
@@ -178,9 +180,10 @@ export default function App() {
             {(props) => (
               <CreateInitiativeScreen
                 {...props}
-                objective={objective}
-                setObjective={setObjective}
-                handleObjective={handleObjective}
+                initiative={initiative}
+                setInitiative={setInitiative}
+                handleInitiative={handleInitiative}
+                currentKeyResultId={currentKeyResultId}
               />
             )}
           </Stack.Screen>

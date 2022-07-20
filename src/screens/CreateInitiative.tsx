@@ -17,7 +17,11 @@ const CreateInitiativeScreen = ({ ...props }) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
-    props.setInitiative({ ...props.initiative, deadline: currentDate });
+    props.setInitiative({
+      ...props.initiative,
+      deadline: currentDate,
+      keyResultId: props.currentKeyResultId,
+    });
     setDate(currentDate);
   };
 

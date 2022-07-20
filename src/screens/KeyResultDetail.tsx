@@ -1,13 +1,21 @@
+import { useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 
 const KeyResultDetailScreen = ({ ...props }) => {
+  useEffect(() => {
+    props.setCurrentRoute("KeyResultDetail");
+    props.setCurrentKeyResultId(props.route.params.id);
+  });
   const currentKeyResult = props?.keyResults?.find(
     (keyResult) => keyResult?.id === props?.route?.params?.id
   );
   const currentObjective = props?.objectives?.find(
     (objective) => objective?.id === currentKeyResult?.objectiveId
+  );
+  const filteredInitiatives = props.initiatives.filter(
+    (initiative: any) => initiative.keyResultId === currentKeyResult.id
   );
   return (
     <ScrollView style={styles.container}>
@@ -19,7 +27,7 @@ const KeyResultDetailScreen = ({ ...props }) => {
         type="progress"
       />
       <View style={styles.cardList}>
-        {props.initiatives.map((initiative, index) => (
+        {filteredInitiatives.map((initiative, index) => (
           <InitiativeCard
             key={index}
             name={initiative.name}
