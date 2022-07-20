@@ -18,12 +18,13 @@ const ObjectiveDetailScreen = ({
   setCurrentRoute,
   setCurrentObjectiveId,
   keyResults,
+  ...props
 }: any) => {
   const isFocused = useIsFocused();
   useEffect(() => {
     setCurrentRoute("ObjectiveDetail");
     setCurrentObjectiveId(route.params.objective.id);
-  }, [isFocused]);
+  }, [props, isFocused]);
   const filteredKeyResults = keyResults.filter(
     (keyResult: any) => keyResult.objectiveId === route.params.objective.id
   );
