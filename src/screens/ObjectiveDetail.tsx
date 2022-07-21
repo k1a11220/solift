@@ -41,13 +41,29 @@ const ObjectiveDetailScreen = ({
     return (countedTrue / filteredInitiatives.length) * 100;
   };
 
+  const keyResultProgressList = keyResults.map((keyResult) => keyResult.id);
+
+  const keyResultProgressAverage = () => {
+    let list = keyResultProgressList.map((keyResult) =>
+      findKeyResultProgress(keyResult)
+    );
+
+    let filteredList = list.reduce(function add(sum, currValue) {
+      return sum + currValue;
+    }, 0);
+
+    return filteredList / list.length;
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
-          <Text style={styles.infoCardValue}>50%</Text>
+          <Text style={styles.infoCardValue}>
+            {keyResultProgressAverage().toString()}%
+          </Text>
         </View>
         <Gap />
         <View style={styles.infoCard}>
