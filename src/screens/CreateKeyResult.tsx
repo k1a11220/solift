@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CTA from "../components/Cta";
+import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
@@ -47,12 +48,7 @@ const CreateKeyResultScreen = ({ ...props }) => {
           }
         />
         <Gap />
-        <RNDateTimePicker
-          value={date}
-          onChange={onChange}
-          mode="date"
-          locale="ko-KR"
-        />
+        <DatePickerModal date={date} onChange={onChange} />
         <CTA label="다음으로" type="primary" onPress={onSubmit} />
       </View>
     </ScrollView>

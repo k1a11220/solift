@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CTA from "../components/Cta";
+import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import InitiativeCard from "../components/InitiativeCard";
 import Input from "../components/Input";
@@ -51,12 +52,7 @@ const CreateInitiativeScreen = ({ ...props }) => {
           }
         />
         <Gap />
-        <RNDateTimePicker
-          value={date}
-          onChange={onChange}
-          mode="date"
-          locale="ko-KR"
-        />
+        <DatePickerModal date={date} onChange={onChange} />
         <CTA label="다음으로" type="primary" onPress={onSubmit} />
       </View>
     </ScrollView>
