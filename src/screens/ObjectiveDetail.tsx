@@ -20,6 +20,7 @@ const ObjectiveDetailScreen = ({
   setCurrentObjectiveId,
   keyResults,
   initiatives,
+  id,
   ...props
 }: any) => {
   const isFocused = useIsFocused();
@@ -41,11 +42,17 @@ const ObjectiveDetailScreen = ({
     return (countedTrue / filteredInitiatives.length) * 100;
   };
 
-  const keyResultProgressList = keyResults.map((keyResult) => keyResult.id);
+  const keyResultProgressList = () => {
+    return keyResults
+      .map((keyResult) => keyResult)
+      .filter(
+        (keyResult) => keyResult.objectiveId === route.params.objective.id
+      );
+  };
 
   const keyResultProgressAverage = () => {
-    let list = keyResultProgressList.map((keyResult) =>
-      findKeyResultProgress(keyResult)
+    let list = keyResultProgressList().map((keyResult) =>
+      findKeyResultProgress(keyResult.id)
     );
 
     let filteredList = list.reduce(function add(sum, currValue) {
@@ -55,14 +62,30 @@ const ObjectiveDetailScreen = ({
     return filteredList / list.length;
   };
 
+  const fixedAverage: number = +keyResultProgressAverage().toFixed(1);
+
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
-          <Text style={styles.infoCardValue}>
-            {keyResultProgressAverage().toFixed(1).toString()}%
+          <Text
+            style={[
+              styles.infoCardValue,
+              {
+                color:
+                  fixedAverage < 20
+                    ? "#FF5252"
+                    : fixedAverage < 70
+                    ? "#FF9100"
+                    : fixedAverage < 100
+                    ? "#47CE09"
+                    : "#4191FD",
+              },
+            ]}
+          >
+            {fixedAverage.toString()}%
           </Text>
         </View>
         <Gap />
