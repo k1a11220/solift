@@ -17,16 +17,6 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
   useEffect(() => {
     props.setCurrentRoute("Home");
   }, [props, isFocused]);
-  const findKeyResultProgress = (id) => {
-    let filteredInitiatives = initiatives.filter(
-      (initiative) => initiative.keyResultId === id
-    );
-    let countedTrue = filteredInitiatives.filter(
-      (initiative) => initiative.hasDone === true
-    ).length;
-
-    return (countedTrue / filteredInitiatives.length) * 100;
-  };
 
   const keyResultProgressList = (id) => {
     return keyResults
@@ -34,15 +24,33 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
       .filter((keyResult) => keyResult.objectiveId === id);
   };
 
+  const findKeyResultProgress = (id) => {
+    let filteredInitiatives = initiatives.filter(
+      (initiative) => initiative.keyResultId === id
+    );
+    if (filteredInitiatives.length === 0) {
+      return 0;
+    } else {
+      let countedTrue = filteredInitiatives.filter(
+        (initiative) => initiative.hasDone === true
+      ).length;
+
+      return (countedTrue / filteredInitiatives.length) * 100;
+    }
+  };
+
   const keyResultProgressAverage = (id) => {
     let list = keyResultProgressList(id).map((keyResult) =>
       findKeyResultProgress(keyResult.id)
     );
+    if (list.length === 0) {
+      return 0;
+    }
+    // console.log(keyResultProgressList(1));
 
     let filteredList = list.reduce(function add(sum, currValue) {
       return sum + currValue;
     }, 0);
-
     return filteredList / list.length;
   };
 

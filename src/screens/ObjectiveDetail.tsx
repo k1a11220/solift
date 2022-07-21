@@ -35,6 +35,10 @@ const ObjectiveDetailScreen = ({
     let filteredInitiatives = initiatives.filter(
       (initiative) => initiative.keyResultId === id
     );
+    if (filteredInitiatives.length === 0) {
+      return 0;
+    }
+
     let countedTrue = filteredInitiatives.filter(
       (initiative) => initiative.hasDone === true
     ).length;
@@ -55,6 +59,10 @@ const ObjectiveDetailScreen = ({
       findKeyResultProgress(keyResult.id)
     );
 
+    if (list.length === 0) {
+      return 0;
+    }
+
     let filteredList = list.reduce(function add(sum, currValue) {
       return sum + currValue;
     }, 0);
@@ -63,7 +71,6 @@ const ObjectiveDetailScreen = ({
   };
 
   const fixedAverage: number = +keyResultProgressAverage().toFixed(1);
-
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />

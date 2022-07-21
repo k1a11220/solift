@@ -21,13 +21,13 @@ const KeyResultDetailScreen = ({ ...props }) => {
   const filteredInitiatives = props.initiatives.filter(
     (initiative: any) => initiative.keyResultId === currentKeyResult.id
   );
+
   const newProgress =
     (filteredInitiatives.filter((initiative) => initiative.hasDone === true)
       .length /
       filteredInitiatives.length) *
     100;
   const [progress, setProgress] = useState(newProgress);
-
   return (
     <ScrollView style={styles.container}>
       <Title
