@@ -23,9 +23,14 @@ const ProgressCard = ({ title, date, progress, onPress }: any) => {
           <View style={styles.iconContainer}>
             <Icon.CheckCircleOutline fillColor={"#8B919E"} />
           </View>
-          <Text style={styles.detailValue}>50%</Text>
+          <Text style={styles.detailValue}>{progress?.toString()}%</Text>
           <View style={styles.progressContainer}>
-            <View style={styles.progressBar} />
+            <View
+              style={[
+                styles.progressBar,
+                { maxWidth: `${progress?.toString()}%` },
+              ]}
+            />
           </View>
         </View>
       </View>
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     backgroundColor: "#4191FD",
-    width: "50%",
+    width: "100%",
     height: "100%",
     borderRadius: 6,
   },

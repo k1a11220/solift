@@ -52,15 +52,15 @@ const KeyResultDetailScreen = ({ ...props }) => {
               name={initiative.name}
               deadline={initiative.deadline}
               setInitiative={props.setInitiative}
-              onPress={() =>
+              onPress={() => {
                 setProgress(
                   (filteredInitiatives.filter(
                     (initiative) => initiative.hasDone === true
                   ).length /
                     filteredInitiatives.length) *
                     100
-                )
-              }
+                );
+              }}
             />
           ))
         )}

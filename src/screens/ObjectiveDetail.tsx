@@ -19,6 +19,7 @@ const ObjectiveDetailScreen = ({
   setCurrentRoute,
   setCurrentObjectiveId,
   keyResults,
+  initiatives,
   ...props
 }: any) => {
   const isFocused = useIsFocused();
@@ -29,6 +30,17 @@ const ObjectiveDetailScreen = ({
   const filteredKeyResults = keyResults.filter(
     (keyResult: any) => keyResult.objectiveId === route.params.objective.id
   );
+  const findKeyResultProgress = (id) => {
+    let filteredInitiatives = initiatives.filter(
+      (initiative) => initiative.keyResultId === id
+    );
+    let countedTrue = filteredInitiatives.filter(
+      (initiative) => initiative.hasDone === true
+    ).length;
+
+    return (countedTrue / filteredInitiatives.length) * 100;
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Title title={route.params.objective.name} type="default" />
@@ -57,6 +69,7 @@ const ObjectiveDetailScreen = ({
               key={keyResult.id}
               title={keyResult.name}
               date={keyResult.deadline}
+              progress={findKeyResultProgress(keyResult.id)}
               navigation={navigation}
               onPress={() =>
                 navigation?.navigate("KeyResultDetail", { id: keyResult.id })

@@ -53,6 +53,7 @@ export default function App() {
     deadline: null,
     initiatives: [],
     objectiveId: null,
+    progress: 0,
   });
 
   const [keyResults, setKeyResults] = useState<Objective[]>([]);
@@ -67,6 +68,7 @@ export default function App() {
       deadline: null,
       initiatives: [],
       objectiveId: null,
+      progress: 0,
     });
   };
 
@@ -132,6 +134,7 @@ export default function App() {
                 setCurrentRoute={setCurrentRoute}
                 keyResults={keyResults}
                 setCurrentObjectiveId={setCurrentObjectiveId}
+                initiatives={initiatives}
               />
             )}
           </Stack.Screen>
