@@ -13,6 +13,7 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import { useDate } from "../utils/useDate";
 import Modal from "react-native-modal";
+import DatePickerModal from "../components/DatePickerModal";
 
 const CreateObjectiveScreen = ({ ...props }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -56,34 +57,10 @@ const CreateObjectiveScreen = ({ ...props }) => {
             }
           />
           <Gap />
-
-          <TouchableOpacity
-            style={styles.datePickerContainer}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.datePickerText}>{useDate(date)}</Text>
-          </TouchableOpacity>
+          <DatePickerModal date={date} onChange={onChange} />
           <CTA label="다음으로" type="primary" onPress={onSubmit} />
         </View>
       </ScrollView>
-
-      <Modal isVisible={modalVisible} style={{ margin: 0 }}>
-        <TouchableOpacity
-          style={styles.modalContainer}
-          onPress={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContent}>
-            <RNDateTimePicker
-              value={date}
-              onChange={onChange}
-              mode="date"
-              locale="ko-KR"
-              display={"inline"}
-              textColor="black"
-            />
-          </View>
-        </TouchableOpacity>
-      </Modal>
     </>
   );
 };
