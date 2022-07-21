@@ -62,7 +62,7 @@ const ObjectiveDetailScreen = ({
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
           <Text style={styles.infoCardValue}>
-            {keyResultProgressAverage().toString()}%
+            {keyResultProgressAverage().toFixed(1).toString()}%
           </Text>
         </View>
         <Gap />
@@ -85,7 +85,7 @@ const ObjectiveDetailScreen = ({
               key={keyResult.id}
               title={keyResult.name}
               date={keyResult.deadline}
-              progress={findKeyResultProgress(keyResult.id)}
+              progress={findKeyResultProgress(keyResult.id).toFixed(1)}
               navigation={navigation}
               onPress={() =>
                 navigation?.navigate("KeyResultDetail", { id: keyResult.id })
