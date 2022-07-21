@@ -121,6 +121,8 @@ export default function App() {
               <HomeScreen
                 {...props}
                 objectives={objectives}
+                keyResults={keyResults}
+                initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
               />
             )}
