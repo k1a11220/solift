@@ -10,7 +10,7 @@ interface InitiativeCardProps {
   hasDone?: boolean;
   initiative?: any;
   setInitiative: (initiative: Initiative) => void;
-  // onPress: () => void;
+  onPress: () => void;
 }
 
 const InitiativeCard = ({
@@ -19,9 +19,11 @@ const InitiativeCard = ({
   setInitiative,
   id,
   initiative,
+  onPress,
 }: InitiativeCardProps) => {
   const [hasDone, setHasDone] = useState(initiative.hasDone);
   const onClick = () => {
+    onPress();
     initiative.hasDone = !initiative.hasDone;
     setHasDone(initiative.hasDone);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
