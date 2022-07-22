@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   rightItemContainer: {
     flex: 1,
     justifyContent: "center",
-    maxWidth: 32,
+    maxWidth: 36,
   },
 
   rightItemText: {
