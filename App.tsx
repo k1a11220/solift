@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import * as Icon from "./assets/icons";
 import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
@@ -114,6 +114,11 @@ export default function App() {
                 <Icon.Chevron fillColor="#333D4B" />
               </TouchableOpacity>
             ),
+            headerRight: () => (
+              <TouchableOpacity style={styles.rightItemContainer}>
+                <Text style={styles.rightItemText}>편집</Text>
+              </TouchableOpacity>
+            ),
           })}
         >
           <Stack.Screen name="Home" options={{ headerShown: false }}>
@@ -211,5 +216,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  rightItemContainer: {
+    flex: 1,
+    justifyContent: "center",
+    maxWidth: 32,
+  },
+
+  rightItemText: {
+    fontSize: 18,
+    color: "#4191FD",
+    fontWeight: "600",
   },
 });
