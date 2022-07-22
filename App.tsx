@@ -16,6 +16,7 @@ import { useState } from "react";
 import { Initiative, KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
+import EditScreen from "./src/screens/Edit";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,7 +57,6 @@ export default function App() {
   });
 
   const [keyResults, setKeyResults] = useState<Objective[]>([]);
-
   const handleKeyResult = () => {
     let newKeyResult = keyResult;
     let newKeyResults = [newKeyResult, ...keyResults];
@@ -92,7 +92,6 @@ export default function App() {
       hasDone: false,
     });
   };
-
   return (
     <StoreProvider store={store}>
       {/* <ExampleView />
@@ -114,11 +113,26 @@ export default function App() {
                 <Icon.Chevron fillColor="#333D4B" />
               </TouchableOpacity>
             ),
-            headerRight: () => (
-              <TouchableOpacity style={styles.rightItemContainer}>
-                <Text style={styles.rightItemText}>편집</Text>
-              </TouchableOpacity>
-            ),
+            headerRight: () =>
+              currentRoute === "ObjectiveDetail" ? (
+                <TouchableOpacity
+                  style={styles.rightItemContainer}
+                  onPress={() =>
+                    navigation.navigate("Edit", { currentObjectiveId })
+                  }
+                >
+                  <Text style={styles.rightItemText}>편집</Text>
+                </TouchableOpacity>
+              ) : currentRoute === "KeyResultDetail" ? (
+                <TouchableOpacity
+                  style={styles.rightItemContainer}
+                  onPress={() =>
+                    navigation.navigate("Edit", { currentKeyResultId })
+                  }
+                >
+                  <Text style={styles.rightItemText}>편집</Text>
+                </TouchableOpacity>
+              ) : null,
           })}
         >
           <Stack.Screen name="Home" options={{ headerShown: false }}>
@@ -194,6 +208,17 @@ export default function App() {
                 setCurrentRoute={setCurrentRoute}
                 latestInitiativeId={latestInitiativeId}
                 setLatestInitiativeId={setLatestInitiativeId}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="Edit">
+            {(props) => (
+              <EditScreen
+                objectives={objectives}
+                keyResults={keyResults}
+                initiatives={initiatives}
+                setCurrentRoute={setCurrentRoute}
+                {...props}
               />
             )}
           </Stack.Screen>

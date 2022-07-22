@@ -6,25 +6,39 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 
-const CreateObjectiveScreen = ({ ...props }) => {
+const EditScreen = ({ ...props }) => {
   useEffect(() => {
-    props.setCurrentRoute("CreateObjective");
+    props.setCurrentRoute("Edit");
   });
 
+  const objective = props.objectives.find(
+    (objective) => objective.id === props.route.params.currentObjectiveId
+  );
+
+  const dateParts = objective.deadline.split("/");
+  const currentDate = new Date(
+    dateParts[0],
+    dateParts[1] - 1,
+    dateParts[2] - -1
+  );
+
+  console.log(currentDate);
+
   const [date, setDate] = useState(new Date());
+  const [name, setName] = useState(objective.name);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    props.setObjective({
-      ...props.objective,
-      deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
-      id: props.latestObjectiveId,
-    });
+    objective.deadline = currentDate
+      .toISOString()
+      .split("T")[0]
+      .replaceAll("-", "/");
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    props.handleObjective();
-    props.setLatestObjectiveId(props.latestObjectiveId + 1);
+    // props.handleObjective();
+    // props.setLatestObjectiveId(props.latestObjectiveId + 1);
     props.navigation.goBack();
   };
 
@@ -38,15 +52,16 @@ const CreateObjectiveScreen = ({ ...props }) => {
         />
         <View style={styles.contentContainer}>
           <Input
-            placeholder="목표를 입력하세요"
-            value={props.objective.name}
-            onChangeText={(text: any) =>
-              props.setObjective({ ...props.objective, name: text })
-            }
+            placeholder={objective.name}
+            value={objective.name}
+            onChangeText={(text: any) => {
+              setName(text);
+              objective.name = text;
+            }}
           />
           <Gap />
-          <DatePickerModal date={date} onChange={onChange} />
-          <CTA label="다음으로" type="primary" onPress={onSubmit} />
+          <DatePickerModal date={currentDate} onChange={onChange} />
+          <CTA label="수정하기" type="primary" onPress={onSubmit} />
         </View>
       </ScrollView>
     </>
@@ -68,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateObjectiveScreen;
+export default EditScreen;
