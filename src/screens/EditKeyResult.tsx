@@ -7,8 +7,6 @@ import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 
 const EditKeyResultScreen = ({ ...props }) => {
-  console.log(props.route.params);
-
   useEffect(() => {
     props.setCurrentRoute("EditKeyResult");
   });
