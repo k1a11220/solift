@@ -6,7 +6,9 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 
-const EditScreen = ({ ...props }) => {
+const EditObjectiveScreen = ({ ...props }) => {
+  console.log(props.route.params);
+
   useEffect(() => {
     props.setCurrentRoute("Edit");
   });
@@ -81,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditScreen;
+export default EditObjectiveScreen;

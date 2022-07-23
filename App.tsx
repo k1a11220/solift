@@ -22,7 +22,7 @@ import { useState } from "react";
 import { Initiative, KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
-import EditScreen from "./src/screens/Edit";
+import EditObjectiveScreen from "./src/screens/EditObjective";
 
 const Stack = createNativeStackNavigator();
 
@@ -140,7 +140,7 @@ export default function App() {
                 <TouchableOpacity
                   style={styles.rightItemContainer}
                   onPress={() =>
-                    navigation.navigate("Edit", { currentObjectiveId })
+                    navigation.navigate("EditObjective", { currentObjectiveId })
                   }
                 >
                   <Text style={styles.rightItemText}>편집</Text>
@@ -246,9 +246,9 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen name="Edit">
+          <Stack.Screen name="EditObjective">
             {(props) => (
-              <EditScreen
+              <EditObjectiveScreen
                 objectives={objectives}
                 keyResults={keyResults}
                 initiatives={initiatives}
