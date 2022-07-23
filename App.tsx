@@ -23,6 +23,7 @@ import { Initiative, KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 import EditObjectiveScreen from "./src/screens/EditObjective";
+import EditKeyResultScreen from "./src/screens/EditKeyResult";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,7 +66,15 @@ export default function App() {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "삭제하기", onPress: () => deleteObjective(id, action) },
+      {
+        text: "삭제하기",
+        onPress: () =>
+          currentRoute === "EditObjective"
+            ? deleteObjective(id, action)
+            : currentRoute === "EditKeyResult"
+            ? deleteKeyResult(id, action)
+            : null,
+      },
     ]);
 
   const [currentKeyResultId, setCurrentKeyResultId] = useState();
@@ -90,6 +99,12 @@ export default function App() {
       initiatives: [],
       objectiveId: null,
     });
+  };
+
+  const deleteKeyResult = (id: number, action) => {
+    action();
+    let newKeyResults = keyResults.filter((keyResult) => keyResult.id !== id);
+    setKeyResults(newKeyResults);
   };
 
   const [latestInitiativeId, setLatestInitiativeId] = useState(0);
@@ -149,7 +164,7 @@ export default function App() {
                 <TouchableOpacity
                   style={styles.rightItemContainer}
                   onPress={() =>
-                    navigation.navigate("Edit", { currentKeyResultId })
+                    navigation.navigate("EditKeyResult", { currentKeyResultId })
                   }
                 >
                   <Text style={styles.rightItemText}>편집</Text>
@@ -161,6 +176,17 @@ export default function App() {
                     deleteAlert(currentObjectiveId, () =>
                       navigation.navigate("Home")
                     )
+                  }
+                >
+                  <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
+                    삭제
+                  </Text>
+                </TouchableOpacity>
+              ) : currentRoute === "EditKeyResult" ? (
+                <TouchableOpacity
+                  style={styles.rightItemContainer}
+                  onPress={() =>
+                    deleteAlert(currentKeyResultId, () => navigation.pop(2))
                   }
                 >
                   <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
@@ -250,8 +276,15 @@ export default function App() {
             {(props) => (
               <EditObjectiveScreen
                 objectives={objectives}
+                setCurrentRoute={setCurrentRoute}
+                {...props}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="EditKeyResult">
+            {(props) => (
+              <EditKeyResultScreen
                 keyResults={keyResults}
-                initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
                 {...props}
               />
