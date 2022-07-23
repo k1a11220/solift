@@ -1,7 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 import * as Icon from "./assets/icons";
 import ObjectiveDetailScreen from "./src/screens/ObjectiveDetail";
@@ -45,6 +51,22 @@ export default function App() {
       keyResults: [],
     });
   };
+
+  const deleteObjective = (id: number, action) => {
+    action();
+    let newObjectives = objectives.filter((objective) => objective.id !== id);
+    setObjectives(newObjectives);
+  };
+
+  const deleteAlert = (id, action) =>
+    Alert.alert("삭제하기", "정말 삭제하시겠어요?", [
+      {
+        text: "취소",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+      { text: "삭제하기", onPress: () => deleteObjective(id, action) },
+    ]);
 
   const [currentKeyResultId, setCurrentKeyResultId] = useState();
   const [latestKeyResultId, setLatestKeyResultId] = useState(0);
@@ -131,6 +153,19 @@ export default function App() {
                   }
                 >
                   <Text style={styles.rightItemText}>편집</Text>
+                </TouchableOpacity>
+              ) : currentRoute === "Edit" ? (
+                <TouchableOpacity
+                  style={styles.rightItemContainer}
+                  onPress={() =>
+                    deleteAlert(currentObjectiveId, () =>
+                      navigation.navigate("Home")
+                    )
+                  }
+                >
+                  <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
+                    삭제
+                  </Text>
                 </TouchableOpacity>
               ) : null,
           })}

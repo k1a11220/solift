@@ -22,8 +22,6 @@ const EditScreen = ({ ...props }) => {
     dateParts[2] - -1
   );
 
-  console.log(currentDate);
-
   const [date, setDate] = useState(new Date());
   const [name, setName] = useState(objective.name);
 
