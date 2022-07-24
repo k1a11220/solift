@@ -16,8 +16,6 @@ interface InitiativeCardProps {
 const InitiativeCard = ({
   name,
   deadline,
-  setInitiative,
-  id,
   initiative,
   onPress,
 }: InitiativeCardProps) => {
@@ -58,6 +56,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 16,
+    marginRight: 22,
+    marginLeft: 22,
+    backgroundColor: "#FFF",
   },
   iconContainer: {
     width: 24,

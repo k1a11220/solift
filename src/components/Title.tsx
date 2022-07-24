@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 24,
   },
+
   iconContainer: {
     width: 17,
     height: 17,
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     height: 6,
     backgroundColor: "#EDEFF1",
     borderRadius: 6,
+    marginBottom: 12,
   },
 
   progressBar: {
