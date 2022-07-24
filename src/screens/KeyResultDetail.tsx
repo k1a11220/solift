@@ -1,10 +1,11 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
+import * as Haptics from "expo-haptics";
 
 const KeyResultDetailScreen = ({ ...props }) => {
   const isFocused = useIsFocused();
@@ -13,6 +14,7 @@ const KeyResultDetailScreen = ({ ...props }) => {
     props.setCurrentRoute("KeyResultDetail");
     props.setCurrentKeyResultId(props.route.params.id);
   }, [props, isFocused]);
+
   const currentKeyResult = props?.keyResults?.find(
     (keyResult) => keyResult?.id === props?.route?.params?.id
   );
@@ -52,13 +54,19 @@ const KeyResultDetailScreen = ({ ...props }) => {
     );
   };
 
-  const renderHiddenItem = () => {
+  const renderHiddenItem = (data, rowmap) => {
     return (
-      <View style={styles.rowBack}>
+      <TouchableOpacity
+        style={styles.rowBack}
+        onPress={() => {
+          props.deleteInitiative(data.item.id);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }}
+      >
         <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
           <Text style={styles.backTextWhite}>삭제</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -71,11 +79,11 @@ const KeyResultDetailScreen = ({ ...props }) => {
         />
       ) : (
         <SwipeListView
-          disableRightSwipe
-          bounces={false}
           data={filteredInitiatives}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
+          disableRightSwipe
+          bounces={false}
           rightOpenValue={-90 - 16}
           previewRowKey={"0"}
           previewOpenValue={-40}

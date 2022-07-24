@@ -115,7 +115,14 @@ export default function App() {
     keyResultId: null,
     hasDone: false,
   });
-  const [initiatives, setInitiatives] = useState([]);
+  const [initiatives, setInitiatives] = useState<Initiative[]>([]);
+
+  const deleteInitiative = (id: number) => {
+    let newInitiatives = initiatives.filter(
+      (initiative) => initiative.id !== id
+    );
+    setInitiatives(newInitiatives);
+  };
 
   const handleInitiative = () => {
     let newInitiative = initiative;
@@ -226,6 +233,7 @@ export default function App() {
                 setInitiative={setInitiative}
                 setCurrentRoute={setCurrentRoute}
                 setCurrentKeyResultId={setCurrentKeyResultId}
+                deleteInitiative={deleteInitiative}
               />
             )}
           </Stack.Screen>
