@@ -169,13 +169,11 @@ export default function App() {
                 >
                   <Text style={styles.rightItemText}>편집</Text>
                 </TouchableOpacity>
-              ) : currentRoute === "Edit" ? (
+              ) : currentRoute === "EditObjective" ? (
                 <TouchableOpacity
                   style={styles.rightItemContainer}
                   onPress={() =>
-                    deleteAlert(currentObjectiveId, () =>
-                      navigation.navigate("Home")
-                    )
+                    deleteAlert(currentObjectiveId, () => navigation.pop(2))
                   }
                 >
                   <Text style={[styles.rightItemText, { color: "#FF5252" }]}>

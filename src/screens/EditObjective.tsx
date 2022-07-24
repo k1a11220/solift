@@ -9,7 +9,7 @@ import { useDate } from "../utils/useDate";
 
 const EditObjectiveScreen = ({ ...props }) => {
   useEffect(() => {
-    props.setCurrentRoute("Edit");
+    props.setCurrentRoute("EditObjective");
   });
 
   const objective = props.objectives.find(
