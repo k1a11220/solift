@@ -1,4 +1,3 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 

@@ -5,6 +5,7 @@ import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
+import { useDate } from "../utils/useDate";
 
 const EditObjectiveScreen = ({ ...props }) => {
   useEffect(() => {
@@ -16,21 +17,14 @@ const EditObjectiveScreen = ({ ...props }) => {
   );
 
   const dateParts = objective.deadline.split("/");
-  const currentDate = new Date(
-    dateParts[0],
-    dateParts[1] - 1,
-    dateParts[2] - -1
-  );
+  const currentDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
 
   const [date, setDate] = useState(new Date());
   const [name, setName] = useState(objective.name);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    objective.deadline = currentDate
-      .toISOString()
-      .split("T")[0]
-      .replaceAll("-", "/");
+    objective.deadline = useDate(currentDate);
     setDate(currentDate);
   };
 

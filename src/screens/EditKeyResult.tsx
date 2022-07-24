@@ -5,6 +5,7 @@ import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
+import { format } from "date-fns";
 
 const EditKeyResultScreen = ({ ...props }) => {
   useEffect(() => {
@@ -23,10 +24,7 @@ const EditKeyResultScreen = ({ ...props }) => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    keyResult.deadline = currentDate
-      .toISOString()
-      .split("T")[0]
-      .replaceAll("-", "/");
+    keyResult.deadline = format(currentDate, "yyyy/MM/dd");
     setDate(currentDate);
   };
 

@@ -1,11 +1,9 @@
-import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { useForm } from "react-hook-form";
+import { ScrollView, StyleSheet, View } from "react-native";
 import CTA from "../components/Cta";
 import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
-import InitiativeCard from "../components/InitiativeCard";
 import Input from "../components/Input";
 import Title from "../components/Title";
 
@@ -14,13 +12,9 @@ const CreateInitiativeScreen = ({ ...props }) => {
     props.setCurrentRoute("CreateInitiative");
   });
   const [date, setDate] = useState(new Date());
-  const [show, setShow] = useState(false);
-
-  const { handleSubmit, control, watch, getValues } = useForm();
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    setShow(false);
     props.setInitiative({
       ...props.initiative,
       deadline: currentDate,

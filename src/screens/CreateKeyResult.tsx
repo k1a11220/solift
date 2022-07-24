@@ -1,13 +1,11 @@
-import RNDateTimePicker from "@react-native-community/datetimepicker";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CTA from "../components/Cta";
 import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
-import { useDate } from "../utils/useDate";
 
 const CreateKeyResultScreen = ({ ...props }) => {
   useEffect(() => {
@@ -19,7 +17,7 @@ const CreateKeyResultScreen = ({ ...props }) => {
     const currentDate = selectedDate;
     props.setKeyResult({
       ...props.keyResult,
-      deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
+      deadline: format(currentDate, "yyyy/MM/dd"),
       id: props.latestKeyResultId,
       objectiveId: props.currentObjectiveId,
     });

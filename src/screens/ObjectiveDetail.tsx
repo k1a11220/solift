@@ -1,13 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
-import {
-  Button,
-  Dimensions,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";

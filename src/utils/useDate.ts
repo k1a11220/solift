@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const useDate = (date: Date) => {
-  return date.toISOString().split("T")[0].replaceAll("-", "/");
+  return format(date, "yyyy/MM/dd");
 };

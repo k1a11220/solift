@@ -1,6 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";

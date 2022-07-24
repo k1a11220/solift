@@ -5,6 +5,7 @@ import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
+import { format } from "date-fns";
 
 const CreateObjectiveScreen = ({ ...props }) => {
   useEffect(() => {
@@ -16,7 +17,7 @@ const CreateObjectiveScreen = ({ ...props }) => {
     const currentDate = selectedDate;
     props.setObjective({
       ...props.objective,
-      deadline: currentDate.toISOString().split("T")[0].replaceAll("-", "/"),
+      deadline: format(currentDate, "yyyy/MM/dd"),
       id: props.latestObjectiveId,
     });
     setDate(currentDate);
