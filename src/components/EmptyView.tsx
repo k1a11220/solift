@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 interface EmptyViewProps {
   title: string;
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    height: Dimensions.get("window").height * 0.6,
   },
   emptyWrapper: {
     flexDirection: "column",

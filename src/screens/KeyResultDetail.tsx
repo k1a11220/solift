@@ -1,6 +1,12 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
@@ -73,17 +79,35 @@ const KeyResultDetailScreen = ({ ...props }) => {
   return (
     <View style={styles.container}>
       {filteredInitiatives.length === 0 ? (
-        <EmptyView
-          title={`아직 세부과제를 만들지 않으셨군요! \n 이제 세부과제를 만들어봐요`}
-          icon="satellite"
-        />
+        <>
+          <ScrollView
+            style={{
+              flex: 1,
+              marginBottom: 20,
+              marginRight: 22,
+              marginLeft: 22,
+            }}
+          >
+            <Title
+              title={currentKeyResult?.name}
+              subtitle={currentObjective?.name}
+              progress={newProgress}
+              date={currentKeyResult?.deadline}
+              type="progress"
+            />
+            <EmptyView
+              title={`아직 세부과제를 만들지 않으셨군요! \n 이제 세부과제를 만들어봐요`}
+              icon="satellite"
+            />
+          </ScrollView>
+        </>
       ) : (
         <SwipeListView
           data={filteredInitiatives}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
           disableRightSwipe
-          bounces={false}
+          bounces={true}
           rightOpenValue={-90 - 16}
           previewRowKey={"0"}
           previewOpenValue={-40}

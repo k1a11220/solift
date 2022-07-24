@@ -1,6 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
@@ -65,7 +65,7 @@ const ObjectiveDetailScreen = ({
 
   const fixedAverage: number = +keyResultProgressAverage().toFixed(1);
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} overScrollMode="always">
       <Title title={route.params.objective.name} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
