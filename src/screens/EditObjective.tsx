@@ -33,15 +33,15 @@ const EditObjectiveScreen = ({
     setCurrentRoute("EditObjective");
   });
 
-  const objective = getCurrentObjective(
+  const currentObjective = getCurrentObjective(
     objectives,
     props.route.params.currentObjectiveId
   );
 
-  const currentDate = stringToDate(objective?.deadline);
+  const currentDate = stringToDate(currentObjective?.deadline);
 
   const [date, setDate] = useState(currentDate);
-  const [name, setName] = useState(objective?.name);
+  const [name, setName] = useState(currentObjective?.name);
 
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
@@ -51,11 +51,11 @@ const EditObjectiveScreen = ({
   const onSubmit = () => {
     props.navigation.goBack();
     let filteredObjectives = objectives.filter(
-      (objective) => objective.id !== objective.id
+      (objective) => objective.id !== currentObjective?.id
     );
     let edited = [
       ...filteredObjectives,
-      { id: objective?.id, name: name, deadline: useDate(date) },
+      { id: currentObjective?.id, name: name, deadline: useDate(date) },
     ];
     AsyncStorage.setItem("objectives", JSON.stringify(edited))
       .then(() => {
@@ -74,12 +74,12 @@ const EditObjectiveScreen = ({
         />
         <View style={styles.contentContainer}>
           <Input
-            placeholder={objective?.name}
+            placeholder={currentObjective?.name}
             value={name}
             onChangeText={(text: any) => {
               setName(text);
-              if (objective !== undefined) {
-                objective.name = text;
+              if (currentObjective !== undefined) {
+                currentObjective.name = text;
               }
             }}
           />

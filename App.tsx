@@ -418,6 +418,7 @@ export default function App() {
                   setCurrentRoute={setCurrentRoute}
                   currentObjectiveId={currentObjectiveId}
                   objectives={objectives}
+                  setKeyResults={setKeyResults}
                   {...props}
                 />
               )}
