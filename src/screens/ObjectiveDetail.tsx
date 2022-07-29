@@ -18,8 +18,7 @@ interface ObjectiveDetailScreenProps {
   setCurrentObjectiveId: any;
   keyResults: KeyResult[];
   initiatives: Initiative[];
-  id: number;
-  route: RouteProp<{ params: { objective: Objective } }, "params">;
+  route: RouteProp<{ params: { objective: Objective } }, "params"> | any;
   navigation: NavigationProp<ParamListBase>;
 }
 
@@ -30,7 +29,6 @@ const ObjectiveDetailScreen = ({
   setCurrentObjectiveId,
   keyResults,
   initiatives,
-  id,
   ...props
 }: ObjectiveDetailScreenProps) => {
   const isFocused = useIsFocused();

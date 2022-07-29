@@ -53,13 +53,13 @@ export default function App() {
     });
   };
 
-  const deleteObjective = (id: number, action) => {
+  const deleteObjective = (id: number, action: any) => {
     action();
     let newObjectives = objectives.filter((objective) => objective.id !== id);
     setObjectives(newObjectives);
   };
 
-  const deleteAlert = (id, action) =>
+  const deleteAlert = (id: number, action: any) =>
     Alert.alert("삭제하기", "정말 삭제하시겠어요?", [
       {
         text: "취소",
@@ -101,7 +101,7 @@ export default function App() {
     });
   };
 
-  const deleteKeyResult = (id: number, action) => {
+  const deleteKeyResult = (id: number, action: any) => {
     action();
     let newKeyResults = keyResults.filter((keyResult) => keyResult.id !== id);
     setKeyResults(newKeyResults);
@@ -179,8 +179,13 @@ export default function App() {
               ) : currentRoute === "EditObjective" ? (
                 <TouchableOpacity
                   style={styles.rightItemContainer}
-                  onPress={() =>
-                    deleteAlert(currentObjectiveId, () => navigation.pop(2))
+                  onPress={
+                    currentObjectiveId !== undefined
+                      ? () =>
+                          deleteAlert(currentObjectiveId, () =>
+                            navigation.pop(2)
+                          )
+                      : () => alert("currentObjectiveId undefined!")
                   }
                 >
                   <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
@@ -190,8 +195,13 @@ export default function App() {
               ) : currentRoute === "EditKeyResult" ? (
                 <TouchableOpacity
                   style={styles.rightItemContainer}
-                  onPress={() =>
-                    deleteAlert(currentKeyResultId, () => navigation.pop(2))
+                  onPress={
+                    currentKeyResultId !== undefined
+                      ? () =>
+                          deleteAlert(currentKeyResultId, () =>
+                            navigation.pop(2)
+                          )
+                      : () => alert("currentObjectiveId undefined!")
                   }
                 >
                   <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
@@ -212,17 +222,20 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen name="ObjectiveDetail">
-            {(props) => (
-              <ObjectiveDetailScreen
-                setCurrentRoute={setCurrentRoute}
-                keyResults={keyResults}
-                setCurrentObjectiveId={setCurrentObjectiveId}
-                initiatives={initiatives}
-                {...props}
-              />
-            )}
-          </Stack.Screen>
+          {objectives.length === 0 ? null : (
+            <Stack.Screen name="ObjectiveDetail">
+              {(props) => (
+                <ObjectiveDetailScreen
+                  setCurrentRoute={setCurrentRoute}
+                  keyResults={keyResults}
+                  setCurrentObjectiveId={setCurrentObjectiveId}
+                  initiatives={initiatives}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
+          )}
+
           <Stack.Screen name="KeyResultDetail">
             {(props) => (
               <KeyResultDetailScreen
@@ -250,36 +263,40 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen name="CreateKeyResult">
-            {(props) => (
-              <CreateKeyResultScreen
-                keyResult={keyResult}
-                setKeyResult={setKeyResult}
-                handleKeyResult={handleKeyResult}
-                latestKeyResultId={latestKeyResultId}
-                setLatestKeyResultId={setLatestKeyResultId}
-                currentObjectiveId={currentObjectiveId}
-                setCurrentRoute={setCurrentRoute}
-                objectives={objectives}
-                {...props}
-              />
-            )}
-          </Stack.Screen>
-          <Stack.Screen name="CreateInitiative">
-            {(props) => (
-              <CreateInitiativeScreen
-                initiative={initiative}
-                setInitiative={setInitiative}
-                handleInitiative={handleInitiative}
-                keyResults={keyResults}
-                currentKeyResultId={currentKeyResultId}
-                setCurrentRoute={setCurrentRoute}
-                latestInitiativeId={latestInitiativeId}
-                setLatestInitiativeId={setLatestInitiativeId}
-                {...props}
-              />
-            )}
-          </Stack.Screen>
+          {currentObjectiveId !== undefined ? (
+            <Stack.Screen name="CreateKeyResult">
+              {(props) => (
+                <CreateKeyResultScreen
+                  keyResult={keyResult}
+                  setKeyResult={setKeyResult}
+                  handleKeyResult={handleKeyResult}
+                  latestKeyResultId={latestKeyResultId}
+                  setLatestKeyResultId={setLatestKeyResultId}
+                  currentObjectiveId={currentObjectiveId}
+                  setCurrentRoute={setCurrentRoute}
+                  objectives={objectives}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
+          ) : null}
+          {currentKeyResultId !== undefined ? (
+            <Stack.Screen name="CreateInitiative">
+              {(props) => (
+                <CreateInitiativeScreen
+                  initiative={initiative}
+                  setInitiative={setInitiative}
+                  handleInitiative={handleInitiative}
+                  keyResults={keyResults}
+                  currentKeyResultId={currentKeyResultId}
+                  setCurrentRoute={setCurrentRoute}
+                  latestInitiativeId={latestInitiativeId}
+                  setLatestInitiativeId={setLatestInitiativeId}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
+          ) : null}
           <Stack.Screen name="EditObjective">
             {(props) => (
               <EditObjectiveScreen
@@ -289,17 +306,19 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen name="EditKeyResult">
-            {(props) => (
-              <EditKeyResultScreen
-                keyResults={keyResults}
-                setCurrentRoute={setCurrentRoute}
-                currentObjectiveId={currentObjectiveId}
-                objectives={objectives}
-                {...props}
-              />
-            )}
-          </Stack.Screen>
+          {currentObjectiveId !== undefined ? (
+            <Stack.Screen name="EditKeyResult">
+              {(props) => (
+                <EditKeyResultScreen
+                  keyResults={keyResults}
+                  setCurrentRoute={setCurrentRoute}
+                  currentObjectiveId={currentObjectiveId}
+                  objectives={objectives}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
+          ) : null}
         </Stack.Navigator>
         {currentRoute === "Home" ? (
           <FloatingBtn currentRoute={currentRoute} />

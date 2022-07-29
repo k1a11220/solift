@@ -18,7 +18,7 @@ interface EditObjectiveScreenProps {
   objectives: Objective[];
   setCurrentRoute: any;
   navigation: NavigationProp<ParamListBase>;
-  route: RouteProp<{ params: { currentObjectiveId: number } }, "params">;
+  route: RouteProp<{ params: { currentObjectiveId: number } }, "params"> | any;
 }
 
 const EditObjectiveScreen = ({

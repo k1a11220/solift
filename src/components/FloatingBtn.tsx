@@ -4,7 +4,7 @@ import * as Icon from "../../assets/icons";
 import { ROUTES } from "../libs/types";
 import * as Haptics from "expo-haptics";
 
-const FloatingBtn = ({ currentRoute }: string) => {
+const FloatingBtn = ({ currentRoute }: any) => {
   const navigation = useNavigation<ROUTES>();
   return (
     <TouchableOpacity

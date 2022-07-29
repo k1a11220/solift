@@ -24,7 +24,7 @@ interface EditKeyResultScreenProps {
   currentObjectiveId: number;
   objectives: Objective[];
   navigation: NavigationProp<ParamListBase>;
-  route: RouteProp<{ params: { currentKeyResultId: number } }, "params">;
+  route: RouteProp<{ params: { currentKeyResultId: number } }, "params"> | any;
 }
 
 const EditKeyResultScreen = ({

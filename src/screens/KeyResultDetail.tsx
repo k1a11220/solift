@@ -23,7 +23,7 @@ interface KeyResultDetailScreenProps {
   setCurrentRoute: any;
   setCurrentKeyResultId: any;
   deleteInitiative: any;
-  route: RouteProp<{ params: { id: number } }, "params">;
+  route: RouteProp<{ params: { id: number } }, "params"> | any;
 }
 
 interface RenderItemProps {
