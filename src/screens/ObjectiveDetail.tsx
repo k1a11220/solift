@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationProp,
   ParamListBase,
@@ -5,13 +6,17 @@ import {
   useIsFocused,
 } from "@react-navigation/native";
 import { useEffect } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
 import { Initiative, KeyResult, Objective } from "../libs/types";
-import { findKeyResultProgress, keyResultProgressList } from "../utils";
+import {
+  findKeyResultProgress,
+  getCurrentObjective,
+  keyResultProgressList,
+} from "../utils";
 
 interface ObjectiveDetailScreenProps {
   setCurrentRoute: any;
@@ -20,6 +25,8 @@ interface ObjectiveDetailScreenProps {
   initiatives: Initiative[];
   route: RouteProp<{ params: { objective: Objective } }, "params"> | any;
   navigation: NavigationProp<ParamListBase>;
+  setObjectives: any;
+  objectives: Objective[];
 }
 
 const ObjectiveDetailScreen = ({
@@ -29,13 +36,31 @@ const ObjectiveDetailScreen = ({
   setCurrentObjectiveId,
   keyResults,
   initiatives,
+  setObjectives,
+  objectives,
   ...props
 }: ObjectiveDetailScreenProps) => {
+  useEffect(() => {
+    loadObjectives();
+  }, [navigation]);
+  const loadObjectives = () => {
+    AsyncStorage.getItem("objectives")
+      .then((data) => {
+        if (data !== null) {
+          setObjectives(JSON.parse(data));
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   const isFocused = useIsFocused();
   useEffect(() => {
     setCurrentRoute("ObjectiveDetail");
     setCurrentObjectiveId(route.params.objective.id);
-  }, [props, isFocused]);
+    const focusHandler = navigation.addListener("focus", () => {
+      loadObjectives();
+    });
+    return focusHandler;
+  }, [props, isFocused, navigation]);
 
   const filteredKeyResults = keyResultProgressList(
     keyResults,
@@ -65,9 +90,15 @@ const ObjectiveDetailScreen = ({
   };
 
   const fixedAverage: number = +keyResultProgressAverage().toFixed(1);
+
+  const currentObjective = getCurrentObjective(
+    objectives,
+    route.params.objective.id
+  );
+
   return (
     <ScrollView style={styles.container} overScrollMode="always">
-      <Title title={`${route.params.objective.name}`} type="default" />
+      <Title title={`${currentObjective?.name}`} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
@@ -92,9 +123,7 @@ const ObjectiveDetailScreen = ({
         <Gap />
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>마감일</Text>
-          <Text style={styles.infoCardValue}>
-            {route.params.objective.deadline}
-          </Text>
+          <Text style={styles.infoCardValue}>{currentObjective?.deadline}</Text>
         </View>
       </View>
       <View style={styles.cardList}>

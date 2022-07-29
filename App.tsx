@@ -331,6 +331,8 @@ export default function App() {
                   keyResults={keyResults}
                   setCurrentObjectiveId={setCurrentObjectiveId}
                   initiatives={initiatives}
+                  setObjectives={setObjectives}
+                  objectives={objectives}
                   {...props}
                 />
               )}
@@ -402,6 +404,7 @@ export default function App() {
             {(props) => (
               <EditObjectiveScreen
                 objectives={objectives}
+                setObjectives={setObjectives}
                 setCurrentRoute={setCurrentRoute}
                 {...props}
               />

@@ -13,10 +13,12 @@ import {
   ParamListBase,
   RouteProp,
 } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface EditObjectiveScreenProps {
   objectives: Objective[];
   setCurrentRoute: any;
+  setObjectives: any;
   navigation: NavigationProp<ParamListBase>;
   route: RouteProp<{ params: { currentObjectiveId: number } }, "params"> | any;
 }
@@ -24,6 +26,7 @@ interface EditObjectiveScreenProps {
 const EditObjectiveScreen = ({
   objectives,
   setCurrentRoute,
+  setObjectives,
   ...props
 }: EditObjectiveScreenProps) => {
   useEffect(() => {
@@ -37,33 +40,42 @@ const EditObjectiveScreen = ({
 
   const currentDate = stringToDate(objective?.deadline);
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(currentDate);
   const [name, setName] = useState(objective?.name);
 
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    if (objective !== undefined) {
-      objective.deadline = useDate(currentDate);
-    }
     setDate(currentDate);
   };
 
   const onSubmit = () => {
     props.navigation.goBack();
+    let filteredObjectives = objectives.filter(
+      (objective) => objective.id !== objective.id
+    );
+    let edited = [
+      ...filteredObjectives,
+      { id: objective?.id, name: name, deadline: useDate(date) },
+    ];
+    AsyncStorage.setItem("objectives", JSON.stringify(edited))
+      .then(() => {
+        setObjectives(edited);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <>
       <ScrollView overScrollMode="never" style={styles.container}>
         <Title
-          title="Objective and deadline"
-          detail="어떤 목표든 괜찮아요"
+          title="목표와 마감일을 알려주세요"
+          detail="여러분이 최종적으로 이루고 싶은 목표에요"
           type="detail"
         />
         <View style={styles.contentContainer}>
           <Input
             placeholder={objective?.name}
-            value={objective?.name}
+            value={name}
             onChangeText={(text: any) => {
               setName(text);
               if (objective !== undefined) {
@@ -72,7 +84,7 @@ const EditObjectiveScreen = ({
             }}
           />
           <Gap />
-          <DatePickerModal date={currentDate} onChange={onChange} />
+          <DatePickerModal date={date} onChange={onChange} />
           <CTA label="수정하기" type="primary" onPress={onSubmit} />
         </View>
       </ScrollView>
