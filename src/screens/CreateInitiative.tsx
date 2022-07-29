@@ -53,7 +53,7 @@ const CreateInitiativeScreen = ({
     props.navigation.goBack();
   };
 
-  const currentKeyResult = getCurrentKeyResult(currentKeyResultId, keyResults);
+  const currentKeyResult = getCurrentKeyResult(keyResults, currentKeyResultId);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>

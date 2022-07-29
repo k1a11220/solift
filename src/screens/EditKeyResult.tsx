@@ -39,8 +39,8 @@ const EditKeyResultScreen = ({
   });
 
   const keyResult = getCurrentKeyResult(
-    props.route.params.currentKeyResultId,
-    keyResults
+    keyResults,
+    props.route.params.currentKeyResultId
   );
 
   const [date, setDate] = useState(new Date());
@@ -58,7 +58,7 @@ const EditKeyResultScreen = ({
     props.navigation.goBack();
   };
 
-  const currentObjective = getCurrentObjective(currentObjectiveId, objectives);
+  const currentObjective = getCurrentObjective(objectives, currentObjectiveId);
 
   return (
     <>

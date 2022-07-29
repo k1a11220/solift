@@ -31,8 +31,8 @@ const EditObjectiveScreen = ({
   });
 
   const objective = getCurrentObjective(
-    props.route.params.currentObjectiveId,
-    objectives
+    objectives,
+    props.route.params.currentObjectiveId
   );
 
   const currentDate = stringToDate(objective?.deadline);

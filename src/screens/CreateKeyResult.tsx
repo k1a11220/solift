@@ -54,7 +54,7 @@ const CreateKeyResultScreen = ({
     props.navigation.goBack();
   };
 
-  const currentObjective = getCurrentObjective(currentObjectiveId, objectives);
+  const currentObjective = getCurrentObjective(objectives, currentObjectiveId);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
