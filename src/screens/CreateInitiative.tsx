@@ -36,7 +36,10 @@ const CreateInitiativeScreen = ({
   useEffect(() => {
     setCurrentRoute("CreateInitiative");
   });
-  const [date, setDate] = useState(new Date());
+
+  const currentKeyResult = getCurrentKeyResult(keyResults, currentKeyResultId);
+
+  const [date, setDate] = useState(stringToDate(currentKeyResult?.deadline));
 
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
@@ -52,8 +55,6 @@ const CreateInitiativeScreen = ({
     setLatestInitiativeId(latestInitiativeId + 1);
     props.navigation.goBack();
   };
-
-  const currentKeyResult = getCurrentKeyResult(keyResults, currentKeyResultId);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>

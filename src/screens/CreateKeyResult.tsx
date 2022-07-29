@@ -38,7 +38,10 @@ const CreateKeyResultScreen = ({
     setCurrentRoute("CreateKeyResult");
   });
 
-  const [date, setDate] = useState(new Date());
+  const currentObjective = getCurrentObjective(objectives, currentObjectiveId);
+
+  const [date, setDate] = useState(stringToDate(currentObjective?.deadline));
+
   const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
     setKeyResult({
@@ -53,8 +56,6 @@ const CreateKeyResultScreen = ({
     setLatestKeyResultId(latestKeyResultId + 1);
     props.navigation.goBack();
   };
-
-  const currentObjective = getCurrentObjective(objectives, currentObjectiveId);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
