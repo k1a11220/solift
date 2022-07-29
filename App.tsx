@@ -18,7 +18,7 @@ import FloatingBtn from "./src/components/FloatingBtn";
 import { Provider as StoreProvider } from "react-redux";
 import store from "./src/redux/store";
 import CreateInitiativeScreen from "./src/screens/CreateInitiative";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Initiative, KeyResult, Objective } from "./src/libs/types";
 import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
@@ -62,8 +62,31 @@ export default function App() {
 
   const deleteObjective = (id: number, action: any) => {
     action();
+
     let newObjectives = objectives.filter((objective) => objective.id !== id);
-    setObjectives(newObjectives);
+
+    // 삭제할 key result 리스트
+    let deleteKeyResultList = keyResults.filter(
+      (keyResult) => keyResult.objectiveId == id
+    );
+
+    // 삭제할 keyResult Id 리스트
+    let deleteKeyResultIdList = deleteKeyResultList.filter(
+      (initiative) => initiative.id
+    );
+
+    let deleteAllKeyResult = () =>
+      deleteKeyResultIdList.map((keyResult) => {
+        deleteKeyResult(+keyResult.toString(), console.log("deleted"));
+      });
+
+    deleteAllKeyResult();
+
+    AsyncStorage.setItem("objectives", JSON.stringify(newObjectives))
+      .then(() => {
+        setObjectives(newObjectives);
+      })
+      .catch((error) => console.log(error));
   };
 
   const deleteAlert = (id: number, action: any) =>
@@ -106,12 +129,35 @@ export default function App() {
       initiatives: [],
       objectiveId: null,
     });
+
+    AsyncStorage.setItem("keyResults", JSON.stringify(newKeyResults))
+      .then(() => {
+        setKeyResults(newKeyResults);
+      })
+      .catch((error) => console.log(error));
   };
 
   const deleteKeyResult = (id: number, action: any) => {
     action();
+
     let newKeyResults = keyResults.filter((keyResult) => keyResult.id !== id);
     setKeyResults(newKeyResults);
+
+    let newInitiatives = initiatives.filter((initiative) => {
+      return initiative.keyResultId !== id;
+    });
+
+    AsyncStorage.setItem("keyResults", JSON.stringify(newKeyResults))
+      .then(() => {
+        setKeyResults(newKeyResults);
+      })
+      .catch((error) => console.log(error));
+
+    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+      .then(() => {
+        setInitiatives(newInitiatives);
+      })
+      .catch((error) => console.log(error));
   };
 
   const [latestInitiativeId, setLatestInitiativeId] = useState(0);
@@ -124,13 +170,6 @@ export default function App() {
   });
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
 
-  const deleteInitiative = (id: number) => {
-    let newInitiatives = initiatives.filter(
-      (initiative) => initiative.id !== id
-    );
-    setInitiatives(newInitiatives);
-  };
-
   const handleInitiative = () => {
     let newInitiative = initiative;
     let newInitiatives = [newInitiative, ...initiatives];
@@ -142,7 +181,62 @@ export default function App() {
       keyResultId: null,
       hasDone: false,
     });
+    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+      .then(() => {
+        setInitiatives(newInitiatives);
+      })
+      .catch((error) => console.log(error));
   };
+
+  const deleteInitiative = (id: number) => {
+    let newInitiatives = initiatives.filter(
+      (initiative) => initiative.id !== id
+    );
+    setInitiatives(newInitiatives);
+
+    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+      .then(() => {
+        setInitiatives(newInitiatives);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    loadObjectives();
+    loadKeyResults();
+    loadInitiatives();
+  }, []);
+
+  const loadObjectives = () => {
+    AsyncStorage.getItem("objectives")
+      .then((data) => {
+        if (data !== null) {
+          setObjectives(JSON.parse(data));
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const loadKeyResults = () => {
+    AsyncStorage.getItem("keyResults")
+      .then((data) => {
+        if (data !== null) {
+          setKeyResults(JSON.parse(data));
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const loadInitiatives = () => {
+    AsyncStorage.getItem("initiatives")
+      .then((data) => {
+        if (data !== null) {
+          setInitiatives(JSON.parse(data));
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <StoreProvider store={store}>
       {/* <ExampleView />
