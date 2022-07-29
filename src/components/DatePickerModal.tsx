@@ -7,9 +7,14 @@ import { useDate } from "../utils/useDate";
 interface DatePickerModalProps {
   date: Date;
   onChange: void;
+  minimumDate?: Date;
 }
 
-const DatePickerModal = ({ date, onChange }: DatePickerModalProps) => {
+const DatePickerModal = ({
+  date,
+  onChange,
+  minimumDate,
+}: DatePickerModalProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -32,6 +37,7 @@ const DatePickerModal = ({ date, onChange }: DatePickerModalProps) => {
               locale="ko-KR"
               display={"inline"}
               textColor="black"
+              minimumDate={minimumDate}
             />
           </View>
         </TouchableOpacity>

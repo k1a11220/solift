@@ -6,21 +6,24 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { format } from "date-fns";
+import {
+  getCurrentKeyResult,
+  getCurrentObjective,
+  stringToDate,
+} from "../utils";
 
 const EditKeyResultScreen = ({ ...props }) => {
   useEffect(() => {
     props.setCurrentRoute("EditKeyResult");
   });
 
-  const keyResult = props.keyResults.find(
-    (keyResult) => keyResult.id === props.route.params.currentKeyResultId
+  const keyResult = getCurrentKeyResult(
+    props.route.params.currentKeyResultId,
+    props.keyResults
   );
 
-  const dateParts = keyResult.deadline.split("/");
-  const currentDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-
   const [date, setDate] = useState(new Date());
-  const [name, setName] = useState(keyResult.name);
+  const [name, setName] = useState(keyResult?.name);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -29,10 +32,13 @@ const EditKeyResultScreen = ({ ...props }) => {
   };
 
   const onSubmit = () => {
-    // props.handlekeyResult();
-    // props.setLatestkeyResultId(props.latestkeyResultId + 1);
     props.navigation.goBack();
   };
+
+  const currentObjective = getCurrentObjective(
+    props.currentObjectiveId,
+    props.objectives
+  );
 
   return (
     <>
@@ -44,15 +50,19 @@ const EditKeyResultScreen = ({ ...props }) => {
         />
         <View style={styles.contentContainer}>
           <Input
-            placeholder={keyResult.name}
-            value={keyResult.name}
+            placeholder={keyResult?.name}
+            value={keyResult?.name}
             onChangeText={(text: any) => {
               setName(text);
               keyResult.name = text;
             }}
           />
           <Gap />
-          <DatePickerModal date={currentDate} onChange={onChange} />
+          <DatePickerModal
+            date={stringToDate(keyResult?.deadline)}
+            onChange={onChange}
+            minimumDate={stringToDate(currentObjective?.deadline)}
+          />
           <CTA label="수정하기" type="primary" onPress={onSubmit} />
         </View>
       </ScrollView>

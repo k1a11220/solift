@@ -6,7 +6,7 @@ import * as Haptics from "expo-haptics";
 interface InitiativeCardProps {
   id: number;
   name: string;
-  deadline: Date;
+  deadline: string;
   hasDone?: boolean;
   initiative?: any;
   setInitiative: (initiative: Initiative) => void;

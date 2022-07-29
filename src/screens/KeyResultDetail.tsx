@@ -44,7 +44,7 @@ const KeyResultDetailScreen = ({ ...props }) => {
         initiative={data.item}
         id={data.item.id}
         name={data.item.name}
-        deadline={data.item.deadline}
+        deadline={`${data.item.deadline}까지`}
         setInitiative={props.setInitiative}
         onPress={() => {
           setProgress(
@@ -118,7 +118,7 @@ const KeyResultDetailScreen = ({ ...props }) => {
                 title={currentKeyResult?.name}
                 subtitle={currentObjective?.name}
                 progress={newProgress}
-                date={currentKeyResult?.deadline}
+                date={`${currentKeyResult?.deadline}`}
                 type="progress"
               />
             </View>

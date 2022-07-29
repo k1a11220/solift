@@ -6,21 +6,22 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { useDate } from "../utils/useDate";
+import { getCurrentObjective, stringToDate } from "../utils";
 
 const EditObjectiveScreen = ({ ...props }) => {
   useEffect(() => {
     props.setCurrentRoute("EditObjective");
   });
 
-  const objective = props.objectives.find(
-    (objective) => objective.id === props.route.params.currentObjectiveId
+  const objective = getCurrentObjective(
+    props.route.params.currentObjectiveId,
+    props.objectives
   );
 
-  const dateParts = objective.deadline.split("/");
-  const currentDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+  const currentDate = stringToDate(objective?.deadline);
 
   const [date, setDate] = useState(new Date());
-  const [name, setName] = useState(objective.name);
+  const [name, setName] = useState(objective?.name);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -44,8 +45,8 @@ const EditObjectiveScreen = ({ ...props }) => {
         />
         <View style={styles.contentContainer}>
           <Input
-            placeholder={objective.name}
-            value={objective.name}
+            placeholder={objective?.name}
+            value={objective?.name}
             onChangeText={(text: any) => {
               setName(text);
               objective.name = text;

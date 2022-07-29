@@ -261,6 +261,7 @@ export default function App() {
                 setLatestKeyResultId={setLatestKeyResultId}
                 currentObjectiveId={currentObjectiveId}
                 setCurrentRoute={setCurrentRoute}
+                objectives={objectives}
               />
             )}
           </Stack.Screen>
@@ -293,6 +294,8 @@ export default function App() {
                 keyResults={keyResults}
                 setCurrentRoute={setCurrentRoute}
                 {...props}
+                currentObjectiveId={currentObjectiveId}
+                objectives={objectives}
               />
             )}
           </Stack.Screen>

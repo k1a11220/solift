@@ -58,8 +58,6 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
     return +keyResultProgressAverage(id).toFixed(1);
   };
 
-  console.log(initiatives);
-
   const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>
