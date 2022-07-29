@@ -272,6 +272,7 @@ export default function App() {
                 initiative={initiative}
                 setInitiative={setInitiative}
                 handleInitiative={handleInitiative}
+                keyResults={keyResults}
                 currentKeyResultId={currentKeyResultId}
                 setCurrentRoute={setCurrentRoute}
                 latestInitiativeId={latestInitiativeId}

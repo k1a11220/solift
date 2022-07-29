@@ -7,6 +7,7 @@ import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
+import { getCurrentKeyResult, stringToDate } from "../utils";
 
 const CreateInitiativeScreen = ({ ...props }) => {
   useEffect(() => {
@@ -28,6 +29,11 @@ const CreateInitiativeScreen = ({ ...props }) => {
     props?.setLatestInitiativeId(props?.latestInitiativeId + 1);
     props.navigation.goBack();
   };
+
+  const currentKeyResult = getCurrentKeyResult(
+    props.currentKeyResultId,
+    props.keyResults
+  );
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
@@ -51,7 +57,11 @@ const CreateInitiativeScreen = ({ ...props }) => {
           }
         />
         <Gap />
-        <DatePickerModal date={date} onChange={onChange} />
+        <DatePickerModal
+          date={date}
+          onChange={onChange}
+          minimumDate={stringToDate(currentKeyResult?.deadline)}
+        />
         <CTA
           label="다음으로"
           type="primary"
