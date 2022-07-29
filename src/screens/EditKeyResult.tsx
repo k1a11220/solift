@@ -11,23 +11,46 @@ import {
   getCurrentObjective,
   stringToDate,
 } from "../utils";
+import { KeyResult, Objective } from "../libs/types";
+import {
+  NavigationProp,
+  ParamListBase,
+  RouteProp,
+} from "@react-navigation/native";
 
-const EditKeyResultScreen = ({ ...props }) => {
+interface EditKeyResultScreenProps {
+  keyResults: KeyResult[];
+  setCurrentRoute: any;
+  currentObjectiveId: number;
+  objectives: Objective[];
+  navigation: NavigationProp<ParamListBase>;
+  route: RouteProp<{ params: { currentKeyResultId: number } }, "params">;
+}
+
+const EditKeyResultScreen = ({
+  keyResults,
+  setCurrentRoute,
+  currentObjectiveId,
+  objectives,
+  ...props
+}: EditKeyResultScreenProps) => {
   useEffect(() => {
-    props.setCurrentRoute("EditKeyResult");
+    setCurrentRoute("EditKeyResult");
   });
 
   const keyResult = getCurrentKeyResult(
     props.route.params.currentKeyResultId,
-    props.keyResults
+    keyResults
   );
 
   const [date, setDate] = useState(new Date());
   const [name, setName] = useState(keyResult?.name);
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    keyResult.deadline = format(currentDate, "yyyy/MM/dd");
+    if (keyResult !== undefined) {
+      keyResult.deadline = format(currentDate, "yyyy/MM/dd");
+    }
     setDate(currentDate);
   };
 
@@ -35,10 +58,7 @@ const EditKeyResultScreen = ({ ...props }) => {
     props.navigation.goBack();
   };
 
-  const currentObjective = getCurrentObjective(
-    props.currentObjectiveId,
-    props.objectives
-  );
+  const currentObjective = getCurrentObjective(currentObjectiveId, objectives);
 
   return (
     <>
@@ -54,7 +74,9 @@ const EditKeyResultScreen = ({ ...props }) => {
             value={keyResult?.name}
             onChangeText={(text: any) => {
               setName(text);
-              keyResult.name = text;
+              if (keyResult !== undefined) {
+                keyResult.name = text;
+              }
             }}
           />
           <Gap />

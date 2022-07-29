@@ -1,61 +1,38 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
-import {
-  Button,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import ProgressCard from "../components/ProgressCard";
-import { Objective, ROUTES } from "../libs/types";
+import { Initiative, KeyResult, Objective, ROUTES } from "../libs/types";
+import { findKeyResultProgress, keyResultProgressList } from "../utils";
 
-const HomeScreen = ({ initiatives, keyResults, ...props }) => {
+interface HomeScreenProps {
+  objectives: Objective[];
+  keyResults: KeyResult[];
+  initiatives: Initiative[];
+  setCurrentRoute: any;
+}
+
+const HomeScreen = ({ initiatives, keyResults, ...props }: HomeScreenProps) => {
   const isFocused = useIsFocused();
   useEffect(() => {
     props.setCurrentRoute("Home");
   }, [props, isFocused]);
 
-  const keyResultProgressList = (id) => {
-    return keyResults
-      .map((keyResult) => keyResult)
-      .filter((keyResult) => keyResult.objectiveId === id);
-  };
-
-  const findKeyResultProgress = (id) => {
-    let filteredInitiatives = initiatives.filter(
-      (initiative) => initiative.keyResultId === id
-    );
-    if (filteredInitiatives.length === 0) {
-      return 0;
-    } else {
-      let countedTrue = filteredInitiatives.filter(
-        (initiative) => initiative.hasDone === true
-      ).length;
-
-      return (countedTrue / filteredInitiatives.length) * 100;
-    }
-  };
-
-  const keyResultProgressAverage = (id) => {
-    let list = keyResultProgressList(id).map((keyResult) =>
-      findKeyResultProgress(keyResult.id)
+  const keyResultProgressAverage = (id: number) => {
+    let list = keyResultProgressList(keyResults, id).map(
+      (keyResult: KeyResult) =>
+        keyResult.id === null
+          ? 0
+          : findKeyResultProgress(initiatives, keyResult.id)
     );
     if (list.length === 0) {
       return 0;
     }
-    // console.log(keyResultProgressList(1));
-
     let filteredList = list.reduce(function add(sum, currValue) {
       return sum + currValue;
     }, 0);
     return filteredList / list.length;
-  };
-
-  const fixedAverage = (id: number) => {
-    return +keyResultProgressAverage(id).toFixed(1);
   };
 
   const navigation = useNavigation<ROUTES>();
@@ -78,7 +55,11 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
               key={objective.id}
               title={objective.name}
               date={objective.deadline}
-              progress={fixedAverage(objective.id)}
+              progress={
+                objective.id === null
+                  ? 0
+                  : +keyResultProgressAverage(objective?.id).toFixed(1)
+              }
               onPress={() =>
                 navigation.navigate("ObjectiveDetail", { objective })
               }

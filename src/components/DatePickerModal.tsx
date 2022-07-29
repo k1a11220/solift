@@ -6,7 +6,7 @@ import { useDate } from "../utils/useDate";
 
 interface DatePickerModalProps {
   date: Date;
-  onChange: void;
+  onChange: any;
   minimumDate?: Date;
 }
 

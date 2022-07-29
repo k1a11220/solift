@@ -1,39 +1,59 @@
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CTA from "../components/Cta";
 import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
+import { Initiative, KeyResult } from "../libs/types";
 import { getCurrentKeyResult, stringToDate } from "../utils";
 
-const CreateInitiativeScreen = ({ ...props }) => {
+interface CreateInitiativeScreenProps {
+  initiative: Initiative;
+  setInitiative: any;
+  handleInitiative: any;
+  keyResults: KeyResult[];
+  currentKeyResultId: number;
+  setCurrentRoute: any;
+  latestInitiativeId: number;
+  setLatestInitiativeId: any;
+  navigation: NavigationProp<ParamListBase>;
+}
+
+const CreateInitiativeScreen = ({
+  initiative,
+  setInitiative,
+  handleInitiative,
+  keyResults,
+  currentKeyResultId,
+  setCurrentRoute,
+  latestInitiativeId,
+  setLatestInitiativeId,
+  ...props
+}: CreateInitiativeScreenProps) => {
   useEffect(() => {
-    props.setCurrentRoute("CreateInitiative");
+    setCurrentRoute("CreateInitiative");
   });
   const [date, setDate] = useState(new Date());
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    props.setInitiative({
-      ...props.initiative,
+    setInitiative({
+      ...initiative,
       deadline: format(currentDate, "yyyy/MM/dd"),
     });
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    props.handleInitiative();
-    props?.setLatestInitiativeId(props?.latestInitiativeId + 1);
+    handleInitiative();
+    setLatestInitiativeId(latestInitiativeId + 1);
     props.navigation.goBack();
   };
 
-  const currentKeyResult = getCurrentKeyResult(
-    props.currentKeyResultId,
-    props.keyResults
-  );
+  const currentKeyResult = getCurrentKeyResult(currentKeyResultId, keyResults);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
@@ -45,13 +65,13 @@ const CreateInitiativeScreen = ({ ...props }) => {
       <View style={styles.contentContainer}>
         <Input
           placeholder="나의 한국현대사 읽기"
-          value={props.initiative.name}
+          value={initiative.name}
           onChangeText={(text: any) =>
-            props.setInitiative({
-              ...props.initiative,
+            setInitiative({
+              ...initiative,
               name: text,
-              id: props.latestInitiativeId,
-              keyResultId: props.currentKeyResultId,
+              id: latestInitiativeId,
+              keyResultId: currentKeyResultId,
               deadline: format(date, "yyyy/MM/dd"),
             })
           }
@@ -66,7 +86,7 @@ const CreateInitiativeScreen = ({ ...props }) => {
           label="다음으로"
           type="primary"
           onPress={onSubmit}
-          disabled={props.initiative.name ? false : true}
+          disabled={initiative.name ? false : true}
         />
       </View>
     </ScrollView>

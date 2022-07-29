@@ -6,25 +6,45 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { format } from "date-fns";
+import { Objective } from "../libs/types";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
-const CreateObjectiveScreen = ({ ...props }) => {
+interface CreateObjectiveScreenProps {
+  objective: Objective;
+  setObjective: any;
+  handleObjective: any;
+  latestObjectiveId: number;
+  setLatestObjectiveId: any;
+  setCurrentRoute: any;
+  navigation: NavigationProp<ParamListBase>;
+}
+
+const CreateObjectiveScreen = ({
+  objective,
+  setObjective,
+  handleObjective,
+  latestObjectiveId,
+  setLatestObjectiveId,
+  setCurrentRoute,
+  ...props
+}: CreateObjectiveScreenProps) => {
   useEffect(() => {
-    props.setCurrentRoute("CreateObjective");
+    setCurrentRoute("CreateObjective");
   });
 
   const [date, setDate] = useState(new Date());
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    props.setObjective({
-      ...props.objective,
+    setObjective({
+      ...objective,
       deadline: format(currentDate, "yyyy/MM/dd"),
     });
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    props.handleObjective();
-    props.setLatestObjectiveId(props.latestObjectiveId + 1);
+    handleObjective();
+    setLatestObjectiveId(latestObjectiveId + 1);
     props.navigation.goBack();
   };
 
@@ -43,12 +63,12 @@ const CreateObjectiveScreen = ({ ...props }) => {
         <View style={styles.contentContainer}>
           <Input
             placeholder="인문학적 소양 기르기"
-            value={props.objective.name}
+            value={objective.name}
             onChangeText={(text: any) =>
-              props.setObjective({
-                ...props.objective,
+              setObjective({
+                ...objective,
                 name: text,
-                id: props.latestObjectiveId,
+                id: latestObjectiveId,
                 deadline: format(date, "yyyy/MM/dd"),
               })
             }
@@ -59,7 +79,7 @@ const CreateObjectiveScreen = ({ ...props }) => {
             label="다음으로"
             type="primary"
             onPress={onSubmit}
-            disabled={props.objective.name ? false : true}
+            disabled={objective.name ? false : true}
           />
         </View>
       </ScrollView>

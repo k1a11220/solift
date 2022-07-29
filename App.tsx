@@ -87,7 +87,7 @@ export default function App() {
     objectiveId: null,
   });
 
-  const [keyResults, setKeyResults] = useState<Objective[]>([]);
+  const [keyResults, setKeyResults] = useState<KeyResult[]>([]);
   const handleKeyResult = () => {
     let newKeyResult = keyResult;
     let newKeyResults = [newKeyResult, ...keyResults];
@@ -204,29 +204,28 @@ export default function App() {
           <Stack.Screen name="Home" options={{ headerShown: false }}>
             {(props) => (
               <HomeScreen
-                {...props}
                 objectives={objectives}
                 keyResults={keyResults}
                 initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
+                {...props}
               />
             )}
           </Stack.Screen>
           <Stack.Screen name="ObjectiveDetail">
             {(props) => (
               <ObjectiveDetailScreen
-                {...props}
                 setCurrentRoute={setCurrentRoute}
                 keyResults={keyResults}
                 setCurrentObjectiveId={setCurrentObjectiveId}
                 initiatives={initiatives}
+                {...props}
               />
             )}
           </Stack.Screen>
           <Stack.Screen name="KeyResultDetail">
             {(props) => (
               <KeyResultDetailScreen
-                {...props}
                 objectives={objectives}
                 keyResults={keyResults}
                 initiatives={initiatives}
@@ -234,26 +233,26 @@ export default function App() {
                 setCurrentRoute={setCurrentRoute}
                 setCurrentKeyResultId={setCurrentKeyResultId}
                 deleteInitiative={deleteInitiative}
+                {...props}
               />
             )}
           </Stack.Screen>
           <Stack.Screen name="CreateObjective">
             {(props) => (
               <CreateObjectiveScreen
-                {...props}
                 objective={objective}
                 setObjective={setObjective}
                 handleObjective={handleObjective}
                 latestObjectiveId={latestObjectiveId}
                 setLatestObjectiveId={setLatestObjectiveId}
                 setCurrentRoute={setCurrentRoute}
+                {...props}
               />
             )}
           </Stack.Screen>
           <Stack.Screen name="CreateKeyResult">
             {(props) => (
               <CreateKeyResultScreen
-                {...props}
                 keyResult={keyResult}
                 setKeyResult={setKeyResult}
                 handleKeyResult={handleKeyResult}
@@ -262,13 +261,13 @@ export default function App() {
                 currentObjectiveId={currentObjectiveId}
                 setCurrentRoute={setCurrentRoute}
                 objectives={objectives}
+                {...props}
               />
             )}
           </Stack.Screen>
           <Stack.Screen name="CreateInitiative">
             {(props) => (
               <CreateInitiativeScreen
-                {...props}
                 initiative={initiative}
                 setInitiative={setInitiative}
                 handleInitiative={handleInitiative}
@@ -277,6 +276,7 @@ export default function App() {
                 setCurrentRoute={setCurrentRoute}
                 latestInitiativeId={latestInitiativeId}
                 setLatestInitiativeId={setLatestInitiativeId}
+                {...props}
               />
             )}
           </Stack.Screen>
@@ -294,9 +294,9 @@ export default function App() {
               <EditKeyResultScreen
                 keyResults={keyResults}
                 setCurrentRoute={setCurrentRoute}
-                {...props}
                 currentObjectiveId={currentObjectiveId}
                 objectives={objectives}
+                {...props}
               />
             )}
           </Stack.Screen>

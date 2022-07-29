@@ -2,28 +2,20 @@ import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
+import { Initiative } from "../libs/types";
 
 interface InitiativeCardProps {
-  id: number;
-  name: string;
-  deadline: string;
-  hasDone?: boolean;
-  initiative?: any;
+  initiative: Initiative;
   setInitiative: (initiative: Initiative) => void;
   onPress: () => void;
 }
 
-const InitiativeCard = ({
-  name,
-  deadline,
-  initiative,
-  onPress,
-}: InitiativeCardProps) => {
-  const [hasDone, setHasDone] = useState(initiative.hasDone);
+const InitiativeCard = ({ initiative, onPress }: InitiativeCardProps) => {
+  const [hasDone, setHasDone] = useState(initiative?.hasDone);
   const onClick = () => {
     onPress();
     initiative.hasDone = !initiative.hasDone;
-    setHasDone(initiative.hasDone);
+    setHasDone(initiative?.hasDone);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
   return (
@@ -34,9 +26,11 @@ const InitiativeCard = ({
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>
-          {deadline}
+          {initiative?.deadline}까지
         </Text>
-        <Text style={[styles.title, hasDone ? styles.done : null]}>{name}</Text>
+        <Text style={[styles.title, hasDone ? styles.done : null]}>
+          {initiative?.name}
+        </Text>
       </View>
       <View style={styles.iconContainer}>
         <Icon.CheckCircleOutline fillColor={hasDone ? "#4191FD" : "#C3C9D3"} />

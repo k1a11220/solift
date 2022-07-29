@@ -1,3 +1,4 @@
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -6,33 +7,54 @@ import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
+import { KeyResult, Objective } from "../libs/types";
 import { getCurrentObjective, stringToDate } from "../utils";
+import { useDate } from "../utils/useDate";
 
-const CreateKeyResultScreen = ({ ...props }) => {
+interface CreateKeyResultScreenProps {
+  keyResult: KeyResult;
+  setKeyResult: any;
+  handleKeyResult: any;
+  latestKeyResultId: number;
+  setLatestKeyResultId: any;
+  currentObjectiveId: number;
+  setCurrentRoute: any;
+  objectives: Objective[];
+  navigation: NavigationProp<ParamListBase>;
+}
+
+const CreateKeyResultScreen = ({
+  keyResult,
+  setKeyResult,
+  handleKeyResult,
+  latestKeyResultId,
+  setLatestKeyResultId,
+  currentObjectiveId,
+  setCurrentRoute,
+  objectives,
+  ...props
+}: CreateKeyResultScreenProps) => {
   useEffect(() => {
-    props.setCurrentRoute("CreateKeyResult");
+    setCurrentRoute("CreateKeyResult");
   });
 
   const [date, setDate] = useState(new Date());
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    props.setKeyResult({
-      ...props.keyResult,
-      deadline: format(currentDate, "yyyy/MM/dd"),
+    setKeyResult({
+      ...keyResult,
+      deadline: useDate(currentDate),
     });
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    props?.handleKeyResult();
-    props?.setLatestKeyResultId(props?.latestKeyResultId + 1);
-    props?.navigation.goBack();
+    handleKeyResult();
+    setLatestKeyResultId(latestKeyResultId + 1);
+    props.navigation.goBack();
   };
 
-  const currentObjective = getCurrentObjective(
-    props.currentObjectiveId,
-    props.objectives
-  );
+  const currentObjective = getCurrentObjective(currentObjectiveId, objectives);
 
   return (
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
@@ -44,13 +66,13 @@ const CreateKeyResultScreen = ({ ...props }) => {
       <View style={styles.contentContainer}>
         <Input
           placeholder="인문학 책 10권 읽기"
-          value={props.keyResult.name}
+          value={keyResult.name}
           onChangeText={(text: any) =>
-            props.setKeyResult({
-              ...props.keyResult,
+            setKeyResult({
+              ...keyResult,
               name: text,
-              id: props.latestKeyResultId,
-              objectiveId: props.currentObjectiveId,
+              id: latestKeyResultId,
+              objectiveId: currentObjectiveId,
               deadline: format(date, "yyyy/MM/dd"),
             })
           }
@@ -65,7 +87,7 @@ const CreateKeyResultScreen = ({ ...props }) => {
           label="다음으로"
           type="primary"
           onPress={onSubmit}
-          disabled={props.keyResult.name ? false : true}
+          disabled={keyResult.name ? false : true}
         />
       </View>
     </ScrollView>

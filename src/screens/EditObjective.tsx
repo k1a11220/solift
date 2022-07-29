@@ -7,15 +7,32 @@ import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { useDate } from "../utils/useDate";
 import { getCurrentObjective, stringToDate } from "../utils";
+import { Objective } from "../libs/types";
+import {
+  NavigationProp,
+  ParamListBase,
+  RouteProp,
+} from "@react-navigation/native";
 
-const EditObjectiveScreen = ({ ...props }) => {
+interface EditObjectiveScreenProps {
+  objectives: Objective[];
+  setCurrentRoute: any;
+  navigation: NavigationProp<ParamListBase>;
+  route: RouteProp<{ params: { currentObjectiveId: number } }, "params">;
+}
+
+const EditObjectiveScreen = ({
+  objectives,
+  setCurrentRoute,
+  ...props
+}: EditObjectiveScreenProps) => {
   useEffect(() => {
-    props.setCurrentRoute("EditObjective");
+    setCurrentRoute("EditObjective");
   });
 
   const objective = getCurrentObjective(
     props.route.params.currentObjectiveId,
-    props.objectives
+    objectives
   );
 
   const currentDate = stringToDate(objective?.deadline);
@@ -23,15 +40,15 @@ const EditObjectiveScreen = ({ ...props }) => {
   const [date, setDate] = useState(new Date());
   const [name, setName] = useState(objective?.name);
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: Date) => {
     const currentDate = selectedDate;
-    objective.deadline = useDate(currentDate);
+    if (objective !== undefined) {
+      objective.deadline = useDate(currentDate);
+    }
     setDate(currentDate);
   };
 
   const onSubmit = () => {
-    // props.handleObjective();
-    // props.setLatestObjectiveId(props.latestObjectiveId + 1);
     props.navigation.goBack();
   };
 
@@ -49,7 +66,9 @@ const EditObjectiveScreen = ({ ...props }) => {
             value={objective?.name}
             onChangeText={(text: any) => {
               setName(text);
-              objective.name = text;
+              if (objective !== undefined) {
+                objective.name = text;
+              }
             }}
           />
           <Gap />

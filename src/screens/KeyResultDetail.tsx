@@ -1,4 +1,4 @@
-import { useIsFocused } from "@react-navigation/native";
+import { RouteProp, useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -12,22 +12,58 @@ import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 import * as Haptics from "expo-haptics";
+import { Initiative, KeyResult, Objective } from "../libs/types";
+import { getCurrentKeyResult, getCurrentObjective } from "../utils";
 
-const KeyResultDetailScreen = ({ ...props }) => {
+interface KeyResultDetailScreenProps {
+  objectives: Objective[];
+  keyResults: KeyResult[];
+  initiatives: Initiative[];
+  setInitiative: any;
+  setCurrentRoute: any;
+  setCurrentKeyResultId: any;
+  deleteInitiative: any;
+  route: RouteProp<{ params: { id: number } }, "params">;
+}
+
+interface RenderItemProps {
+  item: Initiative;
+}
+
+const KeyResultDetailScreen = ({
+  objectives,
+  keyResults,
+  initiatives,
+  setInitiative,
+  setCurrentRoute,
+  setCurrentKeyResultId,
+  deleteInitiative,
+  ...props
+}: KeyResultDetailScreenProps) => {
   const isFocused = useIsFocused();
+
   useEffect(() => {
-    props.setCurrentRoute("KeyResultDetail");
-    props.setCurrentKeyResultId(props.route.params.id);
+    setCurrentRoute("KeyResultDetail");
+    setCurrentKeyResultId(props.route.params.id);
   }, [props, isFocused]);
 
-  const currentKeyResult = props?.keyResults?.find(
-    (keyResult) => keyResult?.id === props?.route?.params?.id
+  const currentKeyResult = getCurrentKeyResult(
+    keyResults,
+    props.route.params.id
   );
-  const currentObjective = props?.objectives?.find(
-    (objective) => objective?.id === currentKeyResult?.objectiveId
-  );
-  const filteredInitiatives = props.initiatives.filter(
-    (initiative: any) => initiative.keyResultId === currentKeyResult.id
+
+  const currentObjective =
+    currentKeyResult?.objectiveId === null
+      ? null
+      : getCurrentObjective(
+          objectives,
+          currentKeyResult?.objectiveId !== undefined
+            ? currentKeyResult.objectiveId
+            : 0
+        );
+
+  const filteredInitiatives = initiatives.filter(
+    (initiative: any) => initiative.keyResultId === currentKeyResult?.id
   );
 
   const newProgress =
@@ -37,15 +73,12 @@ const KeyResultDetailScreen = ({ ...props }) => {
     100;
   const [progress, setProgress] = useState(newProgress);
 
-  const renderItem = (data) => {
+  const renderItem = (data: RenderItemProps) => {
     return (
       <InitiativeCard
         key={data.item.id}
         initiative={data.item}
-        id={data.item.id}
-        name={data.item.name}
-        deadline={`${data.item.deadline}까지`}
-        setInitiative={props.setInitiative}
+        setInitiative={setInitiative}
         onPress={() => {
           setProgress(
             (filteredInitiatives.filter(
@@ -59,12 +92,12 @@ const KeyResultDetailScreen = ({ ...props }) => {
     );
   };
 
-  const renderHiddenItem = (data, rowmap) => {
+  const renderHiddenItem = (data: RenderItemProps, rowmap: any) => {
     return (
       <TouchableOpacity
         style={styles.rowBack}
         onPress={() => {
-          props.deleteInitiative(data.item.id);
+          deleteInitiative(data.item.id);
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         }}
       >
@@ -88,10 +121,10 @@ const KeyResultDetailScreen = ({ ...props }) => {
             }}
           >
             <Title
-              title={currentKeyResult?.name}
-              subtitle={currentObjective?.name}
+              title={`${currentKeyResult?.name}`}
+              subtitle={`${currentObjective?.name}`}
               progress={newProgress}
-              date={currentKeyResult?.deadline}
+              date={`${currentKeyResult?.deadline}`}
               type="progress"
             />
             <EmptyView
@@ -115,8 +148,8 @@ const KeyResultDetailScreen = ({ ...props }) => {
           ListHeaderComponent={
             <View style={{ marginBottom: 20, marginRight: 22, marginLeft: 22 }}>
               <Title
-                title={currentKeyResult?.name}
-                subtitle={currentObjective?.name}
+                title={`${currentKeyResult?.name}`}
+                subtitle={`${currentObjective?.name}`}
                 progress={newProgress}
                 date={`${currentKeyResult?.deadline}`}
                 type="progress"

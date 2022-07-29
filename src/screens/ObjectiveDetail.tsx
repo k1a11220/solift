@@ -1,10 +1,27 @@
-import { useIsFocused } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  RouteProp,
+  useIsFocused,
+} from "@react-navigation/native";
 import { useEffect } from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
+import { Initiative, KeyResult, Objective } from "../libs/types";
+import { findKeyResultProgress, keyResultProgressList } from "../utils";
+
+interface ObjectiveDetailScreenProps {
+  setCurrentRoute: any;
+  setCurrentObjectiveId: any;
+  keyResults: KeyResult[];
+  initiatives: Initiative[];
+  id: number;
+  route: RouteProp<{ params: { objective: Objective } }, "params">;
+  navigation: NavigationProp<ParamListBase>;
+}
 
 const ObjectiveDetailScreen = ({
   navigation,
@@ -15,41 +32,27 @@ const ObjectiveDetailScreen = ({
   initiatives,
   id,
   ...props
-}: any) => {
+}: ObjectiveDetailScreenProps) => {
   const isFocused = useIsFocused();
   useEffect(() => {
     setCurrentRoute("ObjectiveDetail");
     setCurrentObjectiveId(route.params.objective.id);
   }, [props, isFocused]);
-  const filteredKeyResults = keyResults.filter(
-    (keyResult: any) => keyResult.objectiveId === route.params.objective.id
+
+  const filteredKeyResults = keyResultProgressList(
+    keyResults,
+    route.params.objective.id !== null ? route.params.objective.id : 0
   );
-  const findKeyResultProgress = (id) => {
-    let filteredInitiatives = initiatives.filter(
-      (initiative) => initiative.keyResultId === id
-    );
-    if (filteredInitiatives.length === 0) {
-      return 0;
-    }
-
-    let countedTrue = filteredInitiatives.filter(
-      (initiative) => initiative.hasDone === true
-    ).length;
-
-    return (countedTrue / filteredInitiatives.length) * 100;
-  };
-
-  const keyResultProgressList = () => {
-    return keyResults
-      .map((keyResult) => keyResult)
-      .filter(
-        (keyResult) => keyResult.objectiveId === route.params.objective.id
-      );
-  };
 
   const keyResultProgressAverage = () => {
-    let list = keyResultProgressList().map((keyResult) =>
-      findKeyResultProgress(keyResult.id)
+    let list = keyResultProgressList(
+      keyResults,
+      route.params.objective.id !== null ? route.params.objective.id : 0
+    ).map((keyResult) =>
+      findKeyResultProgress(
+        initiatives,
+        keyResult.id !== null ? keyResult.id : 0
+      )
     );
 
     if (list.length === 0) {
@@ -66,7 +69,7 @@ const ObjectiveDetailScreen = ({
   const fixedAverage: number = +keyResultProgressAverage().toFixed(1);
   return (
     <ScrollView style={styles.container} overScrollMode="always">
-      <Title title={route.params.objective.name} type="default" />
+      <Title title={`${route.params.objective.name}`} type="default" />
       <View style={styles.infoContainer}>
         <View style={styles.infoCard}>
           <Text style={styles.infoCardTitle}>진행도</Text>
@@ -109,7 +112,7 @@ const ObjectiveDetailScreen = ({
               title={keyResult.name}
               date={keyResult.deadline}
               progress={parseFloat(
-                findKeyResultProgress(keyResult.id).toFixed(1)
+                findKeyResultProgress(initiatives, keyResult.id).toFixed(1)
               )}
               navigation={navigation}
               onPress={() =>
