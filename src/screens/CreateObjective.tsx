@@ -36,13 +36,13 @@ const CreateObjectiveScreen = ({ ...props }) => {
         bounces={false}
       >
         <Title
-          title="Objective and deadline"
-          detail="어떤 목표든 괜찮아요"
+          title="목표와 마감일을 알려주세요"
+          detail="여러분이 최종적으로 이루고 싶은 목표에요"
           type="detail"
         />
         <View style={styles.contentContainer}>
           <Input
-            placeholder="목표를 입력하세요"
+            placeholder="인문학적 소양 기르기"
             value={props.objective.name}
             onChangeText={(text: any) =>
               props.setObjective({

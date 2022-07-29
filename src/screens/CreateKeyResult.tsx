@@ -29,15 +29,15 @@ const CreateKeyResultScreen = ({ ...props }) => {
   };
 
   return (
-    <ScrollView overScrollMode="never" style={styles.container}>
+    <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
       <Title
-        title="KeyResult and deadline"
-        detail="어떤 목표든 괜찮아요"
+        title="핵심 지표와 마감일을 알려주세요"
+        detail="목표를 달성하기 위한 주요 지표에요"
         type="detail"
       />
       <View style={styles.contentContainer}>
         <Input
-          placeholder="목표를 입력하세요"
+          placeholder="인문학 책 10권 읽기"
           value={props.keyResult.name}
           onChangeText={(text: any) =>
             props.setKeyResult({

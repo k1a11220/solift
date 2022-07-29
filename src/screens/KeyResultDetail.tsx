@@ -15,6 +15,10 @@ import * as Haptics from "expo-haptics";
 
 const KeyResultDetailScreen = ({ ...props }) => {
   const isFocused = useIsFocused();
+  useEffect(() => {
+    props.setCurrentRoute("KeyResultDetail");
+    props.setCurrentKeyResultId(props.route.params.id);
+  }, [props, isFocused]);
 
   const currentKeyResult = props?.keyResults?.find(
     (keyResult) => keyResult?.id === props?.route?.params?.id
@@ -32,11 +36,6 @@ const KeyResultDetailScreen = ({ ...props }) => {
       filteredInitiatives.length) *
     100;
   const [progress, setProgress] = useState(newProgress);
-
-  useEffect(() => {
-    props.setCurrentRoute("KeyResultDetail");
-    props.setCurrentKeyResultId(props.route.params.id);
-  }, [props, isFocused]);
 
   const renderItem = (data) => {
     return (

@@ -30,15 +30,15 @@ const CreateInitiativeScreen = ({ ...props }) => {
   };
 
   return (
-    <ScrollView overScrollMode="never" style={styles.container}>
+    <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
       <Title
-        title="목표와 마감일을 알려주세요"
-        detail="어떤 목표든 괜찮아요"
+        title="세부 과제와 마감일을 알려주세요"
+        detail="핵심 지표를 달성하기 위한 구체적인 과제에요"
         type="detail"
       />
       <View style={styles.contentContainer}>
         <Input
-          placeholder="목표를 입력하세요"
+          placeholder="나의 한국현대사 읽기"
           value={props.initiative.name}
           onChangeText={(text: any) =>
             props.setInitiative({

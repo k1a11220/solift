@@ -58,6 +58,8 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
     return +keyResultProgressAverage(id).toFixed(1);
   };
 
+  console.log(initiatives);
+
   const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>
@@ -71,6 +73,8 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
         <EmptyView title="새로운 목표를 만들어봐요" icon="scope" />
       ) : (
         <ScrollView style={styles.cardList}>
+          {/* <Text style={styles.title}>이번주까지 할 일</Text> */}
+          <Text style={styles.title}>내 목표</Text>
           {props.objectives.map((objective: Objective) => (
             <ProgressCard
               key={objective.id}
@@ -99,9 +103,19 @@ const styles = StyleSheet.create({
   logoContainer: {
     justifyContent: "center",
     height: 48,
-    marginBottom: 12,
+    // marginBottom: 12,
+    // borderBottomColor: "#e6e6e6",
+    // borderBottomWidth: 1,
   },
-  cardList: {},
+  cardList: {
+    paddingTop: 22,
+  },
+  title: {
+    fontSize: 22,
+    color: "#333D4B",
+    fontWeight: "bold",
+    marginBottom: 24,
+  },
 });
 
 export default HomeScreen;
