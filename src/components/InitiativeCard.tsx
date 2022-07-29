@@ -34,7 +34,7 @@ const InitiativeCard = ({
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>
-          {deadline.toLocaleDateString()}
+          {deadline}
         </Text>
         <Text style={[styles.title, hasDone ? styles.done : null]}>{name}</Text>
       </View>

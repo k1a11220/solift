@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -17,9 +18,7 @@ const CreateInitiativeScreen = ({ ...props }) => {
     const currentDate = selectedDate;
     props.setInitiative({
       ...props.initiative,
-      deadline: currentDate,
-      id: props.latestInitiativeId,
-      keyResultId: props.currentKeyResultId,
+      deadline: format(currentDate, "yyyy/MM/dd"),
     });
     setDate(currentDate);
   };
@@ -42,12 +41,23 @@ const CreateInitiativeScreen = ({ ...props }) => {
           placeholder="목표를 입력하세요"
           value={props.initiative.name}
           onChangeText={(text: any) =>
-            props.setInitiative({ ...props.initiative, name: text })
+            props.setInitiative({
+              ...props.initiative,
+              name: text,
+              id: props.latestInitiativeId,
+              keyResultId: props.currentKeyResultId,
+              deadline: format(date, "yyyy/MM/dd"),
+            })
           }
         />
         <Gap />
         <DatePickerModal date={date} onChange={onChange} />
-        <CTA label="다음으로" type="primary" onPress={onSubmit} />
+        <CTA
+          label="다음으로"
+          type="primary"
+          onPress={onSubmit}
+          disabled={props.initiative.name ? false : true}
+        />
       </View>
     </ScrollView>
   );

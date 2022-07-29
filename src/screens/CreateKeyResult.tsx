@@ -18,8 +18,6 @@ const CreateKeyResultScreen = ({ ...props }) => {
     props.setKeyResult({
       ...props.keyResult,
       deadline: format(currentDate, "yyyy/MM/dd"),
-      id: props.latestKeyResultId,
-      objectiveId: props.currentObjectiveId,
     });
     setDate(currentDate);
   };
@@ -42,12 +40,23 @@ const CreateKeyResultScreen = ({ ...props }) => {
           placeholder="목표를 입력하세요"
           value={props.keyResult.name}
           onChangeText={(text: any) =>
-            props.setKeyResult({ ...props.keyResult, name: text })
+            props.setKeyResult({
+              ...props.keyResult,
+              name: text,
+              id: props.latestKeyResultId,
+              objectiveId: props.currentObjectiveId,
+              deadline: format(date, "yyyy/MM/dd"),
+            })
           }
         />
         <Gap />
         <DatePickerModal date={date} onChange={onChange} />
-        <CTA label="다음으로" type="primary" onPress={onSubmit} />
+        <CTA
+          label="다음으로"
+          type="primary"
+          onPress={onSubmit}
+          disabled={props.keyResult.name ? false : true}
+        />
       </View>
     </ScrollView>
   );

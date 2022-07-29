@@ -7,12 +7,13 @@ interface CTAProps {
   onPress: () => void;
 }
 
-const CTA = ({ label, onPress }: CTAProps) => {
+const CTA = ({ label, onPress, disabled }: CTAProps) => {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, disabled ? styles.disabled : null]}
       onPress={onPress}
       activeOpacity={0.8}
+      disabled={disabled}
     >
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
@@ -33,6 +34,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
+  },
+
+  disabled: {
+    backgroundColor: "#C7DEFF",
   },
 });
 

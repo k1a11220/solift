@@ -18,7 +18,6 @@ const CreateObjectiveScreen = ({ ...props }) => {
     props.setObjective({
       ...props.objective,
       deadline: format(currentDate, "yyyy/MM/dd"),
-      id: props.latestObjectiveId,
     });
     setDate(currentDate);
   };
@@ -31,7 +30,11 @@ const CreateObjectiveScreen = ({ ...props }) => {
 
   return (
     <>
-      <ScrollView overScrollMode="never" style={styles.container}>
+      <ScrollView
+        overScrollMode="never"
+        style={styles.container}
+        bounces={false}
+      >
         <Title
           title="Objective and deadline"
           detail="어떤 목표든 괜찮아요"
@@ -42,12 +45,22 @@ const CreateObjectiveScreen = ({ ...props }) => {
             placeholder="목표를 입력하세요"
             value={props.objective.name}
             onChangeText={(text: any) =>
-              props.setObjective({ ...props.objective, name: text })
+              props.setObjective({
+                ...props.objective,
+                name: text,
+                id: props.latestObjectiveId,
+                deadline: format(date, "yyyy/MM/dd"),
+              })
             }
           />
           <Gap />
           <DatePickerModal date={date} onChange={onChange} />
-          <CTA label="다음으로" type="primary" onPress={onSubmit} />
+          <CTA
+            label="다음으로"
+            type="primary"
+            onPress={onSubmit}
+            disabled={props.objective.name ? false : true}
+          />
         </View>
       </ScrollView>
     </>
