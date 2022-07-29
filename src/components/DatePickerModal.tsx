@@ -38,6 +38,7 @@ const DatePickerModal = ({
               display={"inline"}
               textColor="black"
               minimumDate={minimumDate}
+              themeVariant="light"
             />
           </View>
         </TouchableOpacity>

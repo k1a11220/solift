@@ -11,12 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "expo": {
+      "userInterfaceStyle": "light"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "solift"

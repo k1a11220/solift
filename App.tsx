@@ -24,6 +24,7 @@ import CreateObjectiveScreen from "./src/screens/CreateObjective";
 import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 import EditObjectiveScreen from "./src/screens/EditObjective";
 import EditKeyResultScreen from "./src/screens/EditKeyResult";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,12 @@ export default function App() {
       deadline: null,
       keyResults: [],
     });
+
+    AsyncStorage.setItem("objectives", JSON.stringify(newObjectives))
+      .then(() => {
+        setObjectives(newObjectives);
+      })
+      .catch((error) => console.log(error));
   };
 
   const deleteObjective = (id: number, action: any) => {
