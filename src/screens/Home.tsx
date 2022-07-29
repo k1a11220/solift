@@ -54,9 +54,10 @@ const HomeScreen = ({ initiatives, keyResults, ...props }) => {
     return filteredList / list.length;
   };
 
-  const fixedAverage: number = (id) => {
+  const fixedAverage = (id: number) => {
     return +keyResultProgressAverage(id).toFixed(1);
   };
+
   const navigation = useNavigation<ROUTES>();
   return (
     <View style={styles.container}>

@@ -108,7 +108,9 @@ const ObjectiveDetailScreen = ({
               key={keyResult.id}
               title={keyResult.name}
               date={keyResult.deadline}
-              progress={findKeyResultProgress(keyResult.id).toFixed(1)}
+              progress={parseFloat(
+                findKeyResultProgress(keyResult.id).toFixed(1)
+              )}
               navigation={navigation}
               onPress={() =>
                 navigation?.navigate("KeyResultDetail", { id: keyResult.id })
