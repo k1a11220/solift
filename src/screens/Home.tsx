@@ -80,7 +80,7 @@ const HomeScreen = ({
         <EmptyView title="새로운 목표를 만들어봐요" icon="scope" />
       ) : (
         <ScrollView style={styles.cardList}>
-          <Text style={styles.title}>이번주까지 할 일</Text>
+          {/* <Text style={styles.title}>이번주까지 할 일</Text>
           {thisWeekInitiatives.map((initiative: Initiative) => (
             <InitiativeCard
               key={initiative.id}
@@ -89,8 +89,8 @@ const HomeScreen = ({
               // setInitiatve hasDone to true if it is done
               onPress={() => setInitiative(initiative.id, { hasDone: true })}
             />
-          ))}
-          <Text style={styles.title}>내 목표</Text>
+          ))} */}
+          {/* <Text style={styles.title}>내 목표</Text> */}
           {props.objectives.map((objective: Objective) => (
             <ProgressCard
               key={objective.id}
