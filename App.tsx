@@ -205,6 +205,9 @@ export default function App() {
     loadObjectives();
     loadKeyResults();
     loadInitiatives();
+    loadLatestObjectiveId();
+    loadLatestKeyResultId();
+    loadLatestInitiativeId();
   }, []);
 
   const loadObjectives = () => {
@@ -237,6 +240,35 @@ export default function App() {
       .catch((error) => console.log(error));
   };
 
+  const loadLatestObjectiveId = () => {
+    AsyncStorage.getItem("latestObjectiveId")
+      .then((data) => {
+        if (data !== null) {
+          setLatestObjectiveId(+data);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const loadLatestKeyResultId = () => {
+    AsyncStorage.getItem("latestKeyResultId")
+      .then((data) => {
+        if (data !== null) {
+          setLatestKeyResultId(+data);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const loadLatestInitiativeId = () => {
+    AsyncStorage.getItem("latestInitiativeId")
+      .then((data) => {
+        if (data !== null) {
+          setLatestInitiativeId(+data);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <StoreProvider store={store}>
       {/* <ExampleView />

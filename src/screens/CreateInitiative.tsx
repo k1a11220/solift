@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -52,7 +53,14 @@ const CreateInitiativeScreen = ({
 
   const onSubmit = () => {
     handleInitiative();
-    setLatestInitiativeId(latestInitiativeId + 1);
+    AsyncStorage.setItem(
+      "latestInitiativeId",
+      JSON.stringify(latestInitiativeId + 1)
+    )
+      .then(() => {
+        setLatestInitiativeId(latestInitiativeId + 1);
+      })
+      .catch((error) => console.log(error));
     props.navigation.goBack();
   };
 

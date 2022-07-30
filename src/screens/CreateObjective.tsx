@@ -8,6 +8,7 @@ import DatePickerModal from "../components/DatePickerModal";
 import { format } from "date-fns";
 import { Objective } from "../libs/types";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface CreateObjectiveScreenProps {
   objective: Objective;
@@ -44,7 +45,14 @@ const CreateObjectiveScreen = ({
 
   const onSubmit = () => {
     handleObjective();
-    setLatestObjectiveId(latestObjectiveId + 1);
+    AsyncStorage.setItem(
+      "latestObjectiveId",
+      JSON.stringify(latestObjectiveId + 1)
+    )
+      .then(() => {
+        setLatestObjectiveId(latestObjectiveId + 1);
+      })
+      .catch((error) => console.log(error));
     props.navigation.goBack();
   };
 

@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -53,7 +54,14 @@ const CreateKeyResultScreen = ({
 
   const onSubmit = () => {
     handleKeyResult();
-    setLatestKeyResultId(latestKeyResultId + 1);
+    AsyncStorage.setItem(
+      "latestKeyResultId",
+      JSON.stringify(latestKeyResultId + 1)
+    )
+      .then(() => {
+        setLatestKeyResultId(latestKeyResultId + 1);
+      })
+      .catch((error) => console.log(error));
     props.navigation.goBack();
   };
 
