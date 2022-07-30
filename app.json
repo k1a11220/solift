@@ -26,7 +26,13 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyCHx3Gr7Mc8KWPabSqCFRZIlWhb3OF_eMg",
+          "measurementId": "G-012MREGY8V"
+        }
+      }
     }
   }
 }
