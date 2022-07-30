@@ -75,20 +75,21 @@ const KeyResultDetailScreen = ({
 
   const renderItem = (data: RenderItemProps) => {
     return (
-      <InitiativeCard
-        key={data.item.id}
-        initiative={data.item}
-        setInitiative={setInitiative}
-        onPress={() => {
-          setProgress(
-            (filteredInitiatives.filter(
-              (initiative) => initiative.hasDone === true
-            ).length /
-              filteredInitiatives.length) *
-              100
-          );
-        }}
-      />
+      <View style={{ marginRight: 22, marginLeft: 22 }} key={data.item.id}>
+        <InitiativeCard
+          initiative={data.item}
+          setInitiative={setInitiative}
+          onPress={() => {
+            setProgress(
+              (filteredInitiatives.filter(
+                (initiative) => initiative.hasDone === true
+              ).length /
+                filteredInitiatives.length) *
+                100
+            );
+          }}
+        />
+      </View>
     );
   };
 

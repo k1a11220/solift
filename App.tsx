@@ -319,6 +319,7 @@ export default function App() {
                 keyResults={keyResults}
                 initiatives={initiatives}
                 setCurrentRoute={setCurrentRoute}
+                setInitiative={setInitiative}
                 {...props}
               />
             )}
