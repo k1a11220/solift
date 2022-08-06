@@ -99,7 +99,7 @@ const EditKeyResultScreen = ({
           <DatePickerModal
             date={date}
             onChange={onChange}
-            minimumDate={stringToDate(currentObjective?.deadline)}
+            maximumDate={stringToDate(currentObjective?.deadline)}
           />
           <CTA label="수정하기" type="primary" onPress={onSubmit} />
         </View>

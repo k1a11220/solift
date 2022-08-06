@@ -4,6 +4,7 @@ import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
 import { Initiative } from "../libs/types";
 import { getCurrentInitiative } from "../utils";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface InitiativeCardProps {
   initiative: Initiative;
@@ -18,7 +19,10 @@ const InitiativeCard = ({
   onPress,
 }: InitiativeCardProps) => {
   const [hasDone, setHasDone] = useState(initiative?.hasDone);
-  const currentIntitiative = getCurrentInitiative(initiatives, initiative.id);
+  const currentIntitiative =
+    initiative.id !== null
+      ? getCurrentInitiative(initiatives, initiative.id)
+      : null;
   console.log(currentIntitiative);
   const onClick = () => {
     onPress();
