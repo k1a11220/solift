@@ -61,7 +61,7 @@ export default function App() {
   };
 
   const deleteObjective = (id: number, action: any) => {
-    action();
+    action === undefined ? null : action();
 
     let newObjectives = objectives.filter((objective) => objective.id !== id);
 
@@ -138,7 +138,7 @@ export default function App() {
   };
 
   const deleteKeyResult = (id: number, action: any) => {
-    action();
+    action === undefined ? null : action();
 
     let newKeyResults = keyResults.filter((keyResult) => keyResult.id !== id);
     setKeyResults(newKeyResults);

@@ -7,13 +7,13 @@ import { useDate } from "../utils/useDate";
 interface DatePickerModalProps {
   date: Date;
   onChange: any;
-  minimumDate?: Date;
+  maximumDate?: Date;
 }
 
 const DatePickerModal = ({
   date,
   onChange,
-  minimumDate,
+  maximumDate,
 }: DatePickerModalProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -37,7 +37,7 @@ const DatePickerModal = ({
               locale="ko-KR"
               display={"inline"}
               textColor="black"
-              minimumDate={minimumDate}
+              maximumDate={maximumDate}
               themeVariant="light"
             />
           </View>

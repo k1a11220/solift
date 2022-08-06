@@ -3,15 +3,23 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
 import { Initiative } from "../libs/types";
+import { getCurrentInitiative } from "../utils";
 
 interface InitiativeCardProps {
   initiative: Initiative;
+  initiatives: Initiative[];
   setInitiative: (initiative: Initiative) => void;
   onPress: () => void;
 }
 
-const InitiativeCard = ({ initiative, onPress }: InitiativeCardProps) => {
+const InitiativeCard = ({
+  initiatives,
+  initiative,
+  onPress,
+}: InitiativeCardProps) => {
   const [hasDone, setHasDone] = useState(initiative?.hasDone);
+  const currentIntitiative = getCurrentInitiative(initiatives, initiative.id);
+  console.log(currentIntitiative);
   const onClick = () => {
     onPress();
     initiative.hasDone = !initiative.hasDone;

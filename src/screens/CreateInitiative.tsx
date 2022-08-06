@@ -89,7 +89,7 @@ const CreateInitiativeScreen = ({
         <DatePickerModal
           date={date}
           onChange={onChange}
-          minimumDate={stringToDate(currentKeyResult?.deadline)}
+          maximumDate={stringToDate(currentKeyResult?.deadline)}
         />
         <CTA
           label="다음으로"

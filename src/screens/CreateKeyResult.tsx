@@ -90,7 +90,7 @@ const CreateKeyResultScreen = ({
         <DatePickerModal
           date={date}
           onChange={onChange}
-          minimumDate={stringToDate(currentObjective?.deadline)}
+          maximumDate={stringToDate(currentObjective?.deadline)}
         />
         <CTA
           label="다음으로"

@@ -78,6 +78,7 @@ const KeyResultDetailScreen = ({
       <View style={{ marginRight: 22, marginLeft: 22 }} key={data.item.id}>
         <InitiativeCard
           initiative={data.item}
+          initiatives={initiatives}
           setInitiative={setInitiative}
           onPress={() => {
             setProgress(

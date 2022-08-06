@@ -16,6 +16,10 @@ export const getCurrentInitiatives = (list: Array<Initiative>, id: number) => {
   return list.filter((initiatives) => initiatives.keyResultId === id);
 };
 
+export const getCurrentInitiative = (list: Array<Initiative>, id: number) => {
+  return list.find((initiative) => initiative.id === id);
+};
+
 export const stringToDate = (date: any) => {
   const dateParts = date.split("/");
   const currentDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
