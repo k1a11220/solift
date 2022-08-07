@@ -19,7 +19,7 @@ interface KeyResultDetailScreenProps {
   objectives: Objective[];
   keyResults: KeyResult[];
   initiatives: Initiative[];
-  setInitiative: any;
+  setInitiatives: any;
   setCurrentRoute: any;
   setCurrentKeyResultId: any;
   deleteInitiative: any;
@@ -34,7 +34,7 @@ const KeyResultDetailScreen = ({
   objectives,
   keyResults,
   initiatives,
-  setInitiative,
+  setInitiatives,
   setCurrentRoute,
   setCurrentKeyResultId,
   deleteInitiative,
@@ -79,7 +79,7 @@ const KeyResultDetailScreen = ({
         <InitiativeCard
           initiative={data.item}
           initiatives={initiatives}
-          setInitiative={setInitiative}
+          setInitiatives={setInitiatives}
           onPress={() => {
             setProgress(
               (filteredInitiatives.filter(

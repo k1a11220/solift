@@ -378,7 +378,7 @@ export default function App() {
                 objectives={objectives}
                 keyResults={keyResults}
                 initiatives={initiatives}
-                setInitiative={setInitiative}
+                setInitiatives={setInitiatives}
                 setCurrentRoute={setCurrentRoute}
                 setCurrentKeyResultId={setCurrentKeyResultId}
                 deleteInitiative={deleteInitiative}

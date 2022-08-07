@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 interface InitiativeCardProps {
   initiative: Initiative;
   initiatives: Initiative[];
-  setInitiative: (initiative: Initiative) => void;
+  setInitiatives: any;
   onPress: () => void;
 }
 
@@ -17,18 +17,51 @@ const InitiativeCard = ({
   initiatives,
   initiative,
   onPress,
+  setInitiatives,
 }: InitiativeCardProps) => {
-  const [hasDone, setHasDone] = useState(initiative?.hasDone);
   const currentIntitiative =
     initiative.id !== null
       ? getCurrentInitiative(initiatives, initiative.id)
       : null;
-  console.log(currentIntitiative);
+  const [hasDone, setHasDone] = useState(currentIntitiative?.hasDone);
+
   const onClick = () => {
     onPress();
     initiative.hasDone = !initiative.hasDone;
-    setHasDone(initiative?.hasDone);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    let filteredInitiatives = initiatives.filter(
+      (initiative) => initiative.id !== currentIntitiative?.id
+    );
+    let edited = [
+      ...filteredInitiatives,
+      {
+        id: currentIntitiative?.id,
+        name: currentIntitiative?.name,
+        hasDone: !hasDone,
+        deadline: currentIntitiative?.deadline,
+        keyResultId: currentIntitiative?.keyResultId,
+      },
+    ];
+    edited.sort(function (a, b) {
+      if (
+        a.id !== null &&
+        b.id !== null &&
+        a.id !== undefined &&
+        b.id !== undefined
+      ) {
+        return a.id - b.id;
+      } else {
+        return 0;
+      }
+    });
+    AsyncStorage.setItem("initiatives", JSON.stringify(edited))
+      .then(() => {
+        setInitiatives(edited);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setHasDone(currentIntitiative?.hasDone);
   };
   return (
     <TouchableOpacity
@@ -38,10 +71,10 @@ const InitiativeCard = ({
     >
       <View style={styles.contentContainer}>
         <Text style={[styles.deadline, hasDone ? styles.done : null]}>
-          {initiative?.deadline}까지
+          {currentIntitiative?.deadline}까지
         </Text>
         <Text style={[styles.title, hasDone ? styles.done : null]}>
-          {initiative?.name}
+          {currentIntitiative?.name}
         </Text>
       </View>
       <View style={styles.iconContainer}>
