@@ -8,6 +8,7 @@ import DatePickerModal from "../components/DatePickerModal";
 import {
   getCurrentKeyResult,
   getCurrentObjective,
+  sortByLatestId,
   stringToDate,
 } from "../utils";
 import { KeyResult, Objective } from "../libs/types";
@@ -70,7 +71,7 @@ const EditKeyResultScreen = ({
         objectiveId: currentObjectiveId,
       },
     ];
-    AsyncStorage.setItem("keyResults", JSON.stringify(edited))
+    AsyncStorage.setItem("keyResults", JSON.stringify(sortByLatestId(edited)))
       .then(() => {
         setKeyResults(edited);
       })

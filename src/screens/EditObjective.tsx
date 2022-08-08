@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { useDate } from "../utils/useDate";
-import { getCurrentObjective, stringToDate } from "../utils";
+import { getCurrentObjective, sortByLatestId, stringToDate } from "../utils";
 import { Objective } from "../libs/types";
 import {
   NavigationProp,
@@ -57,7 +57,7 @@ const EditObjectiveScreen = ({
       ...filteredObjectives,
       { id: currentObjective?.id, name: name, deadline: useDate(date) },
     ];
-    AsyncStorage.setItem("objectives", JSON.stringify(edited))
+    AsyncStorage.setItem("objectives", JSON.stringify(sortByLatestId(edited)))
       .then(() => {
         setObjectives(edited);
       })

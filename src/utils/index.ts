@@ -47,3 +47,7 @@ export const findKeyResultProgress = (
     return (countedTrue / filteredInitiatives.length) * 100;
   }
 };
+
+export const sortByLatestId = (list: any) => {
+  return list.sort((a: any, b: any) => b.id - a.id);
+};
