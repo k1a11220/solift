@@ -66,7 +66,11 @@ const EditObjectiveScreen = ({
 
   return (
     <>
-      <ScrollView overScrollMode="never" style={styles.container}>
+      <ScrollView
+        overScrollMode="never"
+        bounces={false}
+        style={styles.container}
+      >
         <Title
           title="목표와 마감일을 알려주세요"
           detail="여러분이 최종적으로 이루고 싶은 목표에요"

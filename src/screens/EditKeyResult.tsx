@@ -81,7 +81,11 @@ const EditKeyResultScreen = ({
 
   return (
     <>
-      <ScrollView overScrollMode="never" style={styles.container}>
+      <ScrollView
+        overScrollMode="never"
+        bounces={false}
+        style={styles.container}
+      >
         <Title
           title="핵심 지표와 마감일을 알려주세요"
           detail="목표를 달성하기 위한 주요 지표에요"
