@@ -129,7 +129,7 @@ const ObjectiveDetailScreen = ({
       <View style={styles.cardList}>
         {filteredKeyResults.length === 0 ? (
           <EmptyView
-            title={`목표를 다 만드셨군요!\n이젠 세부과제를 만들어봐요`}
+            title={`목표를 이루기 위한 \n 핵심 지표를 만들어봐요`}
             icon="antenna"
           />
         ) : (

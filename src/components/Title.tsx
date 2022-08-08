@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
   detail: {
     fontSize: 16,
-    marginTop: 6,
+    marginTop: 3,
     color: "#8B919E",
     lineHeight: 16 * 1.4,
   },

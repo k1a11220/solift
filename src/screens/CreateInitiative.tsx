@@ -68,7 +68,7 @@ const CreateInitiativeScreen = ({
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
       <Title
         title="세부 과제와 마감일을 알려주세요"
-        detail="핵심 지표를 달성하기 위한 구체적인 과제에요"
+        detail="핵심 지표를 이루기 위한 구체적인 과제에요"
         type="detail"
       />
       <View style={styles.contentContainer}>

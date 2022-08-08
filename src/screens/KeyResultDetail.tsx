@@ -130,7 +130,7 @@ const KeyResultDetailScreen = ({
               type="progress"
             />
             <EmptyView
-              title={`아직 세부과제를 만들지 않으셨군요! \n 이제 세부과제를 만들어봐요`}
+              title={`핵심 지표를 이루기 위한 \n 구체적인 과제를 만들어봐요`}
               icon="satellite"
             />
           </ScrollView>

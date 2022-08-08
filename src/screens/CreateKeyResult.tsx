@@ -69,7 +69,7 @@ const CreateKeyResultScreen = ({
     <ScrollView overScrollMode="never" style={styles.container} bounces={false}>
       <Title
         title="핵심 지표와 마감일을 알려주세요"
-        detail="목표를 달성하기 위한 주요 지표에요"
+        detail="목표를 이루기 위해 해야할 일이에요"
         type="detail"
       />
       <View style={styles.contentContainer}>
