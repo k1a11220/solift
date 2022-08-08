@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Icon from "../../assets/icons";
 import { ROUTES } from "../libs/types";
 import * as Haptics from "expo-haptics";
+import { theme } from "../libs/theme";
 
 const FloatingBtn = ({ currentRoute }: any) => {
   const navigation = useNavigation<ROUTES>();
@@ -23,7 +24,7 @@ const FloatingBtn = ({ currentRoute }: any) => {
       style={styles.container}
     >
       <View style={styles.iconContainer}>
-        <Icon.Create fillColor={"#ffffff"} />
+        <Icon.Create fillColor={theme.colors.white} />
       </View>
     </TouchableOpacity>
   );
@@ -32,7 +33,7 @@ const FloatingBtn = ({ currentRoute }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4191FD",
+    backgroundColor: theme.colors.blue500,
     justifyContent: "center",
     alignItems: "center",
     width: 56,

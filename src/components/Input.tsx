@@ -1,4 +1,5 @@
 import { StyleSheet, TextInput } from "react-native";
+import { theme } from "../libs/theme";
 
 const Input = (props: any) => {
   return (
@@ -16,8 +17,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#C3C9D3",
-    color: "#333D4B",
+    borderColor: theme.colors.grey200,
+    color: theme.colors.grey500,
     fontWeight: "400",
   },
 });

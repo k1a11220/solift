@@ -4,6 +4,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import ProgressCard from "../components/ProgressCard";
+import { theme } from "../libs/theme";
 import { Initiative, KeyResult, Objective, ROUTES } from "../libs/types";
 import {
   findKeyResultProgress,
@@ -116,7 +117,7 @@ const HomeScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    color: "#333D4B",
+    color: theme.colors.grey500,
     fontWeight: "bold",
     marginBottom: 24,
   },

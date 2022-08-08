@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { theme } from "../libs/theme";
 
 interface CTAProps {
   label: string;
@@ -23,7 +24,7 @@ const CTA = ({ label, onPress, disabled }: CTAProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4191FD",
+    backgroundColor: theme.colors.blue500,
     padding: 17,
     justifyContent: "center",
     alignItems: "center",
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    color: "#fff",
+    color: theme.colors.white,
     fontSize: 16,
     fontWeight: "600",
   },

@@ -19,6 +19,7 @@ import {
 } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDate } from "../utils/useDate";
+import { theme } from "../libs/theme";
 
 interface EditKeyResultScreenProps {
   keyResults: KeyResult[];
@@ -116,7 +117,7 @@ const EditKeyResultScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },

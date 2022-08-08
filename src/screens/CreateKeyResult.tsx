@@ -8,6 +8,7 @@ import DatePickerModal from "../components/DatePickerModal";
 import Gap from "../components/Gap";
 import Input from "../components/Input";
 import Title from "../components/Title";
+import { theme } from "../libs/theme";
 import { KeyResult, Objective } from "../libs/types";
 import { getCurrentObjective, stringToDate } from "../utils";
 import { useDate } from "../utils/useDate";
@@ -106,7 +107,7 @@ const CreateKeyResultScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },

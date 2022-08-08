@@ -2,6 +2,7 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
+import { theme } from "../libs/theme";
 import { useDate } from "../utils/useDate";
 
 interface DatePickerModalProps {
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
 
   modalContent: {
     width: "100%",
-    backgroundColor: "#ffffff",
+    backgroundColor: theme.colors.white,
     padding: 22,
     borderTopRightRadius: 24,
     borderTopLeftRadius: 24,
@@ -66,14 +67,14 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#C3C9D3",
+    borderColor: theme.colors.grey200,
     marginBottom: 16,
   },
 
   datePickerText: {
     fontSize: 16,
     fontWeight: "400",
-    color: "#333D4B",
+    color: theme.colors.grey500,
   },
 });
 

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
+import { theme } from "../libs/theme";
 
 const ProgressCard = ({ title, date, progress, onPress }: any) => {
   return (
@@ -14,13 +15,13 @@ const ProgressCard = ({ title, date, progress, onPress }: any) => {
       <View style={styles.detailContainer}>
         <View style={styles.detailWrapper}>
           <View style={styles.iconContainer}>
-            <Icon.CalendarOutline fillColor={"#8B919E"} />
+            <Icon.CalendarOutline fillColor={theme.colors.grey300} />
           </View>
           <Text style={styles.detailValue}>{date}</Text>
         </View>
         <View style={styles.detailWrapper}>
           <View style={styles.iconContainer}>
-            <Icon.CheckCircleOutline fillColor={"#8B919E"} />
+            <Icon.CheckCircleOutline fillColor={theme.colors.grey300} />
           </View>
           <Text style={styles.detailValue}>{progress?.toString()}%</Text>
           <View style={styles.progressContainer}>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 1,
     borderRadius: 12,
-    borderColor: "#EDEFF1",
+    borderColor: theme.colors.grey100,
     width: "100%",
     marginBottom: 12,
   },
@@ -55,13 +56,13 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     borderBottomWidth: 1,
-    borderColor: "#EDEFF1",
-    color: "#8B919E",
+    borderColor: theme.colors.grey100,
+    color: theme.colors.grey300,
   },
   title: {
     fontSize: 16,
     marginBottom: 16,
-    color: "#333D4B",
+    color: theme.colors.grey500,
     fontWeight: "600",
     lineHeight: 16 * 1.4,
   },
@@ -75,19 +76,19 @@ const styles = StyleSheet.create({
   },
   detailValue: {
     marginLeft: 6,
-    color: "#8B919E",
+    color: theme.colors.grey300,
   },
   progressContainer: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
     height: 6,
-    backgroundColor: "#EDEFF1",
+    backgroundColor: theme.colors.grey100,
     marginLeft: 6,
     borderRadius: 6,
   },
   progressBar: {
-    backgroundColor: "#4191FD",
+    backgroundColor: theme.colors.blue500,
     width: "100%",
     height: "100%",
     borderRadius: 6,

@@ -14,6 +14,7 @@ import Title from "../components/Title";
 import * as Haptics from "expo-haptics";
 import { Initiative, KeyResult, Objective } from "../libs/types";
 import { getCurrentKeyResult, getCurrentObjective } from "../utils";
+import { theme } from "../libs/theme";
 
 interface KeyResultDetailScreenProps {
   objectives: Objective[];
@@ -167,7 +168,7 @@ const KeyResultDetailScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
 
     paddingBottom: 22,
   },
@@ -199,12 +200,12 @@ const styles = StyleSheet.create({
   },
 
   backRightBtnRight: {
-    backgroundColor: "#FF5252",
+    backgroundColor: theme.colors.red500,
     right: 0,
   },
 
   backTextWhite: {
-    color: "#fff",
+    color: theme.colors.white,
     fontWeight: "600",
     fontSize: 16,
   },

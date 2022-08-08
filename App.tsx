@@ -25,6 +25,7 @@ import CreateKeyResultScreen from "./src/screens/CreateKeyResult";
 import EditObjectiveScreen from "./src/screens/EditObjective";
 import EditKeyResultScreen from "./src/screens/EditKeyResult";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { theme } from "./src/libs/theme";
 
 const Stack = createNativeStackNavigator();
 
@@ -269,6 +270,7 @@ export default function App() {
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <StoreProvider store={store}>
       {/* <ExampleView />
@@ -281,13 +283,13 @@ export default function App() {
             headerBackTitleVisible: false,
             headerTitle: "",
             headerShadowVisible: false, // applied here
-            headerTintColor: "#333D4B",
+            headerTintColor: theme.colors.grey500,
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
                 style={{ width: 26, height: 26 }}
               >
-                <Icon.Chevron fillColor="#333D4B" />
+                <Icon.Chevron fillColor={theme.colors.grey500} />
               </TouchableOpacity>
             ),
             headerRight: () =>
@@ -321,7 +323,12 @@ export default function App() {
                       : () => alert("currentObjectiveId undefined!")
                   }
                 >
-                  <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
+                  <Text
+                    style={[
+                      styles.rightItemText,
+                      { color: theme.colors.red500 },
+                    ]}
+                  >
                     삭제
                   </Text>
                 </TouchableOpacity>
@@ -337,7 +344,12 @@ export default function App() {
                       : () => alert("currentObjectiveId undefined!")
                   }
                 >
-                  <Text style={[styles.rightItemText, { color: "#FF5252" }]}>
+                  <Text
+                    style={[
+                      styles.rightItemText,
+                      { color: theme.colors.red500 },
+                    ]}
+                  >
                     삭제
                   </Text>
                 </TouchableOpacity>
@@ -473,7 +485,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -486,7 +498,7 @@ const styles = StyleSheet.create({
 
   rightItemText: {
     fontSize: 18,
-    color: "#4191FD",
+    color: theme.colors.blue500,
     fontWeight: "600",
   },
 });

@@ -1,4 +1,5 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { theme } from "../libs/theme";
 
 interface EmptyViewProps {
   title: string;
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 18,
-    color: "#333D4B",
+    color: theme.colors.grey500,
     fontWeight: "600",
     marginTop: 24,
     textAlign: "center",

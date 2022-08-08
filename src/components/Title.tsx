@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as Icon from "../../assets/icons";
+import { theme } from "../libs/theme";
 
 interface TitleProps {
   type: "default" | "detail" | "progress";
@@ -29,7 +30,7 @@ const Title = ({
         <>
           <View style={styles.dateContainer}>
             <View style={styles.iconContainer}>
-              <Icon.CalendarOutline fillColor={"#8B919E"} />
+              <Icon.CalendarOutline fillColor={theme.colors.grey300} />
             </View>
             <Text style={styles.date}>{date}</Text>
           </View>
@@ -58,13 +59,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 6,
-    backgroundColor: "#EDEFF1",
+    backgroundColor: theme.colors.grey100,
     borderRadius: 6,
     marginBottom: 12,
   },
 
   progressBar: {
-    backgroundColor: "#4191FD",
+    backgroundColor: theme.colors.blue500,
     height: "100%",
     borderRadius: 6,
     width: "100%",
@@ -73,14 +74,14 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     fontWeight: "500",
-    color: "#8B919E",
+    color: theme.colors.grey300,
     marginBottom: 6,
     lineHeight: 14 * 1.4,
   },
 
   title: {
     fontSize: 22,
-    color: "#333D4B",
+    color: theme.colors.grey500,
     fontWeight: "bold",
     lineHeight: 22 * 1.4,
   },
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 16,
     marginTop: 3,
-    color: "#8B919E",
+    color: theme.colors.grey300,
     lineHeight: 16 * 1.4,
   },
 
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    color: "#8B919E",
+    color: theme.colors.grey300,
   },
 });
 

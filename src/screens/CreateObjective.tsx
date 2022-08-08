@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { Objective } from "../libs/types";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { theme } from "../libs/theme";
 
 interface CreateObjectiveScreenProps {
   objective: Objective;
@@ -98,7 +99,7 @@ const CreateObjectiveScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },

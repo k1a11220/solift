@@ -14,6 +14,7 @@ import {
   RouteProp,
 } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { theme } from "../libs/theme";
 
 interface EditObjectiveScreenProps {
   objectives: Objective[];
@@ -99,7 +100,7 @@ const EditObjectiveScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },

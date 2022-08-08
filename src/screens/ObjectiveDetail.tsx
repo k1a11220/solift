@@ -11,6 +11,7 @@ import EmptyView from "../components/EmptyView";
 import Gap from "../components/Gap";
 import ProgressCard from "../components/ProgressCard";
 import Title from "../components/Title";
+import { theme } from "../libs/theme";
 import { Initiative, KeyResult, Objective } from "../libs/types";
 import {
   findKeyResultProgress,
@@ -108,12 +109,12 @@ const ObjectiveDetailScreen = ({
               {
                 color:
                   fixedAverage < 20
-                    ? "#FF5252"
+                    ? theme.colors.red500
                     : fixedAverage < 70
-                    ? "#FF9100"
+                    ? theme.colors.orange500
                     : fixedAverage < 100
-                    ? "#47CE09"
-                    : "#4191FD",
+                    ? theme.colors.green500
+                    : theme.colors.blue500,
               },
             ]}
           >
@@ -156,7 +157,7 @@ const ObjectiveDetailScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     paddingLeft: 22,
     paddingRight: 22,
   },
@@ -173,17 +174,17 @@ const styles = StyleSheet.create({
     paddingBottom: 22,
     borderWidth: 1,
     borderRadius: 12,
-    borderColor: "#EDEFF1",
+    borderColor: theme.colors.grey100,
     flex: 1,
   },
   infoCardTitle: {
     fontSize: 12,
     marginBottom: 4,
-    color: "#8B919E",
+    color: theme.colors.grey300,
   },
   infoCardValue: {
     fontSize: 18,
-    color: "#333D4B",
+    color: theme.colors.grey500,
     fontWeight: "600",
   },
   cardList: {
