@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     color: "#333D4B",
     fontWeight: "600",
+    lineHeight: 16 * 1.4,
   },
   detailContainer: {
     marginTop: 6,

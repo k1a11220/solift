@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333D4B",
     fontWeight: "600",
+    lineHeight: 16 * 1.4,
   },
   done: {
     textDecorationLine: "line-through",

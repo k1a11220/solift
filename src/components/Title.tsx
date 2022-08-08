@@ -75,18 +75,21 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#8B919E",
     marginBottom: 6,
+    lineHeight: 14 * 1.4,
   },
 
   title: {
     fontSize: 22,
     color: "#333D4B",
     fontWeight: "bold",
+    lineHeight: 22 * 1.4,
   },
 
   detail: {
     fontSize: 16,
     marginTop: 6,
     color: "#8B919E",
+    lineHeight: 16 * 1.4,
   },
 
   dateContainer: {
