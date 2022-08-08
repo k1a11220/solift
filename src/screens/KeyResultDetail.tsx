@@ -97,17 +97,30 @@ const KeyResultDetailScreen = ({
 
   const renderHiddenItem = (data: RenderItemProps, rowmap: any) => {
     return (
-      <TouchableOpacity
-        style={styles.rowBack}
-        onPress={() => {
-          deleteInitiative(data.item.id);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        }}
-      >
-        <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-          <Text style={styles.backTextWhite}>삭제</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.hiddenViewContainer}>
+        <TouchableOpacity
+          style={styles.editBtn}
+          onPress={() => {
+            deleteInitiative(data.item.id);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          }}
+        >
+          <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
+            <Text style={styles.backTextWhite}>편집</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.rowBack}
+          onPress={() => {
+            deleteInitiative(data.item.id);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          }}
+        >
+          <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+            <Text style={styles.backTextWhite}>삭제</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -143,7 +156,7 @@ const KeyResultDetailScreen = ({
           renderHiddenItem={renderHiddenItem}
           disableRightSwipe
           bounces={true}
-          rightOpenValue={-90 - 16}
+          rightOpenValue={-90 - 90 - 16 - 16}
           previewRowKey={"0"}
           previewOpenValue={-40}
           previewOpenDelay={3000}
@@ -169,7 +182,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.white,
-
     paddingBottom: 22,
   },
 
@@ -178,14 +190,28 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
 
+  hiddenViewContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+
   rowBack: {
     alignItems: "center",
-    flex: 1,
+    width: 90,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingLeft: 15,
     marginRight: 22,
-    marginLeft: 22,
+    marginBottom: 16,
+  },
+
+  editBtn: {
+    alignItems: "center",
+    width: 90,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginRight: 10,
     marginBottom: 16,
   },
 
@@ -201,6 +227,11 @@ const styles = StyleSheet.create({
 
   backRightBtnRight: {
     backgroundColor: theme.colors.red500,
+    right: 0,
+  },
+
+  backRightBtnLeft: {
+    backgroundColor: theme.colors.grey300,
     right: 0,
   },
 
