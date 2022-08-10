@@ -5,6 +5,7 @@ export interface ROUTES {
   CreateObjective: "CreateObjective";
   CreateKeyResult: "CreateKeyResult";
   CreateInitiative: "CreateInitiative";
+  EditInitiative: "EditInitiative";
 }
 
 export interface Initiative {

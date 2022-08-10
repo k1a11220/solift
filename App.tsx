@@ -26,6 +26,7 @@ import EditObjectiveScreen from "./src/screens/EditObjective";
 import EditKeyResultScreen from "./src/screens/EditKeyResult";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./src/libs/theme";
+import EditInitiativeScreen from "./src/screens/EditInitiative";
 
 const Stack = createNativeStackNavigator();
 
@@ -464,6 +465,19 @@ export default function App() {
                   currentObjectiveId={currentObjectiveId}
                   objectives={objectives}
                   setKeyResults={setKeyResults}
+                  {...props}
+                />
+              )}
+            </Stack.Screen>
+          ) : null}
+          {currentKeyResultId !== undefined ? (
+            <Stack.Screen name="EditInitiative">
+              {(props) => (
+                <EditInitiativeScreen
+                  initiatives={initiatives}
+                  setCurrentRoute={setCurrentRoute}
+                  currentKeyResultId={currentKeyResultId}
+                  setInitiatives={setInitiatives}
                   {...props}
                 />
               )}

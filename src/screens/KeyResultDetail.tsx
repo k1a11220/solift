@@ -1,4 +1,8 @@
-import { RouteProp, useIsFocused } from "@react-navigation/native";
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+} from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -12,7 +16,7 @@ import EmptyView from "../components/EmptyView";
 import InitiativeCard from "../components/InitiativeCard";
 import Title from "../components/Title";
 import * as Haptics from "expo-haptics";
-import { Initiative, KeyResult, Objective } from "../libs/types";
+import { Initiative, KeyResult, Objective, ROUTES } from "../libs/types";
 import { getCurrentKeyResult, getCurrentObjective } from "../utils";
 import { theme } from "../libs/theme";
 
@@ -42,6 +46,8 @@ const KeyResultDetailScreen = ({
   ...props
 }: KeyResultDetailScreenProps) => {
   const isFocused = useIsFocused();
+
+  const navigation: ROUTES = useNavigation();
 
   useEffect(() => {
     setCurrentRoute("KeyResultDetail");
@@ -74,7 +80,7 @@ const KeyResultDetailScreen = ({
     100;
   const [progress, setProgress] = useState(newProgress);
 
-  const renderItem = (data: RenderItemProps) => {
+  const renderItem = (data: RenderItemProps, rowMap: any) => {
     return (
       <View style={{ marginRight: 22, marginLeft: 22 }} key={data.item.id}>
         <InitiativeCard
@@ -95,13 +101,26 @@ const KeyResultDetailScreen = ({
     );
   };
 
-  const renderHiddenItem = (data: RenderItemProps, rowmap: any) => {
+  const closeRow = (rowMap: any, rowKey: any) => {
+    if (rowMap[rowKey]) {
+      rowMap[rowKey].closeRow();
+    }
+  };
+
+  const renderHiddenItem = (
+    data: RenderItemProps,
+    rowMap: any,
+    rowKey: any
+  ) => {
     return (
       <View style={styles.hiddenViewContainer}>
         <TouchableOpacity
           style={styles.editBtn}
           onPress={() => {
-            deleteInitiative(data.item.id);
+            closeRow(rowMap, data.item.id);
+            navigation.navigate("EditInitiative", {
+              id: data.item.id,
+            });
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           }}
         >
@@ -151,9 +170,15 @@ const KeyResultDetailScreen = ({
         </>
       ) : (
         <SwipeListView
+          keyExtractor={(rowData: any, index) => {
+            return rowData.id.toString();
+          }}
           data={filteredInitiatives}
           renderItem={renderItem}
-          renderHiddenItem={renderHiddenItem}
+          closeOnRowPress={true}
+          renderHiddenItem={(data, rowMap) => {
+            return renderHiddenItem(data, rowMap, data.item.id);
+          }}
           disableRightSwipe
           bounces={true}
           rightOpenValue={-90 - 90 - 16 - 16}
