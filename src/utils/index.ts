@@ -53,8 +53,9 @@ export const sortByLatestId = (list: any) => {
 };
 
 export const sortByLatestDate = (list: any) => {
-  return list.sort(
-    (a: any, b: any) =>
-      Number(stringToDate(a.deadline)) - Number(stringToDate(b.deadline))
+  return list.sort((a: any, b: any) =>
+    a.deadline === b.deadline
+      ? b.id - a.id
+      : Number(stringToDate(a.deadline)) - Number(stringToDate(b.deadline))
   );
 };
