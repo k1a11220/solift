@@ -4,12 +4,50 @@ import * as Icon from "../../assets/icons";
 import { ROUTES } from "../libs/types";
 import * as Haptics from "expo-haptics";
 import { theme } from "../libs/theme";
+import {
+  onPressCreateInitiative,
+  onPressCreateKeyResult,
+  onPressCreateObjective,
+} from "../utils/firebaseAnalytics";
 
-const FloatingBtn = ({ currentRoute }: any) => {
+interface FloatingBtnProps {
+  currentRoute: string;
+  deviceName: string;
+  latestObjectiveId: number;
+  currentObjectiveId: number;
+  latestKeyResultId: number;
+  currentKeyResultId: number;
+  latestInitiativeId: number;
+}
+
+const FloatingBtn = ({
+  currentRoute,
+  deviceName,
+  latestObjectiveId,
+  currentObjectiveId,
+  latestKeyResultId,
+  currentKeyResultId,
+  latestInitiativeId,
+}: FloatingBtnProps) => {
   const navigation = useNavigation<ROUTES>();
   return (
     <TouchableOpacity
       onPress={() => {
+        currentRoute === "Home"
+          ? onPressCreateObjective(deviceName, latestObjectiveId)
+          : currentRoute === "ObjectiveDetail"
+          ? onPressCreateKeyResult(
+              deviceName,
+              currentObjectiveId,
+              latestKeyResultId
+            )
+          : currentRoute === "KeyResultDetail"
+          ? onPressCreateInitiative(
+              deviceName,
+              currentKeyResultId,
+              latestInitiativeId
+            )
+          : null;
         navigation.navigate(
           currentRoute === "Home"
             ? "CreateObjective"

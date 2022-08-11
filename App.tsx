@@ -32,7 +32,18 @@ import * as Device from "expo-device";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const deviceName = Device.modelName;
+  const [deviceName, setDeviceName] = useState("");
+
+  useEffect(() => {
+    const getDeviceName = async () => {
+      if (Device.deviceName !== null) {
+        const deviceName = await Device.deviceName;
+        setDeviceName(deviceName);
+      }
+    };
+    getDeviceName();
+  }, []);
+
   const [currentRoute, setCurrentRoute] = useState("");
 
   const [currentObjectiveId, setCurrentObjectiveId] = useState();
@@ -487,11 +498,15 @@ export default function App() {
           ) : null}
         </Stack.Navigator>
         {currentRoute === "Home" ? (
-          <FloatingBtn currentRoute={currentRoute} />
+          <FloatingBtn
+            deviceName={deviceName}
+            latestObjectiveId={latestObjectiveId}
+            currentRoute={currentRoute}
+          />
         ) : currentRoute === "ObjectiveDetail" ? (
-          <FloatingBtn currentRoute={currentRoute} />
+          <FloatingBtn deviceName={deviceName} currentRoute={currentRoute} />
         ) : currentRoute === "KeyResultDetail" ? (
-          <FloatingBtn currentRoute={currentRoute} />
+          <FloatingBtn deviceName={deviceName} currentRoute={currentRoute} />
         ) : null}
       </NavigationContainer>
     </StoreProvider>
