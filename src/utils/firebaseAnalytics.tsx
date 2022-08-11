@@ -32,3 +32,16 @@ export const onPressCreateKeyResult = (
     purpose: "How many people are creating keyResults?",
   });
 };
+
+export const onPressCreateInitiative = (
+  uid: string,
+  keyResultId: number,
+  initiativeId: number
+) => {
+  Analytics.logEvent("onPressCreateInitiative", {
+    uid: uid,
+    keyResultId: keyResultId,
+    latestInitiativeId: initiativeId,
+    purpose: "How many people are creating initiatives?",
+  });
+};
