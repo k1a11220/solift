@@ -62,3 +62,12 @@ export const createKeyResult = (uid: string, oid: number, name: string) => {
     purpose: "KeyResult names",
   });
 };
+
+export const createInitiative = (uid: string, kid: number, name: string) => {
+  Analytics.logEvent("createInitiative", {
+    uid: uid,
+    keyResultId: kid,
+    initiativeName: name,
+    purpose: "Initiative names",
+  });
+};
