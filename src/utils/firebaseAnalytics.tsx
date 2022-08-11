@@ -45,3 +45,11 @@ export const onPressCreateInitiative = (
     purpose: "How many people are creating initiatives?",
   });
 };
+
+export const createObjective = (uid: string, name: string) => {
+  Analytics.logEvent("createObjective", {
+    uid: uid,
+    objectiveName: name,
+    purpose: "Objective names",
+  });
+};
