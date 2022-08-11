@@ -408,6 +408,7 @@ export default function App() {
                 setCurrentRoute={setCurrentRoute}
                 setCurrentKeyResultId={setCurrentKeyResultId}
                 deleteInitiative={deleteInitiative}
+                deviceName={deviceName}
                 {...props}
               />
             )}

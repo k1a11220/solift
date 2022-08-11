@@ -19,6 +19,7 @@ import * as Haptics from "expo-haptics";
 import { Initiative, KeyResult, Objective, ROUTES } from "../libs/types";
 import { getCurrentKeyResult, getCurrentObjective } from "../utils";
 import { theme } from "../libs/theme";
+import { clickInitiative } from "../utils/firebaseAnalytics";
 
 interface KeyResultDetailScreenProps {
   objectives: Objective[];
@@ -28,6 +29,7 @@ interface KeyResultDetailScreenProps {
   setCurrentRoute: any;
   setCurrentKeyResultId: any;
   deleteInitiative: any;
+  deviceName: string;
   route: RouteProp<{ params: { id: number } }, "params"> | any;
 }
 
@@ -43,6 +45,7 @@ const KeyResultDetailScreen = ({
   setCurrentRoute,
   setCurrentKeyResultId,
   deleteInitiative,
+  deviceName,
   ...props
 }: KeyResultDetailScreenProps) => {
   const isFocused = useIsFocused();
@@ -80,6 +83,17 @@ const KeyResultDetailScreen = ({
     100;
   const [progress, setProgress] = useState(newProgress);
 
+  const clickInitiativeHandler = (initiative: Initiative) => {
+    if (initiative.keyResultId && initiative.name !== null) {
+      clickInitiative(
+        deviceName,
+        initiative.keyResultId,
+        initiative.name,
+        initiative.hasDone
+      );
+    }
+  };
+
   const renderItem = (data: RenderItemProps, rowMap: any) => {
     return (
       <View style={{ marginRight: 22, marginLeft: 22 }} key={data.item.id}>
@@ -88,6 +102,7 @@ const KeyResultDetailScreen = ({
           initiatives={initiatives}
           setInitiatives={setInitiatives}
           onPress={() => {
+            clickInitiativeHandler(data.item);
             setProgress(
               (filteredInitiatives.filter(
                 (initiative) => initiative.hasDone === true
