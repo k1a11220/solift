@@ -27,9 +27,14 @@ const HomeScreen = ({
   ...props
 }: HomeScreenProps) => {
   const isFocused = useIsFocused();
+
   useEffect(() => {
-    props.setCurrentRoute("Home");
-  }, [props, isFocused]);
+    handleRoute();
+  }, [isFocused]);
+
+  const handleRoute = () => {
+    isFocused === true ? props.setCurrentRoute("Home") : null;
+  };
 
   const keyResultProgressAverage = (id: number) => {
     let list = keyResultProgressList(keyResults, id).map(

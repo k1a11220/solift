@@ -7,7 +7,11 @@ import Title from "../components/Title";
 import DatePickerModal from "../components/DatePickerModal";
 import { format } from "date-fns";
 import { Objective } from "../libs/types";
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useIsFocused,
+} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "../libs/theme";
 import { createObjective } from "../utils/firebaseAnalytics";
@@ -33,9 +37,10 @@ const CreateObjectiveScreen = ({
   deviceName,
   ...props
 }: CreateObjectiveScreenProps) => {
+  const isFocused = useIsFocused();
   useEffect(() => {
     setCurrentRoute("CreateObjective");
-  });
+  }, [isFocused]);
 
   const [date, setDate] = useState(new Date());
   const onChange = (event: any, selectedDate: Date) => {
