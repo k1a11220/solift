@@ -10,6 +10,7 @@ import { Objective } from "../libs/types";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "../libs/theme";
+import { createObjective } from "../utils/firebaseAnalytics";
 
 interface CreateObjectiveScreenProps {
   objective: Objective;
@@ -18,6 +19,7 @@ interface CreateObjectiveScreenProps {
   latestObjectiveId: number;
   setLatestObjectiveId: any;
   setCurrentRoute: any;
+  deviceName: string;
   navigation: NavigationProp<ParamListBase>;
 }
 
@@ -28,6 +30,7 @@ const CreateObjectiveScreen = ({
   latestObjectiveId,
   setLatestObjectiveId,
   setCurrentRoute,
+  deviceName,
   ...props
 }: CreateObjectiveScreenProps) => {
   useEffect(() => {
@@ -46,6 +49,9 @@ const CreateObjectiveScreen = ({
 
   const onSubmit = () => {
     handleObjective();
+    if (objective.name !== null) {
+      createObjective(deviceName, objective.name);
+    }
     AsyncStorage.setItem(
       "latestObjectiveId",
       JSON.stringify(latestObjectiveId + 1)

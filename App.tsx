@@ -421,6 +421,7 @@ export default function App() {
                 latestObjectiveId={latestObjectiveId}
                 setLatestObjectiveId={setLatestObjectiveId}
                 setCurrentRoute={setCurrentRoute}
+                deviceName={deviceName}
                 {...props}
               />
             )}
@@ -437,6 +438,7 @@ export default function App() {
                   currentObjectiveId={currentObjectiveId}
                   setCurrentRoute={setCurrentRoute}
                   objectives={objectives}
+                  deviceName={deviceName}
                   {...props}
                 />
               )}
@@ -454,6 +456,7 @@ export default function App() {
                   setCurrentRoute={setCurrentRoute}
                   latestInitiativeId={latestInitiativeId}
                   setLatestInitiativeId={setLatestInitiativeId}
+                  deviceName={deviceName}
                   {...props}
                 />
               )}

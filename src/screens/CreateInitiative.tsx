@@ -11,6 +11,7 @@ import Title from "../components/Title";
 import { theme } from "../libs/theme";
 import { Initiative, KeyResult } from "../libs/types";
 import { getCurrentKeyResult, stringToDate } from "../utils";
+import { createInitiative } from "../utils/firebaseAnalytics";
 
 interface CreateInitiativeScreenProps {
   initiative: Initiative;
@@ -21,6 +22,7 @@ interface CreateInitiativeScreenProps {
   setCurrentRoute: any;
   latestInitiativeId: number;
   setLatestInitiativeId: any;
+  deviceName: string;
   navigation: NavigationProp<ParamListBase>;
 }
 
@@ -33,6 +35,7 @@ const CreateInitiativeScreen = ({
   setCurrentRoute,
   latestInitiativeId,
   setLatestInitiativeId,
+  deviceName,
   ...props
 }: CreateInitiativeScreenProps) => {
   useEffect(() => {
@@ -54,6 +57,9 @@ const CreateInitiativeScreen = ({
 
   const onSubmit = () => {
     handleInitiative();
+    if (initiative.name !== null) {
+      createInitiative(deviceName, currentKeyResultId, initiative.name);
+    }
     AsyncStorage.setItem(
       "latestInitiativeId",
       JSON.stringify(latestInitiativeId + 1)

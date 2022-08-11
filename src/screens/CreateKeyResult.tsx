@@ -11,6 +11,7 @@ import Title from "../components/Title";
 import { theme } from "../libs/theme";
 import { KeyResult, Objective } from "../libs/types";
 import { getCurrentObjective, stringToDate } from "../utils";
+import { createKeyResult } from "../utils/firebaseAnalytics";
 import { useDate } from "../utils/useDate";
 
 interface CreateKeyResultScreenProps {
@@ -22,6 +23,7 @@ interface CreateKeyResultScreenProps {
   currentObjectiveId: number;
   setCurrentRoute: any;
   objectives: Objective[];
+  deviceName: string;
   navigation: NavigationProp<ParamListBase>;
 }
 
@@ -34,6 +36,7 @@ const CreateKeyResultScreen = ({
   currentObjectiveId,
   setCurrentRoute,
   objectives,
+  deviceName,
   ...props
 }: CreateKeyResultScreenProps) => {
   useEffect(() => {
@@ -55,6 +58,9 @@ const CreateKeyResultScreen = ({
 
   const onSubmit = () => {
     handleKeyResult();
+    if (keyResult.name !== null) {
+      createKeyResult(deviceName, currentObjectiveId, keyResult.name);
+    }
     AsyncStorage.setItem(
       "latestKeyResultId",
       JSON.stringify(latestKeyResultId + 1)
