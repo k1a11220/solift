@@ -53,3 +53,12 @@ export const createObjective = (uid: string, name: string) => {
     purpose: "Objective names",
   });
 };
+
+export const createKeyResult = (uid: string, oid: number, name: string) => {
+  Analytics.logEvent("createKeyResult", {
+    uid: uid,
+    objectiveId: oid,
+    keyResultName: name,
+    purpose: "KeyResult names",
+  });
+};
