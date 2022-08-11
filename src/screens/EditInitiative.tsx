@@ -1,5 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  RouteProp,
+} from "@react-navigation/native";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -20,6 +24,7 @@ interface EditInitiativeScreenProps {
   setInitiatives: any;
   navigation: NavigationProp<ParamListBase>;
   keyResults: KeyResult[];
+  route: RouteProp<{ params: { currentInitiativeId: number } }, "params"> | any;
 }
 
 const EditInitiativeScreen = ({
@@ -35,7 +40,7 @@ const EditInitiativeScreen = ({
   });
 
   const currentInitiative = initiatives.find(
-    (initiative) => initiative.keyResultId === currentKeyResultId
+    (initiative) => initiative.id === props.route.params.currentInitiativeId
   );
 
   const currentKeyResult = getCurrentKeyResult(keyResults, currentKeyResultId);

@@ -134,7 +134,7 @@ const KeyResultDetailScreen = ({
           onPress={() => {
             closeRow(rowMap, data.item.id);
             navigation.navigate("EditInitiative", {
-              id: data.item.id,
+              currentInitiativeId: data.item.id,
             });
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           }}
