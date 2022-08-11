@@ -109,7 +109,7 @@ PODS:
     - ExpoModulesCore
     - React-Core
   - EXStructuredHeaders (2.2.1)
-  - EXUpdates (0.13.3):
+  - EXUpdates (0.13.4):
     - ASN1Decoder (~> 1.8)
     - EASClient
     - EXManifests
@@ -498,6 +498,8 @@ PODS:
     - React
   - RNDateTimePicker (6.1.2):
     - React-Core
+  - RNDeviceInfo (10.0.2):
+    - React-Core
   - RNGestureHandler (2.2.1):
     - React-Core
   - RNReanimated (2.8.0):
@@ -593,6 +595,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -727,6 +730,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -762,7 +767,7 @@ SPEC CHECKSUMS:
   ExpoModulesCore: e4278a668e8c13c0269ed8b8a4200989deea2973
   EXSplashScreen: 34f460788db8d682883871708dddbfac72095bb7
   EXStructuredHeaders: 5d86829469399370a9fc7cb1e4391b09de87681d
-  EXUpdates: 084edfaac900e6bc77ab4027eaf7437a4236b8c3
+  EXUpdates: f8d0170faaf3032912284693ef07f4d57288e14e
   EXUpdatesInterface: 0b101ace1dbfa0f64260a5df31c71d03c66cca54
   FBLazyVector: a7a655862f6b09625d11c772296b01cd5164b648
   FBReactNativeSpec: 81ce99032d5b586fddd6a38d450f8595f7e04be4
@@ -807,6 +812,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: 6f1f0b4cf7c71b6e2aea7a3aa62969111084bbd1
+  RNDeviceInfo: 0a7c1d2532aa7691f9b9925a27e43af006db4dae
   RNGestureHandler: 1dc1ea9d4b64f999042afafbaccf5b143f0b2fa2
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f

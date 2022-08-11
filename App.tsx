@@ -27,10 +27,12 @@ import EditKeyResultScreen from "./src/screens/EditKeyResult";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./src/libs/theme";
 import EditInitiativeScreen from "./src/screens/EditInitiative";
+import * as Device from "expo-device";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const deviceName = Device.modelName;
   const [currentRoute, setCurrentRoute] = useState("");
 
   const [currentObjectiveId, setCurrentObjectiveId] = useState();
