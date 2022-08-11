@@ -495,6 +495,7 @@ export default function App() {
                   setCurrentRoute={setCurrentRoute}
                   currentKeyResultId={currentKeyResultId}
                   setInitiatives={setInitiatives}
+                  keyResults={keyResults}
                   {...props}
                 />
               )}

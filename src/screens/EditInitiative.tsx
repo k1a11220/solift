@@ -19,6 +19,7 @@ interface EditInitiativeScreenProps {
   currentKeyResultId: number;
   setInitiatives: any;
   navigation: NavigationProp<ParamListBase>;
+  keyResults: KeyResult[];
 }
 
 const EditInitiativeScreen = ({
@@ -26,6 +27,7 @@ const EditInitiativeScreen = ({
   setCurrentRoute,
   currentKeyResultId,
   setInitiatives,
+  keyResults,
   ...props
 }: EditInitiativeScreenProps) => {
   useEffect(() => {
@@ -35,6 +37,8 @@ const EditInitiativeScreen = ({
   const currentInitiative = initiatives.find(
     (initiative) => initiative.keyResultId === currentKeyResultId
   );
+
+  const currentKeyResult = getCurrentKeyResult(keyResults, currentKeyResultId);
 
   const [newName, setNewName] = useState(currentInitiative?.name);
   const [newDate, setNewDate] = useState(
@@ -84,7 +88,7 @@ const EditInitiativeScreen = ({
         <DatePickerModal
           date={newDate}
           onChange={onChange}
-          maximumDate={stringToDate(currentInitiative?.deadline)}
+          maximumDate={stringToDate(currentKeyResult?.deadline)}
         />
         <CTA
           label="다음으로"
