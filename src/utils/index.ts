@@ -51,3 +51,10 @@ export const findKeyResultProgress = (
 export const sortByLatestId = (list: any) => {
   return list.sort((a: any, b: any) => b.id - a.id);
 };
+
+export const sortByLatestDate = (list: any) => {
+  return list.sort(
+    (a: any, b: any) =>
+      Number(stringToDate(a.deadline)) - Number(stringToDate(b.deadline))
+  );
+};

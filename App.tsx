@@ -28,6 +28,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "./src/libs/theme";
 import EditInitiativeScreen from "./src/screens/EditInitiative";
 import * as Device from "expo-device";
+import { sortByLatestDate } from "./src/utils";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,7 +61,7 @@ export default function App() {
   const handleObjective = () => {
     let newObjective = objective;
     let newObjectives = [newObjective, ...objectives];
-    setObjectives(newObjectives);
+
     setObjective({
       id: null,
       name: null,
@@ -68,9 +69,12 @@ export default function App() {
       keyResults: [],
     });
 
-    AsyncStorage.setItem("objectives", JSON.stringify(newObjectives))
+    AsyncStorage.setItem(
+      "objectives",
+      JSON.stringify(sortByLatestDate(newObjectives))
+    )
       .then(() => {
-        setObjectives(newObjectives);
+        setObjectives(sortByLatestDate(newObjectives));
       })
       .catch((error) => console.log(error));
   };
@@ -97,9 +101,12 @@ export default function App() {
 
     deleteAllKeyResult();
 
-    AsyncStorage.setItem("objectives", JSON.stringify(newObjectives))
+    AsyncStorage.setItem(
+      "objectives",
+      JSON.stringify(sortByLatestDate(newObjectives))
+    )
       .then(() => {
-        setObjectives(newObjectives);
+        setObjectives(sortByLatestDate(newObjectives));
       })
       .catch((error) => console.log(error));
   };
@@ -136,7 +143,6 @@ export default function App() {
   const handleKeyResult = () => {
     let newKeyResult = keyResult;
     let newKeyResults = [newKeyResult, ...keyResults];
-    setKeyResults(newKeyResults);
     setKeyResult({
       id: null,
       name: null,
@@ -145,9 +151,12 @@ export default function App() {
       objectiveId: null,
     });
 
-    AsyncStorage.setItem("keyResults", JSON.stringify(newKeyResults))
+    AsyncStorage.setItem(
+      "keyResults",
+      JSON.stringify(sortByLatestDate(newKeyResults))
+    )
       .then(() => {
-        setKeyResults(newKeyResults);
+        setKeyResults(sortByLatestDate(newKeyResults));
       })
       .catch((error) => console.log(error));
   };
@@ -156,21 +165,26 @@ export default function App() {
     action === undefined ? null : action();
 
     let newKeyResults = keyResults.filter((keyResult) => keyResult.id !== id);
-    setKeyResults(newKeyResults);
 
     let newInitiatives = initiatives.filter((initiative) => {
       return initiative.keyResultId !== id;
     });
 
-    AsyncStorage.setItem("keyResults", JSON.stringify(newKeyResults))
+    AsyncStorage.setItem(
+      "keyResults",
+      JSON.stringify(sortByLatestDate(newKeyResults))
+    )
       .then(() => {
-        setKeyResults(newKeyResults);
+        setKeyResults(sortByLatestDate(newKeyResults));
       })
       .catch((error) => console.log(error));
 
-    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+    AsyncStorage.setItem(
+      "initiatives",
+      JSON.stringify(sortByLatestDate(newInitiatives))
+    )
       .then(() => {
-        setInitiatives(newInitiatives);
+        setInitiatives(sortByLatestDate(newInitiatives));
       })
       .catch((error) => console.log(error));
   };
@@ -188,7 +202,6 @@ export default function App() {
   const handleInitiative = () => {
     let newInitiative = initiative;
     let newInitiatives = [newInitiative, ...initiatives];
-    setInitiatives(newInitiatives);
     setInitiative({
       id: null,
       name: null,
@@ -196,9 +209,12 @@ export default function App() {
       keyResultId: null,
       hasDone: false,
     });
-    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+    AsyncStorage.setItem(
+      "initiatives",
+      JSON.stringify(sortByLatestDate(newInitiatives))
+    )
       .then(() => {
-        setInitiatives(newInitiatives);
+        setInitiatives(sortByLatestDate(newInitiatives));
       })
       .catch((error) => console.log(error));
   };
@@ -207,11 +223,12 @@ export default function App() {
     let newInitiatives = initiatives.filter(
       (initiative) => initiative.id !== id
     );
-    setInitiatives(newInitiatives);
-
-    AsyncStorage.setItem("initiatives", JSON.stringify(newInitiatives))
+    AsyncStorage.setItem(
+      "initiatives",
+      JSON.stringify(sortByLatestDate(newInitiatives))
+    )
       .then(() => {
-        setInitiatives(newInitiatives);
+        setInitiatives(sortByLatestDate(newInitiatives));
       })
       .catch((error) => console.log(error));
   };

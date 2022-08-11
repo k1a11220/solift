@@ -3,7 +3,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Icon from "../../assets/icons";
 import * as Haptics from "expo-haptics";
 import { Initiative } from "../libs/types";
-import { getCurrentInitiative, sortByLatestId } from "../utils";
+import {
+  getCurrentInitiative,
+  sortByLatestDate,
+  sortByLatestId,
+} from "../utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { theme } from "../libs/theme";
 
@@ -43,9 +47,12 @@ const InitiativeCard = ({
         keyResultId: currentIntitiative?.keyResultId,
       },
     ];
-    AsyncStorage.setItem("initiatives", JSON.stringify(sortByLatestId(edited)))
+    AsyncStorage.setItem(
+      "initiatives",
+      JSON.stringify(sortByLatestDate(edited))
+    )
       .then(() => {
-        setInitiatives(edited);
+        setInitiatives(sortByLatestDate(edited));
       })
       .catch((err) => {
         console.log(err);

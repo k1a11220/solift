@@ -14,7 +14,7 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import { theme } from "../libs/theme";
 import { Initiative, KeyResult } from "../libs/types";
-import { getCurrentKeyResult, sortByLatestId, stringToDate } from "../utils";
+import { getCurrentKeyResult, sortByLatestDate, stringToDate } from "../utils";
 import { useDate } from "../utils/useDate";
 
 interface EditInitiativeScreenProps {
@@ -68,7 +68,10 @@ const EditInitiativeScreen = ({
         keyResultId: currentKeyResultId,
       },
     ];
-    AsyncStorage.setItem("initiatives", JSON.stringify(sortByLatestId(edited)))
+    AsyncStorage.setItem(
+      "initiatives",
+      JSON.stringify(sortByLatestDate(edited))
+    )
       .then(() => {
         setInitiatives(edited);
       })
