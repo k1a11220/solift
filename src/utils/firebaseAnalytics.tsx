@@ -71,3 +71,18 @@ export const createInitiative = (uid: string, kid: number, name: string) => {
     purpose: "Initiative names",
   });
 };
+
+export const clickInitiative = (
+  uid: string,
+  kid: number,
+  name: string,
+  hasDone: boolean
+) => {
+  Analytics.logEvent("clickInitiative", {
+    uid: uid,
+    keyResultId: kid,
+    initiativeName: name,
+    hasDone: hasDone,
+    purpose: "Initiative names",
+  });
+};
