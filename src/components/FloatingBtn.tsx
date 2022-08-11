@@ -14,9 +14,9 @@ interface FloatingBtnProps {
   currentRoute: string;
   deviceName: string;
   latestObjectiveId: number;
-  currentObjectiveId: number;
+  currentObjectiveId: number | undefined;
   latestKeyResultId: number;
-  currentKeyResultId: number;
+  currentKeyResultId: number | undefined;
   latestInitiativeId: number;
 }
 
@@ -30,24 +30,31 @@ const FloatingBtn = ({
   latestInitiativeId,
 }: FloatingBtnProps) => {
   const navigation = useNavigation<ROUTES>();
+
+  const sendLogEvent = () => {
+    if (currentObjectiveId !== undefined && currentKeyResultId !== undefined) {
+      currentRoute === "Home"
+        ? onPressCreateObjective(deviceName, latestObjectiveId)
+        : currentRoute === "ObjectiveDetail"
+        ? onPressCreateKeyResult(
+            deviceName,
+            currentObjectiveId,
+            latestKeyResultId
+          )
+        : currentRoute === "KeyResultDetail"
+        ? onPressCreateInitiative(
+            deviceName,
+            currentKeyResultId,
+            latestInitiativeId
+          )
+        : null;
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {
-        currentRoute === "Home"
-          ? onPressCreateObjective(deviceName, latestObjectiveId)
-          : currentRoute === "ObjectiveDetail"
-          ? onPressCreateKeyResult(
-              deviceName,
-              currentObjectiveId,
-              latestKeyResultId
-            )
-          : currentRoute === "KeyResultDetail"
-          ? onPressCreateInitiative(
-              deviceName,
-              currentKeyResultId,
-              latestInitiativeId
-            )
-          : null;
+        sendLogEvent();
         navigation.navigate(
           currentRoute === "Home"
             ? "CreateObjective"

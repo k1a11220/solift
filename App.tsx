@@ -497,16 +497,16 @@ export default function App() {
             </Stack.Screen>
           ) : null}
         </Stack.Navigator>
-        {currentRoute === "Home" ? (
+        {currentRoute === "Home" || "ObjectiveDetail" || "KeyResultDetail" ? (
           <FloatingBtn
             deviceName={deviceName}
             latestObjectiveId={latestObjectiveId}
             currentRoute={currentRoute}
+            currentObjectiveId={currentObjectiveId}
+            latestKeyResultId={latestKeyResultId}
+            currentKeyResultId={currentKeyResultId}
+            latestInitiativeId={latestInitiativeId}
           />
-        ) : currentRoute === "ObjectiveDetail" ? (
-          <FloatingBtn deviceName={deviceName} currentRoute={currentRoute} />
-        ) : currentRoute === "KeyResultDetail" ? (
-          <FloatingBtn deviceName={deviceName} currentRoute={currentRoute} />
         ) : null}
       </NavigationContainer>
     </StoreProvider>
