@@ -19,7 +19,11 @@ import * as Haptics from "expo-haptics";
 import { Initiative, KeyResult, Objective, ROUTES } from "../libs/types";
 import { getCurrentKeyResult, getCurrentObjective } from "../utils";
 import { theme } from "../libs/theme";
-import { clickInitiative } from "../utils/firebaseAnalytics";
+import {
+  clickDeleteInitiative,
+  clickEditInitiative,
+  clickInitiative,
+} from "../utils/firebaseAnalytics";
 
 interface KeyResultDetailScreenProps {
   objectives: Objective[];
@@ -132,6 +136,14 @@ const KeyResultDetailScreen = ({
         <TouchableOpacity
           style={styles.editBtn}
           onPress={() => {
+            data.item.keyResultId && data.item.name !== null
+              ? clickEditInitiative(
+                  deviceName,
+                  data.item.keyResultId,
+                  data.item.name,
+                  data.item.hasDone
+                )
+              : null;
             closeRow(rowMap, data.item.id);
             navigation.navigate("EditInitiative", {
               currentInitiativeId: data.item.id,
@@ -146,6 +158,14 @@ const KeyResultDetailScreen = ({
         <TouchableOpacity
           style={styles.rowBack}
           onPress={() => {
+            data.item.keyResultId && data.item.name !== null
+              ? clickDeleteInitiative(
+                  deviceName,
+                  data.item.keyResultId,
+                  data.item.name,
+                  data.item.hasDone
+                )
+              : null;
             deleteInitiative(data.item.id);
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           }}
