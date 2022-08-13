@@ -86,3 +86,33 @@ export const clickInitiative = (
     purpose: "Initiative names",
   });
 };
+
+export const clickDeleteInitiative = (
+  uid: string,
+  kid: number,
+  name: string,
+  hasDone: boolean
+) => {
+  Analytics.logEvent("deleteInitiative", {
+    uid: uid,
+    keyResultId: kid,
+    initiativeName: name,
+    hasDone: hasDone,
+    purpose: "Initiative names",
+  });
+};
+
+export const clickEditInitiative = (
+  uid: string,
+  kid: number,
+  name: string,
+  hasDone: boolean
+) => {
+  Analytics.logEvent("deleteInitiative", {
+    uid: uid,
+    keyResultId: kid,
+    initiativeName: name,
+    hasDone: hasDone,
+    purpose: "Initiative names",
+  });
+};
